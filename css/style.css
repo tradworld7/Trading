@@ -1,75 +1,27 @@
 body {
+  font-family: sans-serif;
   margin: 0;
   padding: 0;
-  background: #0f1115;
-  color: #fff;
-  font-family: 'Segoe UI', sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
+  background: #f3f4f6;
 }
-
 .container {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
-  width: 100%;
+  height: 100vh;
 }
-
 .card {
-  background: #1e222d;
+  background: white;
   padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.3);
-  width: 100%;
-  max-width: 400px;
-  box-sizing: border-box;
-}
-
-input[type="email"],
-input[type="password"],
-input[type="file"] {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 6px;
-  border: none;
-  background: #2c303a;
-  color: white;
-  box-sizing: border-box;
-}
-
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #00b894;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background 0.3s;
-}
-
-button:hover {
-  background-color: #019875;
-}
-
-#result {
-  margin-top: 1rem;
-  background: #2a2d3a;
-  padding: 1rem;
   border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  width: 90%;
+  max-width: 400px;
 }
-
-@media only screen and (max-width: 600px) {
-  .card {
-    padding: 1rem;
-  }
-  h2, h3 {
-    font-size: 1.2rem;
-  }
+input, button {
+  display: block;
+  width: 100%;
+  margin: 1rem 0;
+  padding: 0.75rem;
+  font-size: 1rem;
 }
