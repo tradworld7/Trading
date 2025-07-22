@@ -3,24 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chart Analyzer</title>
+  <title>Chart Analyzer Pro</title>
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
   <script>
-    if (!localStorage.getItem("user")) window.location.href = "signup.html";
+    if (!localStorage.getItem("user")) window.location.href = "login.html";
   </script>
   <div class="container">
     <div class="card">
-      <h2>Upload Chart Screenshot</h2>
-      <input type="file" id="screenshot" accept="image/*">
-      <button onclick="uploadScreenshot()">Upload & Analyze</button>
-      <div id="result">
-        <h3>📊 Analysis:</h3>
-        <p>📍 Entry: $<span id="entry">--</span></p>
-        <p>🔒 Stop Loss: $<span id="stoploss">--</span></p>
-        <p>📈 Avg Buy: $<span id="avg">--</span></p>
-        <p>🌟 Target: $<span id="target">--</span></p>
+      <div class="header">
+        <h2><i class="fas fa-chart-line"></i> Chart Analyzer Pro</h2>
+        <button class="logout-btn" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      </div>
+      <div class="upload-area" id="dropZone">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <p>Drag & Drop your chart screenshot here</p>
+        <input type="file" id="screenshot" accept="image/*" hidden>
+        <button class="browse-btn" onclick="document.getElementById('screenshot').click()">Browse Files</button>
+      </div>
+      <button class="analyze-btn" onclick="uploadScreenshot()">Analyze Chart</button>
+      <div class="analysis-result" id="result">
+        <h3><i class="fas fa-chart-pie"></i> Trade Analysis:</h3>
+        <div class="result-item">
+          <span class="label"><i class="fas fa-sign-in-alt"></i> Entry:</span>
+          <span class="value" id="entry">--</span>
+        </div>
+        <div class="result-item">
+          <span class="label"><i class="fas fa-shield-alt"></i> Stop Loss:</span>
+          <span class="value" id="stoploss">--</span>
+        </div>
+        <div class="result-item">
+          <span class="label"><i class="fas fa-dollar-sign"></i> Avg Buy:</span>
+          <span class="value" id="avg">--</span>
+        </div>
+        <div class="result-item">
+          <span class="label"><i class="fas fa-bullseye"></i> Target:</span>
+          <span class="value" id="target">--</span>
+        </div>
+        <div class="result-item profit">
+          <span class="label"><i class="fas fa-coins"></i> Potential Profit:</span>
+          <span class="value" id="profit">--</span>
+        </div>
+        <div class="confidence-meter">
+          <div class="confidence-fill" id="confidenceFill"></div>
+          <span>Analysis Confidence: <span id="confidenceValue">--</span>%</span>
+        </div>
       </div>
     </div>
   </div>
