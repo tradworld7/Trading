@@ -3,48 +3,96 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login | Chart Analyzer Pro</title>
-  <link rel="stylesheet" href="css/style.css">
+  <title>Login | ProTrade Analyzer</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <div class="container">
-    <div class="card auth-card">
-      <h2><i class="fas fa-sign-in-alt"></i> Login</h2>
-      <div class="input-group">
-        <i class="fas fa-envelope"></i>
-        <input type="email" id="email" placeholder="Email" required>
+    <div class="card">
+      <div class="card-header">
+        <h2>Welcome Back</h2>
       </div>
-      <div class="input-group">
-        <i class="fas fa-lock"></i>
-        <input type="password" id="password" placeholder="Password" required>
+      <div class="card-body">
+        <div class="input-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" placeholder="Enter your email">
+        </div>
+
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter your password">
+        </div>
+
+        <button id="loginBtn" class="btn btn-primary btn-block" onclick="login()">
+          <i class="fas fa-sign-in-alt btn-icon"></i>
+          Login
+        </button>
+
+        <div class="text-center mt-3">
+          <p>Don't have an account? <a href="signup.html">Sign up here</a></p>
+        </div>
+
+        <div id="errorMessage" class="mt-3 text-center" style="color: var(--danger);"></div>
       </div>
-      <button class="auth-btn" onclick="login()">Login</button>
-      <p class="auth-link">Don't have an account? <a href="signup.html">Sign up</a></p>
-      <p id="msg" class="message"></p>
     </div>
   </div>
+
   <script type="module">
     import { auth } from './js/firebase-config.js';
     import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
-    window.login = function () {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      const msg = document.getElementById("msg");
+    window.login = async function() {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const errorMessage = document.getElementById('errorMessage');
+      const loginBtn = document.getElementById('loginBtn');
 
-      signInWithEmailAndPassword(auth, email, password)
-        .then(() => {
-          localStorage.setItem("user", email);
-          window.location.href = "index.html";
-        })
-        .catch(err => msg.innerText = err.message);
-    }
+      if (!email || !password) {
+        errorMessage.textContent = 'Please fill in all fields';
+        return;
+      }
 
-    window.logout = function() {
-      localStorage.removeItem("user");
-      window.location.href = "login.html";
-    }
+      try {
+        // Show loading state
+        loginBtn.disabled = true;
+        loginBtn.innerHTML = '<i class="fas fa-spinner spinner btn-icon"></i> Authenticating...';
+
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        localStorage.setItem("user", userCredential.user.email);
+        window.location.href = "index.html";
+      } catch (error) {
+        console.error("Login error:", error);
+        
+        // User-friendly error messages
+        switch(error.code) {
+          case 'auth/user-not-found':
+            errorMessage.textContent = 'No account found with this email';
+            break;
+          case 'auth/wrong-password':
+            errorMessage.textContent = 'Incorrect password';
+            break;
+          case 'auth/invalid-email':
+            errorMessage.textContent = 'Invalid email address';
+            break;
+          default:
+            errorMessage.textContent = 'Login failed. Please try again.';
+        }
+      } finally {
+        loginBtn.disabled = false;
+        loginBtn.innerHTML = '<i class="fas fa-sign-in-alt btn-icon"></i> Login';
+      }
+    };
+
+    // Allow login on Enter key
+    document.addEventListener('DOMContentLoaded', function() {
+      document.getElementById('password').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          login();
+        }
+      });
+    });
   </script>
 </body>
 </html>
