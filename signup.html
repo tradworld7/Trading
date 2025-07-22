@@ -1,32 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Signup - Chart Analyzer</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="form-container">
-    <h2>Sign Up</h2>
-    <input type="email" id="email" placeholder="Email" />
-    <input type="password" id="password" placeholder="Password" />
-    <button onclick="signup()">Sign Up</button>
-    <p id="msg"></p>
+  <div class="container">
+    <div class="card">
+      <h2>Create Account</h2>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <button onclick="signup()">Sign Up</button>
+      <p id="msg"></p>
+    </div>
   </div>
-
   <script type="module">
-    import { auth } from './firebase-config.js';
+    import { auth } from './js/firebase-config.js';
     import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
 
-    const signup = () => {
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
+    window.signup = function () {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const msg = document.getElementById("msg");
+
       createUserWithEmailAndPassword(auth, email, password)
         .then(() => window.location.href = "index.html")
-        .catch(err => document.getElementById('msg').innerText = err.message);
+        .catch(err => msg.innerText = err.message);
     }
-
-    window.signup = signup;
   </script>
 </body>
 </html>
