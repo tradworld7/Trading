@@ -2,22 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Chart Analyzer</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <h2>Upload Chart Screenshot</h2>
-  <input type="file" id="screenshot" accept="image/*">
-  <button onclick="uploadScreenshot()">Upload & Analyze</button>
-
-  <div id="result">
-    <h3>📊 Analysis:</h3>
-    <p>📍 Entry: $<span id="entry">...</span></p>
-    <p>🔒 Stop Loss: $<span id="stoploss">...</span></p>
-    <p>📈 Average Buy: $<span id="avg">...</span></p>
-    <p>🎯 Profit Target: $<span id="target">...</span></p>
+  <div class="container">
+    <div class="card">
+      <h2>Upload Chart Screenshot</h2>
+      <input type="file" id="screenshot" accept="image/*">
+      <button onclick="uploadScreenshot()">Upload & Analyze</button>
+      <div id="result">
+        <h3>📊 Analysis:</h3>
+        <p>📍 Entry: $<span id="entry">--</span></p>
+        <p>🔒 Stop Loss: $<span id="stoploss">--</span></p>
+        <p>📈 Avg Buy: $<span id="avg">--</span></p>
+        <p>🎯 Target: $<span id="target">--</span></p>
+      </div>
+    </div>
   </div>
-
-  <script type="module" src="app.js"></script>
+  <script type="module" src="js/app.js"></script>
 </body>
 </html>
