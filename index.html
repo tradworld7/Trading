@@ -7,6 +7,9 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <script>
+    if (!localStorage.getItem("user")) window.location.href = "signup.html";
+  </script>
   <div class="container">
     <div class="card">
       <h2>Upload Chart Screenshot</h2>
@@ -17,7 +20,7 @@
         <p>📍 Entry: $<span id="entry">--</span></p>
         <p>🔒 Stop Loss: $<span id="stoploss">--</span></p>
         <p>📈 Avg Buy: $<span id="avg">--</span></p>
-        <p>🎯 Target: $<span id="target">--</span></p>
+        <p>🌟 Target: $<span id="target">--</span></p>
       </div>
     </div>
   </div>
