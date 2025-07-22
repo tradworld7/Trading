@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Signup - Chart Analyzer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="form-container">
+    <h2>Sign Up</h2>
+    <input type="email" id="email" placeholder="Email" />
+    <input type="password" id="password" placeholder="Password" />
+    <button onclick="signup()">Sign Up</button>
+    <p id="msg"></p>
+  </div>
+
+  <script type="module">
+    import { auth } from './firebase-config.js';
+    import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js";
+
+    const signup = () => {
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => window.location.href = "index.html")
+        .catch(err => document.getElementById('msg').innerText = err.message);
+    }
+
+    window.signup = signup;
+  </script>
+</body>
+</html>
