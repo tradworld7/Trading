@@ -1,166 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ProTrade Analyzer | Professional Trading Analysis</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoVision - AI Trading Analysis</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-  <nav class="navbar">
-    <a href="#" class="brand">
-      <i class="fas fa-chart-line brand-icon"></i>
-      <span>ProTrade Analyzer</span>
-    </a>
-    <button class="btn btn-outline" onclick="logout()">
-      <i class="fas fa-sign-out-alt btn-icon"></i>
-      Logout
-    </button>
-  </nav>
-
-  <div class="container">
-    <div class="card">
-      <div class="card-header">
-        <h2>Chart Analysis Dashboard</h2>
-      </div>
-      <div class="card-body">
-        <div class="input-group">
-          <label for="screenshot">Upload Trading Chart</label>
-          <div class="upload-area" id="dropZone">
-            <i class="fas fa-cloud-upload-alt upload-icon"></i>
-            <p class="upload-text">Drag & drop your chart screenshot here or click to browse</p>
-            <input type="file" id="screenshot" class="file-input" accept="image/*">
-            <button class="btn btn-outline">
-              <i class="fas fa-folder-open btn-icon"></i>
-              Select File
-            </button>
-            <div id="fileName" class="file-name"></div>
-          </div>
-        </div>
-
-        <button id="analyzeBtn" class="btn btn-primary btn-block" onclick="analyzeChart()">
-          <i class="fas fa-chart-pie btn-icon"></i>
-          Analyze Chart
-        </button>
-
-        <div id="resultsContainer" class="analysis-results hidden">
-          <h3>Trade Analysis Results</h3>
-          
-          <div class="result-item">
-            <span class="result-label">
-              <i class="fas fa-sign-in-alt result-icon"></i>
-              Entry Point
-            </span>
-            <span id="entry" class="result-value">--</span>
-          </div>
-          
-          <div class="result-item">
-            <span class="result-label">
-              <i class="fas fa-shield-alt result-icon"></i>
-              Stop Loss
-            </span>
-            <span id="stoploss" class="result-value">--</span>
-          </div>
-          
-          <div class="result-item">
-            <span class="result-label">
-              <i class="fas fa-dollar-sign result-icon"></i>
-              Average Buy
-            </span>
-            <span id="avg" class="result-value">--</span>
-          </div>
-          
-          <div class="result-item">
-            <span class="result-label">
-              <i class="fas fa-bullseye result-icon"></i>
-              Target Price
-            </span>
-            <span id="target" class="result-value">--</span>
-          </div>
-          
-          <div class="result-item">
-            <span class="result-label">
-              <i class="fas fa-coins result-icon"></i>
-              Potential Profit
-            </span>
-            <span id="profit" class="result-value profit-value">--</span>
-          </div>
-          
-          <div class="confidence-meter mt-3">
-            <div class="confidence-bar">
-              <div id="confidenceFill" class="confidence-fill" style="width: 0%"></div>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>CryptoVision</h1>
+                <span>AI-Powered Trading Insights</span>
             </div>
-            <div class="confidence-text">
-              <span>Analysis Confidence</span>
-              <span id="confidenceValue">0%</span>
+            <nav>
+                <ul>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn-login">Login</button>
+                <button class="btn-signup">Sign Up</button>
             </div>
-          </div>
         </div>
+    </header>
 
-        <div id="errorMessage" class="mt-3 text-center" style="color: var(--danger);"></div>
-      </div>
-    </div>
-  </div>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>AI-Powered Crypto Trading Analysis</h2>
+                    <p>Upload any cryptocurrency chart screenshot and get instant trading recommendations with entry points, stop loss, and take profit levels.</p>
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Drag & Drop your crypto chart screenshot here</p>
+                        <span>or</span>
+                        <button class="btn-browse">Browse Files</button>
+                        <input type="file" id="fileInput" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="assets/images/crypto-analysis.png" alt="Crypto Analysis">
+                </div>
+            </div>
+        </section>
 
-  <script src="js/firebase-config.js"></script>
-  <script src="js/app.js"></script>
-  <script>
-    // Check authentication
-    if (!localStorage.getItem("user")) {
-      window.location.href = "login.html";
-    }
+        <section class="analysis-result" id="analysisResult" style="display: none;">
+            <div class="container">
+                <div class="result-header">
+                    <h3>Analysis Result</h3>
+                    <div class="coin-info">
+                        <img id="coinLogo" src="assets/images/btc-logo.png" alt="Coin Logo">
+                        <div>
+                            <h4 id="coinName">Bitcoin (BTC)</h4>
+                            <p id="coinPrice">Current Price: $36,542.78</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="result-content">
+                    <div class="original-image">
+                        <h5>Your Uploaded Chart</h5>
+                        <img id="uploadedImage" src="" alt="Uploaded Chart">
+                    </div>
+                    
+                    <div class="trading-recommendation">
+                        <h5>Trading Recommendation</h5>
+                        <div class="recommendation-card">
+                            <div class="confidence-level">
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 70%;"></div>
+                                </div>
+                                <span>70% Confidence</span>
+                            </div>
+                            
+                            <div class="recommendation-details">
+                                <div class="detail-box entry">
+                                    <h6>Entry Point</h6>
+                                    <p id="entryPoint">$36,200 - $36,400</p>
+                                </div>
+                                <div class="detail-box stop-loss">
+                                    <h6>Stop Loss</h6>
+                                    <p id="stopLoss">$35,800</p>
+                                </div>
+                                <div class="detail-box take-profit">
+                                    <h6>Take Profit</h6>
+                                    <p id="takeProfit">$37,800 - $38,200</p>
+                                </div>
+                            </div>
+                            
+                            <div class="timeframe">
+                                <h6>Recommended Timeframe</h6>
+                                <p id="timeframe">4H - 1D</p>
+                            </div>
+                            
+                            <div class="analysis-summary">
+                                <h6>Analysis Summary</h6>
+                                <p id="analysisSummary">The chart shows a bullish flag pattern forming after a strong upward move. The RSI is at 58, indicating there's still room for upward movement before becoming overbought. Volume is increasing on upward moves, supporting the bullish case.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn-save-analysis">Save Analysis</button>
+                    <button class="btn-new-analysis">New Analysis</button>
+                    <button class="btn-view-history">View History</button>
+                </div>
+            </div>
+        </section>
 
-    // Drag and drop functionality
-    document.addEventListener('DOMContentLoaded', function() {
-      const dropZone = document.getElementById('dropZone');
-      const fileInput = document.getElementById('screenshot');
-      const fileName = document.getElementById('fileName');
+        <section class="how-it-works" id="how-it-works">
+            <div class="container">
+                <h2>How It Works</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h4>Upload Screenshot</h4>
+                        <p>Take a screenshot of any cryptocurrency chart from your trading platform and upload it to our system.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h4>AI Analysis</h4>
+                        <p>Our advanced AI analyzes the chart patterns, indicators, and market conditions in real-time.</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h4>Get Recommendations</h4>
+                        <p>Receive clear trading recommendations with entry points, stop loss, and take profit levels.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      // Click to select file
-      dropZone.addEventListener('click', function() {
-        fileInput.click();
-      });
+        <section class="features" id="features">
+            <div class="container">
+                <h2>Powerful Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>Pattern Recognition</h4>
+                        <p>Identifies common chart patterns like head and shoulders, flags, triangles with high accuracy.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-robot"></i>
+                        <h4>AI-Powered Analysis</h4>
+                        <p>Uses machine learning to analyze historical data and predict potential price movements.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-bell"></i>
+                        <h4>Risk Management</h4>
+                        <p>Calculates optimal stop loss levels based on volatility and support/resistance levels.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-history"></i>
+                        <h4>Trade History</h4>
+                        <p>Stores all your previous analyses so you can track performance and improve your strategy.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h4>Mobile Friendly</h4>
+                        <p>Works perfectly on all devices, so you can analyze charts anytime, anywhere.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="fas fa-lock"></i>
+                        <h4>Private & Secure</h4>
+                        <p>All your data stays on your device. We don't store your charts or trading history on our servers.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-      // File input change
-      fileInput.addEventListener('change', function() {
-        if (fileInput.files.length) {
-          fileName.textContent = fileInput.files[0].name;
-        }
-      });
+        <section class="testimonials" id="testimonials">
+            <div class="container">
+                <h2>What Traders Say</h2>
+                <div class="testimonial-slider">
+                    <div class="testimonial">
+                        <div class="quote">"This tool has improved my trading accuracy significantly. The pattern recognition is spot on about 70% of the time as promised."</div>
+                        <div class="author">
+                            <img src="assets/images/user1.jpg" alt="Raj K.">
+                            <div>
+                                <h5>Raj K.</h5>
+                                <p>Full-time Crypto Trader</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial">
+                        <div class="quote">"As a beginner, the clear entry and exit points helped me understand market structure better while making profitable trades."</div>
+                        <div class="author">
+                            <img src="assets/images/user2.jpg" alt="Priya M.">
+                            <div>
+                                <h5>Priya M.</h5>
+                                <p>Swing Trader</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-      // Drag over
-      dropZone.addEventListener('dragover', function(e) {
-        e.preventDefault();
-        dropZone.style.borderColor = var(--primary);
-        dropZone.style.backgroundColor = 'rgba(41, 98, 255, 0.05)';
-      });
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <h3>CryptoVision</h3>
+                    <p>AI-powered cryptocurrency trading analysis tool that helps traders make better decisions with clear entry and exit points.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact Us</h4>
+                    <p><i class="fas fa-envelope"></i> support@cryptovision.com</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 CryptoVision. All rights reserved.</p>
+                <p>Disclaimer: Trading cryptocurrencies involves risk. Our analysis is for informational purposes only and should not be considered financial advice.</p>
+            </div>
+        </div>
+    </footer>
 
-      // Drag leave
-      dropZone.addEventListener('dragleave', function() {
-        dropZone.style.borderColor = '#E0E0E0';
-        dropZone.style.backgroundColor = var(--light);
-      });
-
-      // Drop
-      dropZone.addEventListener('drop', function(e) {
-        e.preventDefault();
-        dropZone.style.borderColor = '#E0E0E0';
-        dropZone.style.backgroundColor = var(--light);
-
-        if (e.dataTransfer.files.length) {
-          fileInput.files = e.dataTransfer.files;
-          fileName.textContent = fileInput.files[0].name;
-        }
-      });
-    });
-
-    // Logout function
-    window.logout = function() {
-      localStorage.removeItem("user");
-      window.location.href = "login.html";
-    };
-  </script>
+    <script src="script.js"></script>
 </body>
 </html>
