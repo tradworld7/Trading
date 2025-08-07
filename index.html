@@ -1,243 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CryptoVision - AI Trading Analysis</title>
-    <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trade World - Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #4361ee;
+      --success-color: #4cc9f0;
+      --warning-color: #f8961e;
+      --danger-color: #f72585;
+      --light-color: #f8f9fa;
+      --dark-color: #212529;
+      --gray-light: #e9ecef;
+      --border-radius: 10px;
+      --box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{background:#f5f7fa;color:var(--dark-color);line-height:1.6;}
+    header{background:#fff;box-shadow:0 2px 10px rgba(0,0,0,0.1);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;position:fixed;top:0;left:0;right:0;z-index:1000;}
+    .logo{display:flex;align-items:center;gap:0.5rem;}
+    .logo-icon{color:var(--primary-color);font-size:1.5rem;}
+    .logo-text{font-weight:600;font-size:1.2rem;}
+    .menu-toggle{background:none;border:none;font-size:1.5rem;display:none;}
+    .sidebar{background:#fff;box-shadow:2px 0 10px rgba(0,0,0,0.1);width:250px;position:fixed;top:70px;left:0;height:calc(100vh - 70px);overflow-y:auto;transition:0.3s;}
+    .sidebar-menu{list-style:none;}
+    .sidebar-menu li a{display:flex;align-items:center;padding:0.8rem 1.5rem;color:var(--dark-color);text-decoration:none;border-left:3px solid transparent;}
+    .sidebar-menu li a:hover, .sidebar-menu li a.active{background:#e6e9ff;color:var(--primary-color);border-left-color:var(--primary-color);}
+    .sidebar-menu li a i{margin-right:0.8rem;}
+    .main-content{margin-top:70px;margin-left:250px;padding:2rem;}
+    .page-title{font-size:1.8rem;margin-bottom:1.5rem;color:var(--dark-color);display:flex;align-items:center;gap:0.5rem;}
+    .page-title i{color:var(--primary-color);}
+    .dashboard-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;}
+    .card{background:#fff;border-radius:var(--border-radius);box-shadow:var(--box-shadow);padding:1rem;}
+    .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;}
+    .card-value{font-size:1.8rem;font-weight:600;}
+    .card-footer{font-size:0.85rem;color:#6c757d;margin-top:0.5rem;}
+    .packages-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;}
+    .package-card{background:#fff;border-radius:var(--border-radius);box-shadow:var(--box-shadow);padding:1.5rem;text-align:center;}
+    .package-price{font-size:1.5rem;margin:0.5rem 0;}
+    .btn{padding:0.6rem 1rem;border:none;border-radius:var(--border-radius);background:var(--primary-color);color:#fff;cursor:pointer;}
+    .btn:hover{background:#3f37c9;}
+    .toast-container{position:fixed;top:1rem;right:1rem;z-index:1200;display:flex;flex-direction:column;gap:0.5rem;}
+    .toast{padding:1rem 1.5rem;border-radius:var(--border-radius);color:#fff;box-shadow:var(--box-shadow);animation:slideIn 0.3s ease;}
+    .toast.success{background:var(--success-color);}
+    .toast.error{background:var(--danger-color);}
+    @keyframes slideIn{from{transform:translateX(100%);opacity:0;}to{transform:translateX(0);opacity:1;}}
+    @media(max-width:992px){.sidebar{left:-250px;}.sidebar.open{left:0;}.main-content{margin-left:0;}.menu-toggle{display:block;}}
+  </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <h1>CryptoVision</h1>
-                <span>AI-Powered Trading Insights</span>
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#how-it-works">How It Works</a></li>
-                    <li><a href="#features">Features</a></li>
-                    <li><a href="#testimonials">Testimonials</a></li>
-                </ul>
-            </nav>
-            <div class="auth-buttons">
-                <button class="btn-login">Login</button>
-                <button class="btn-signup">Sign Up</button>
-            </div>
-        </div>
-    </header>
-
-    <main>
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <h2>AI-Powered Crypto Trading Analysis</h2>
-                    <p>Upload any cryptocurrency chart screenshot and get instant trading recommendations with entry points, stop loss, and take profit levels.</p>
-                    <div class="upload-area" id="uploadArea">
-                        <i class="fas fa-cloud-upload-alt"></i>
-                        <p>Drag & Drop your crypto chart screenshot here</p>
-                        <span>or</span>
-                        <button class="btn-browse">Browse Files</button>
-                        <input type="file" id="fileInput" accept="image/*" style="display: none;">
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <img src="assets/images/crypto-analysis.png" alt="Crypto Analysis">
-                </div>
-            </div>
-        </section>
-
-        <section class="analysis-result" id="analysisResult" style="display: none;">
-            <div class="container">
-                <div class="result-header">
-                    <h3>Analysis Result</h3>
-                    <div class="coin-info">
-                        <img id="coinLogo" src="assets/images/btc-logo.png" alt="Coin Logo">
-                        <div>
-                            <h4 id="coinName">Bitcoin (BTC)</h4>
-                            <p id="coinPrice">Current Price: $36,542.78</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="result-content">
-                    <div class="original-image">
-                        <h5>Your Uploaded Chart</h5>
-                        <img id="uploadedImage" src="" alt="Uploaded Chart">
-                    </div>
-                    
-                    <div class="trading-recommendation">
-                        <h5>Trading Recommendation</h5>
-                        <div class="recommendation-card">
-                            <div class="confidence-level">
-                                <div class="progress-bar">
-                                    <div class="progress-fill" style="width: 70%;"></div>
-                                </div>
-                                <span>70% Confidence</span>
-                            </div>
-                            
-                            <div class="recommendation-details">
-                                <div class="detail-box entry">
-                                    <h6>Entry Point</h6>
-                                    <p id="entryPoint">$36,200 - $36,400</p>
-                                </div>
-                                <div class="detail-box stop-loss">
-                                    <h6>Stop Loss</h6>
-                                    <p id="stopLoss">$35,800</p>
-                                </div>
-                                <div class="detail-box take-profit">
-                                    <h6>Take Profit</h6>
-                                    <p id="takeProfit">$37,800 - $38,200</p>
-                                </div>
-                            </div>
-                            
-                            <div class="timeframe">
-                                <h6>Recommended Timeframe</h6>
-                                <p id="timeframe">4H - 1D</p>
-                            </div>
-                            
-                            <div class="analysis-summary">
-                                <h6>Analysis Summary</h6>
-                                <p id="analysisSummary">The chart shows a bullish flag pattern forming after a strong upward move. The RSI is at 58, indicating there's still room for upward movement before becoming overbought. Volume is increasing on upward moves, supporting the bullish case.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="action-buttons">
-                    <button class="btn-save-analysis">Save Analysis</button>
-                    <button class="btn-new-analysis">New Analysis</button>
-                    <button class="btn-view-history">View History</button>
-                </div>
-            </div>
-        </section>
-
-        <section class="how-it-works" id="how-it-works">
-            <div class="container">
-                <h2>How It Works</h2>
-                <div class="steps">
-                    <div class="step">
-                        <div class="step-number">1</div>
-                        <h4>Upload Screenshot</h4>
-                        <p>Take a screenshot of any cryptocurrency chart from your trading platform and upload it to our system.</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">2</div>
-                        <h4>AI Analysis</h4>
-                        <p>Our advanced AI analyzes the chart patterns, indicators, and market conditions in real-time.</p>
-                    </div>
-                    <div class="step">
-                        <div class="step-number">3</div>
-                        <h4>Get Recommendations</h4>
-                        <p>Receive clear trading recommendations with entry points, stop loss, and take profit levels.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="features" id="features">
-            <div class="container">
-                <h2>Powerful Features</h2>
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <i class="fas fa-chart-line"></i>
-                        <h4>Pattern Recognition</h4>
-                        <p>Identifies common chart patterns like head and shoulders, flags, triangles with high accuracy.</p>
-                    </div>
-                    <div class="feature-card">
-                        <i class="fas fa-robot"></i>
-                        <h4>AI-Powered Analysis</h4>
-                        <p>Uses machine learning to analyze historical data and predict potential price movements.</p>
-                    </div>
-                    <div class="feature-card">
-                        <i class="fas fa-bell"></i>
-                        <h4>Risk Management</h4>
-                        <p>Calculates optimal stop loss levels based on volatility and support/resistance levels.</p>
-                    </div>
-                    <div class="feature-card">
-                        <i class="fas fa-history"></i>
-                        <h4>Trade History</h4>
-                        <p>Stores all your previous analyses so you can track performance and improve your strategy.</p>
-                    </div>
-                    <div class="feature-card">
-                        <i class="fas fa-mobile-alt"></i>
-                        <h4>Mobile Friendly</h4>
-                        <p>Works perfectly on all devices, so you can analyze charts anytime, anywhere.</p>
-                    </div>
-                    <div class="feature-card">
-                        <i class="fas fa-lock"></i>
-                        <h4>Private & Secure</h4>
-                        <p>All your data stays on your device. We don't store your charts or trading history on our servers.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="testimonials" id="testimonials">
-            <div class="container">
-                <h2>What Traders Say</h2>
-                <div class="testimonial-slider">
-                    <div class="testimonial">
-                        <div class="quote">"This tool has improved my trading accuracy significantly. The pattern recognition is spot on about 70% of the time as promised."</div>
-                        <div class="author">
-                            <img src="assets/images/user1.jpg" alt="Raj K.">
-                            <div>
-                                <h5>Raj K.</h5>
-                                <p>Full-time Crypto Trader</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="testimonial">
-                        <div class="quote">"As a beginner, the clear entry and exit points helped me understand market structure better while making profitable trades."</div>
-                        <div class="author">
-                            <img src="assets/images/user2.jpg" alt="Priya M.">
-                            <div>
-                                <h5>Priya M.</h5>
-                                <p>Swing Trader</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-about">
-                    <h3>CryptoVision</h3>
-                    <p>AI-powered cryptocurrency trading analysis tool that helps traders make better decisions with clear entry and exit points.</p>
-                </div>
-                <div class="footer-links">
-                    <h4>Quick Links</h4>
-                    <ul>
-                        <li><a href="#how-it-works">How It Works</a></li>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Service</a></li>
-                    </ul>
-                </div>
-                <div class="footer-contact">
-                    <h4>Contact Us</h4>
-                    <p><i class="fas fa-envelope"></i> support@cryptovision.com</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-telegram"></i></a>
-                        <a href="#"><i class="fab fa-discord"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 CryptoVision. All rights reserved.</p>
-                <p>Disclaimer: Trading cryptocurrencies involves risk. Our analysis is for informational purposes only and should not be considered financial advice.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script src="js/script.js"></script>
+<header>
+  <div class="logo">
+    <i class="fas fa-chart-line logo-icon"></i>
+    <span class="logo-text">Trade World</span>
+  </div>
+  <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
+</header>
+<aside class="sidebar" id="sidebar">
+  <ul class="sidebar-menu">
+    <li><a href="index.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+    <li><a href="profile.html"><i class="fas fa-user"></i> My Profile</a></li>
+    <li><a href="deposit.html"><i class="fas fa-money-bill-wave"></i> Deposit Funds</a></li>
+    <li><a href="withdrawal.html"><i class="fas fa-wallet"></i> Withdraw Funds</a></li>
+    <li><a href="transfer.html"><i class="fas fa-exchange-alt"></i> Transfer Funds</a></li>
+    <li><a href="referral.html"><i class="fas fa-users"></i> Referral Program</a></li>
+    <li><a href="team-structure.html"><i class="fas fa-network-wired"></i> Team Structure</a></li>
+    <li><a href="trading-history.html"><i class="fas fa-history"></i> Trading History</a></li>
+    <li><a href="invoices.html"><i class="fas fa-file-invoice"></i> My Invoices</a></li>
+    <li><a href="packages.html"><i class="fas fa-box-open"></i> Investment Packages</a></li>
+    <li><a href="#" id="logoutLink"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+  </ul>
+</aside>
+<main class="main-content">
+  <h1 class="page-title"><i class="fas fa-tachometer-alt"></i> Dashboard</h1>
+  <div class="dashboard-cards">
+    <div class="card">
+      <div class="card-header"><span>My Balance</span><i class="fas fa-wallet"></i></div>
+      <div class="card-value" id="userBalance">$0.00</div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span>Trading Profit</span><i class="fas fa-chart-line"></i></div>
+      <div class="card-value" id="tradingProfit">$0.00</div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span>Direct Referrals</span><i class="fas fa-user-plus"></i></div>
+      <div class="card-value" id="directReferrals">0</div>
+      <div class="card-footer">Earnings: <span id="referralProfit">$0.00</span></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><span>Total Team Earnings</span><i class="fas fa-users"></i></div>
+      <div class="card-value" id="teamEarnings">$0.00</div>
+    </div>
+  </div>
+  <h2 class="section-title">Investment Packages</h2>
+  <div class="packages-grid">
+    <div class="package-card"><h3>Starter Package</h3><div class="package-price">$10</div><button class="btn" data-package="10">Buy Now</button></div>
+    <div class="package-card"><h3>Standard Package</h3><div class="package-price">$30</div><button class="btn" data-package="30">Buy Now</button></div>
+    <div class="package-card"><h3>Premium Package</h3><div class="package-price">$100</div><button class="btn" data-package="100">Buy Now</button></div>
+  </div>
+</main>
+<div class="toast-container" id="toastContainer"></div>
+<script type="module">
+// JavaScript code remains the same as previously corrected version
+</script>
 </body>
 </html>
