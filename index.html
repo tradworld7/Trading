@@ -3,108 +3,79 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Trade World - Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>Dashboard - Trade World</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary-color: #4361ee;
-      --success-color: #4cc9f0;
-      --warning-color: #f8961e;
-      --danger-color: #f72585;
-      --light-color: #f8f9fa;
-      --dark-color: #212529;
-      --gray-light: #e9ecef;
-      --border-radius: 10px;
-      --box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    }
-    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-    body{background:#f5f7fa;color:var(--dark-color);line-height:1.6;}
-    header{background:#fff;box-shadow:0 2px 10px rgba(0,0,0,0.1);padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;position:fixed;top:0;left:0;right:0;z-index:1000;}
-    .logo{display:flex;align-items:center;gap:0.5rem;}
-    .logo-icon{color:var(--primary-color);font-size:1.5rem;}
-    .logo-text{font-weight:600;font-size:1.2rem;}
-    .menu-toggle{background:none;border:none;font-size:1.5rem;display:none;}
-    .sidebar{background:#fff;box-shadow:2px 0 10px rgba(0,0,0,0.1);width:250px;position:fixed;top:70px;left:0;height:calc(100vh - 70px);overflow-y:auto;transition:0.3s;}
-    .sidebar-menu{list-style:none;}
-    .sidebar-menu li a{display:flex;align-items:center;padding:0.8rem 1.5rem;color:var(--dark-color);text-decoration:none;border-left:3px solid transparent;}
-    .sidebar-menu li a:hover, .sidebar-menu li a.active{background:#e6e9ff;color:var(--primary-color);border-left-color:var(--primary-color);}
-    .sidebar-menu li a i{margin-right:0.8rem;}
-    .main-content{margin-top:70px;margin-left:250px;padding:2rem;}
-    .page-title{font-size:1.8rem;margin-bottom:1.5rem;color:var(--dark-color);display:flex;align-items:center;gap:0.5rem;}
-    .page-title i{color:var(--primary-color);}
-    .dashboard-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;}
-    .card{background:#fff;border-radius:var(--border-radius);box-shadow:var(--box-shadow);padding:1rem;}
-    .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;}
-    .card-value{font-size:1.8rem;font-weight:600;}
-    .card-footer{font-size:0.85rem;color:#6c757d;margin-top:0.5rem;}
-    .packages-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem;}
-    .package-card{background:#fff;border-radius:var(--border-radius);box-shadow:var(--box-shadow);padding:1.5rem;text-align:center;}
-    .package-price{font-size:1.5rem;margin:0.5rem 0;}
-    .btn{padding:0.6rem 1rem;border:none;border-radius:var(--border-radius);background:var(--primary-color);color:#fff;cursor:pointer;}
-    .btn:hover{background:#3f37c9;}
-    .toast-container{position:fixed;top:1rem;right:1rem;z-index:1200;display:flex;flex-direction:column;gap:0.5rem;}
-    .toast{padding:1rem 1.5rem;border-radius:var(--border-radius);color:#fff;box-shadow:var(--box-shadow);animation:slideIn 0.3s ease;}
-    .toast.success{background:var(--success-color);}
-    .toast.error{background:var(--danger-color);}
-    @keyframes slideIn{from{transform:translateX(100%);opacity:0;}to{transform:translateX(0);opacity:1;}}
-    @media(max-width:992px){.sidebar{left:-250px;}.sidebar.open{left:0;}.main-content{margin-left:0;}.menu-toggle{display:block;}}
+    * {margin: 0;padding: 0;box-sizing: border-box;font-family: 'Poppins', sans-serif;}
+    body {display: flex;min-height: 100vh;background: #f6f9fc;}
+    .sidebar {width: 220px;background: #222;color: #fff;padding: 1rem 0;position: fixed;top: 0;bottom: 0;left: 0;z-index: 100;}
+    .sidebar h3 {text-align: center;margin-bottom: 2rem;}
+    .sidebar a {display: block;color: #fff;padding: 0.75rem 1.5rem;text-decoration: none;transition: background 0.3s;}
+    .sidebar a:hover {background: #333;}
+    .main {margin-left: 220px;padding: 2rem;width: 100%;}
+    header {background: #fff;padding: 1rem 2rem;border-radius: 8px;margin-bottom: 1.5rem;box-shadow: 0 0 10px rgba(0,0,0,0.05);}
+    .welcome {font-size: 1.25rem;font-weight: 500;}
   </style>
 </head>
 <body>
-<header>
-  <div class="logo">
-    <i class="fas fa-chart-line logo-icon"></i>
-    <span class="logo-text">Trade World</span>
+  <div class="sidebar">
+    <h3>Trade World</h3>
+    <a href="index.html">Dashboard</a>
+    <a href="profile.html">My Profile</a>
+    <a href="deposit.html">Deposit</a>
+    <a href="withdrawal.html">Withdraw</a>
+    <a href="team-structure.html">My Team</a>
+    <a href="#" id="logout">Logout</a>
   </div>
-  <button class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></button>
-</header>
-<aside class="sidebar" id="sidebar">
-  <ul class="sidebar-menu">
-    <li><a href="index.html" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
-    <li><a href="profile.html"><i class="fas fa-user"></i> My Profile</a></li>
-    <li><a href="deposit.html"><i class="fas fa-money-bill-wave"></i> Deposit Funds</a></li>
-    <li><a href="withdrawal.html"><i class="fas fa-wallet"></i> Withdraw Funds</a></li>
-    <li><a href="transfer.html"><i class="fas fa-exchange-alt"></i> Transfer Funds</a></li>
-    <li><a href="referral.html"><i class="fas fa-users"></i> Referral Program</a></li>
-    <li><a href="team-structure.html"><i class="fas fa-network-wired"></i> Team Structure</a></li>
-    <li><a href="trading-history.html"><i class="fas fa-history"></i> Trading History</a></li>
-    <li><a href="invoices.html"><i class="fas fa-file-invoice"></i> My Invoices</a></li>
-    <li><a href="packages.html"><i class="fas fa-box-open"></i> Investment Packages</a></li>
-    <li><a href="#" id="logoutLink"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
-  </ul>
-</aside>
-<main class="main-content">
-  <h1 class="page-title"><i class="fas fa-tachometer-alt"></i> Dashboard</h1>
-  <div class="dashboard-cards">
-    <div class="card">
-      <div class="card-header"><span>My Balance</span><i class="fas fa-wallet"></i></div>
-      <div class="card-value" id="userBalance">$0.00</div>
-    </div>
-    <div class="card">
-      <div class="card-header"><span>Trading Profit</span><i class="fas fa-chart-line"></i></div>
-      <div class="card-value" id="tradingProfit">$0.00</div>
-    </div>
-    <div class="card">
-      <div class="card-header"><span>Direct Referrals</span><i class="fas fa-user-plus"></i></div>
-      <div class="card-value" id="directReferrals">0</div>
-      <div class="card-footer">Earnings: <span id="referralProfit">$0.00</span></div>
-    </div>
-    <div class="card">
-      <div class="card-header"><span>Total Team Earnings</span><i class="fas fa-users"></i></div>
-      <div class="card-value" id="teamEarnings">$0.00</div>
-    </div>
+
+  <div class="main">
+    <header>
+      <div class="welcome" id="userName">Welcome, User</div>
+    </header>
+    <section>
+      <p>This is your dashboard. You can manage your profile, check deposits, withdrawals, and view your team.</p>
+    </section>
   </div>
-  <h2 class="section-title">Investment Packages</h2>
-  <div class="packages-grid">
-    <div class="package-card"><h3>Starter Package</h3><div class="package-price">$10</div><button class="btn" data-package="10">Buy Now</button></div>
-    <div class="package-card"><h3>Standard Package</h3><div class="package-price">$30</div><button class="btn" data-package="30">Buy Now</button></div>
-    <div class="package-card"><h3>Premium Package</h3><div class="package-price">$100</div><button class="btn" data-package="100">Buy Now</button></div>
-  </div>
-</main>
-<div class="toast-container" id="toastContainer"></div>
-<script type="module">
-// JavaScript code remains the same as previously corrected version
-</script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-auth.js";
+    import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCzHmIimieea8H9KzYFDSqD0lGOCZjxHYw",
+      authDomain: "myapp-ee226.firebaseapp.com",
+      databaseURL: "https://myapp-ee226-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "myapp-ee226",
+      storageBucket: "myapp-ee226.firebasestorage.app",
+      messagingSenderId: "272405753135",
+      appId: "1:272405753135:web:598ec27c28bcf6b04105da",
+      measurementId: "G-D5KYTMJ5WK"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getDatabase(app);
+
+    const userName = document.getElementById('userName');
+
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const snapshot = await get(ref(db, 'users/' + user.uid));
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          userName.textContent = `Welcome, ${data.name || 'User'}`;
+        }
+      } else {
+        window.location.href = 'signup.html';
+      }
+    });
+
+    document.getElementById('logout').addEventListener('click', () => {
+      signOut(auth).then(() => {
+        window.location.href = 'login.html';
+      });
+    });
+  </script>
 </body>
 </html>
