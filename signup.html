@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up - Trade World</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
+    body{background:#eef2f3;display:flex;align-items:center;justify-content:center;min-height:100vh;}
+    .signup-container{background:#fff;padding:2rem;border-radius:10px;box-shadow:0 0 15px rgba(0,0,0,0.1);width:100%;max-width:420px;}
+    h2{text-align:center;margin-bottom:1.5rem;}
+    input[type="text"], input[type="email"], input[type="password"] {
+      width:100%;padding:0.75rem;margin:0.4rem 0;border:1px solid #ccc;border-radius:5px;
+    }
+    label{font-weight:500;margin-top:0.5rem;display:block;}
+    .checkbox-label{display:flex;align-items:center;font-size:0.9rem;margin:0.5rem 0;}
+    .checkbox-label input{margin-right:8px;}
+    button{width:100%;padding:0.75rem;background:#4361ee;color:#fff;border:none;border-radius:5px;cursor:pointer;}
+    button:hover{background:#3b4cca;}
+    .footer-text{text-align:center;margin-top:1rem;font-size:0.9rem;}
+    .footer-text a{color:#4361ee;text-decoration:none;}
+    .footer-text a:hover{text-decoration:underline;}
+    .error{color:red;font-size:0.85rem;margin-top:0.5rem;}
+    .success{color:green;text-align:center;margin-top:1rem;}
+  </style>
+</head>
+<body>
+<div class="signup-container">
+  <h2>Create Your Account</h2>
+  <label for="refId">Sponsor ID</label>
+  <input type="text" id="refId" placeholder="Enter sponsor ID (optional)" />
+  <label for="fullName">Full Name</label>
+  <input type="text" id="fullName" placeholder="Enter your full name" required />
+  <label for="mobile">Mobile Number</label>
+  <input type="text" id="mobile" placeholder="Enter mobile number" required />
+  <label for="email">Email Address</label>
+  <input type="email" id="email" placeholder="Enter email address" required />
+  <label for="password">Password</label>
+  <input type="password" id="password" placeholder="Create password" required />
+  <label for="rePassword">Re-enter Password</label>
+  <input type="password" id="rePassword" placeholder="Re-enter password" required />
+  <div class="checkbox-label">
+    <input type="checkbox" id="agree" required />
+    <label for="agree">I agree to Terms & Conditions</label>
+  </div>
+  <button id="signupBtn">Sign Up</button>
+  <div id="message"></div>
+  <div class="footer-text">Already have an account? <a href="login.html">Login</a></div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-auth.js";
+  import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCzHmIimieea8H9KzYFDSqD0lGOCZjxHYw",
+    authDomain: "myapp-ee226.firebaseapp.com",
+    databaseURL: "https://myapp-ee226-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "myapp-ee226",
+    storageBucket: "myapp-ee226.firebasestorage.app",
+    messagingSenderId: "272405753135",
+    appId: "1:272405753135:web:598ec27c28bcf6b04105da",
+    measurementId: "G-D5KYTMJ5WK"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getDatabase(app);
+
+  const signupBtn = document.getElementById('signupBtn');
+  const msgBox = document.getElementById('message');
+
+  signupBtn.addEventListener('click', async () => {
+    const fullName = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const mobile = document.getElementById('mobile').value.trim();
+    const password = document.getElementById('password').value;
+    const rePassword = document.getElementById('rePassword').value;
+    const agreed = document.getElementById('agree').checked;
+    const sponsorId = document.getElementById('refId').value.trim() || null;
+
+    if (!fullName || !email || !mobile || !password || !rePassword) {
+      msgBox.innerHTML = '<div class="error">Please fill all required fields.</div>';
+      return;
+    }
+    if (password !== rePassword) {
+      msgBox.innerHTML = '<div class="error">Passwords do not match.</div>';
+      return;
+    }
+    if (!agreed) {
+      msgBox.innerHTML = '<div class="error">You must agree to terms and conditions.</div>';
+      return;
+    }
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      await set(ref(db, 'users/' + user.uid), {
+        uid: user.uid,
+        name: fullName,
+        email: email,
+        mobile: mobile,
+        balance: 0,
+        referrer: sponsorId,
+        createdAt: Date.now()
+      });
+      msgBox.innerHTML = '<div class="success">Account created successfully!</div>';
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 2000);
+    } catch (error) {
+      msgBox.innerHTML = `<div class="error">${error.message}</div>`;
+    }
+  });
+</script>
+</body>
+</html>
