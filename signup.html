@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign Up - Trade World</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
@@ -23,11 +23,13 @@
     .footer-text a:hover{text-decoration:underline;}
     .error{color:red;font-size:0.85rem;margin-top:0.5rem;}
     .success{color:green;text-align:center;margin-top:1rem;}
+    .sponsor-note{font-size:0.85rem;color:#333;margin-bottom:1rem;text-align:center;}
   </style>
 </head>
 <body>
 <div class="signup-container">
   <h2>Create Your Account</h2>
+  <div class="sponsor-note" id="sponsorText"></div>
   <label for="refId">Sponsor ID</label>
   <input type="text" id="refId" placeholder="Enter sponsor ID (optional)" />
   <label for="fullName">Full Name</label>
@@ -52,7 +54,7 @@
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-app.js";
   import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-auth.js";
-  import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-database.js";
+  import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/9.6.0/firebase-database.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyCzHmIimieea8H9KzYFDSqD0lGOCZjxHYw",
@@ -71,6 +73,26 @@
 
   const signupBtn = document.getElementById('signupBtn');
   const msgBox = document.getElementById('message');
+  const refIdField = document.getElementById('refId');
+  const sponsorText = document.getElementById('sponsorText');
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const sponsorUid = urlParams.get('ref');
+
+  if (sponsorUid) {
+    refIdField.value = sponsorUid;
+    const sponsorRef = ref(db, `users/${sponsorUid}`);
+    get(sponsorRef).then(snapshot => {
+      if (snapshot.exists()) {
+        const sponsorName = snapshot.val().name || 'Sponsor';
+        sponsorText.textContent = `You are joining under: ${sponsorName} (${sponsorUid})`;
+      } else {
+        sponsorText.textContent = `Sponsor not found. Proceeding as direct.`;
+      }
+    }).catch(() => {
+      sponsorText.textContent = `Could not verify sponsor.`;
+    });
+  }
 
   signupBtn.addEventListener('click', async () => {
     const fullName = document.getElementById('fullName').value.trim();
@@ -79,7 +101,7 @@
     const password = document.getElementById('password').value;
     const rePassword = document.getElementById('rePassword').value;
     const agreed = document.getElementById('agree').checked;
-    const sponsorId = document.getElementById('refId').value.trim() || null;
+    const sponsorId = refIdField.value.trim() || null;
 
     if (!fullName || !email || !mobile || !password || !rePassword) {
       msgBox.innerHTML = '<div class="error">Please fill all required fields.</div>';
