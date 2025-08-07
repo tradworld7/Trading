@@ -15,6 +15,10 @@
     .main {margin-left: 220px;padding: 2rem;width: 100%;}
     header {background: #fff;padding: 1rem 2rem;border-radius: 8px;margin-bottom: 1.5rem;box-shadow: 0 0 10px rgba(0,0,0,0.05);}
     .welcome {font-size: 1.25rem;font-weight: 500;}
+    .dashboard-cards {display: grid;grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));gap: 1rem;margin-bottom: 2rem;}
+    .card {background: #fff;padding: 1rem;border-radius: 8px;box-shadow: 0 0 5px rgba(0,0,0,0.05);}
+    .card h4 {font-size: 1rem;margin-bottom: 0.5rem;}
+    .card .value {font-size: 1.5rem;font-weight: 600;}
     .section-title {font-weight: 600;font-size: 1.1rem;margin-bottom: 0.5rem;}
     .transaction-list {background: #fff;padding: 1rem;border-radius: 8px;box-shadow: 0 0 5px rgba(0,0,0,0.05);}
     .transaction-item {padding: 0.6rem 0;border-bottom: 1px solid #eee;}
@@ -32,9 +36,26 @@
     <header>
       <div class="welcome" id="userName">Welcome, User</div>
     </header>
-    <section>
-      <p>This is your dashboard. You can view recent transactions and manage your profile.</p>
-    </section>
+
+    <div class="dashboard-cards">
+      <div class="card">
+        <h4>My Balance</h4>
+        <div class="value" id="myBalance">$0.00</div>
+      </div>
+      <div class="card">
+        <h4>Trading Profit</h4>
+        <div class="value" id="tradingProfit">$0.00</div>
+      </div>
+      <div class="card">
+        <h4>Direct Referrals</h4>
+        <div class="value" id="directReferrals">0</div>
+        <small id="referralEarnings">Earnings: $0.00</small>
+      </div>
+      <div class="card">
+        <h4>Total Team Earnings</h4>
+        <div class="value" id="teamEarnings">$0.00</div>
+      </div>
+    </div>
 
     <section style="margin-top: 2rem;">
       <div class="section-title">Recent Transactions</div>
@@ -65,6 +86,11 @@
     const db = getDatabase(app);
 
     const userName = document.getElementById('userName');
+    const myBalance = document.getElementById('myBalance');
+    const tradingProfit = document.getElementById('tradingProfit');
+    const directReferrals = document.getElementById('directReferrals');
+    const referralEarnings = document.getElementById('referralEarnings');
+    const teamEarnings = document.getElementById('teamEarnings');
     const transactionList = document.getElementById('transactionList');
 
     onAuthStateChanged(auth, async (user) => {
@@ -74,9 +100,13 @@
         if (snap.exists()) {
           const data = snap.val();
           userName.textContent = `Welcome, ${data.name || 'User'}`;
+          myBalance.textContent = `$${(data.balance || 0).toFixed(2)}`;
+          tradingProfit.textContent = `$${(data.tradingProfit || 0).toFixed(2)}`;
+          directReferrals.textContent = data.directReferrals || 0;
+          referralEarnings.textContent = `Earnings: $${(data.referralEarnings || 0).toFixed(2)}`;
+          teamEarnings.textContent = `$${(data.teamEarnings || 0).toFixed(2)}`;
         }
 
-        // Load latest 10 transactions
         const transactionsRef = ref(db, 'transactions');
         onValue(transactionsRef, (snapshot) => {
           if (!snapshot.exists()) {
