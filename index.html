@@ -1559,11 +1559,11 @@
                         // Add transaction record for profit distribution
                         const transactionId = push(ref(database, 'transactions')).key;
                         updates[`users/${investor.userId}/transactions/${transactionId}`] = {
-                            type: 'profit',
+                            type: 'Trading Profit',
                             amount: share,
                             status: 'completed',
                             timestamp: Date.now(),
-                            details: 'Trading profit distribution'
+                            details: 'Trading profit '
                         };
                     }
                 });
@@ -1741,4 +1741,5 @@
     </script>
 </body>
 </html>
+
 
