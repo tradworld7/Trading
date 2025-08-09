@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradeWorld - My Invoices</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #4361ee;
+            --primary-light: #e6e9ff;
+            --secondary-color: #3f37c9;
+            --success-color: #4cc9f0;
+            --success-light: #e6f7fd;
+            --danger-color: #f72585;
+            --danger-light: #fde6ef;
+            --warning-color: #f8961e;
+            --warning-light: #fef3e6;
+            --info-color: #4895ef;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+            --gray-color: #6c757d;
+            --gray-light: #e9ecef;
+            --white-color: #ffffff;
+            --sidebar-width: 250px;
+            --header-height: 70px;
+            --transition: all 0.3s ease;
+            --border-radius: 10px;
+            --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: var(--dark-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white-color);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: var(--header-height);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .logo-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .menu-toggle {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--dark-color);
+            cursor: pointer;
+            display: none;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            background-color: var(--white-color);
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+            width: var(--sidebar-width);
+            height: calc(100vh - var(--header-height));
+            position: fixed;
+            top: var(--header-height);
+            left: 0;
+            overflow-y: auto;
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding: 1rem 0;
+        }
+
+        .sidebar-menu li a {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 1.5rem;
+            color: var(--dark-color);
+            text-decoration: none;
+            transition: var(--transition);
+            gap: 0.8rem;
+            border-left: 3px solid transparent;
+        }
+
+        .sidebar-menu li a:hover {
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+        }
+
+        .sidebar-menu li a.active {
+            background-color: var(--primary-light);
+            color: var(--primary-color);
+            border-left: 3px solid var(--primary-color);
+        }
+
+        .sidebar-menu li a i {
+            width: 20px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            margin-top: var(--header-height);
+            margin-left: var(--sidebar-width);
+            padding: 2rem;
+            transition: var(--transition);
+            min-height: calc(100vh - var(--header-height));
+        }
+
+        .page-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .page-title i {
+            color: var(--primary-color);
+        }
+
+        /* Card Styles */
+        .card {
+            background-color: var(--white-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            margin-bottom: 2rem;
+            border: none;
+        }
+
+        .card-header {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            border-radius: var(--border-radius) var(--border-radius) 0 0 !important;
+            padding: 1rem 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Table Styles */
+        .table-responsive {
+            overflow-x: auto;
+            border-radius: var(--border-radius);
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th {
+            background-color: rgba(0, 0, 0, 0.02);
+            padding: 0.8rem 1rem;
+            text-align: left;
+            font-weight: 500;
+            color: var(--gray-color);
+            white-space: nowrap;
+        }
+
+        .table td {
+            padding: 0.8rem 1rem;
+            border-bottom: 1px solid var(--gray-light);
+            vertical-align: middle;
+        }
+
+        .table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .table tr:hover td {
+            background-color: rgba(0, 0, 0, 0.01);
+        }
+
+        /* Status Badges */
+        .badge {
+            display: inline-block;
+            padding: 0.35rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status-active {
+            background-color: rgba(76, 201, 240, 0.1);
+            color: var(--success-color);
+        }
+
+        .status-completed {
+            background-color: rgba(67, 97, 238, 0.1);
+            color: var(--primary-color);
+        }
+
+        .status-pending {
+            background-color: rgba(248, 150, 30, 0.1);
+            color: var(--warning-color);
+        }
+
+        .status-cancelled {
+            background-color: rgba(247, 37, 133, 0.1);
+            color: var(--danger-color);
+        }
+
+        /* Button Styles */
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .btn-sm {
+            padding: 0.3rem 0.7rem;
+            font-size: 0.8rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-outline-primary {
+            background-color: transparent;
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline-primary:hover {
+            background-color: var(--primary-light);
+        }
+
+        /* Invoice Modal */
+        .invoice-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1100;
+        }
+
+        .invoice-modal-content {
+            background: var(--white-color);
+            width: 90%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow: auto;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            box-shadow: var(--box-shadow);
+        }
+
+        .invoice-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .close-invoice {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--gray-color);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .close-invoice:hover {
+            color: var(--dark-color);
+        }
+
+        .invoice-modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray-light);
+        }
+
+        /* Invoice Content */
+        .invoice-container {
+            font-family: Arial, sans-serif;
+            max-width: 100%;
+        }
+
+        .invoice-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .invoice-addresses {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+        }
+
+        .invoice-items {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 2rem;
+        }
+
+        .invoice-items th {
+            text-align: left;
+            padding: 0.8rem;
+            background: var(--gray-light);
+            border-bottom: 1px solid var(--gray-color);
+        }
+
+        .invoice-items td {
+            padding: 0.8rem;
+            border-bottom: 1px solid var(--gray-light);
+        }
+
+        .invoice-items .total td {
+            border-top: 2px solid var(--dark-color);
+            font-weight: 600;
+        }
+
+        .invoice-footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--gray-color);
+            font-size: 0.9rem;
+        }
+
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1200;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .toast {
+            padding: 1rem 1.5rem;
+            border-radius: var(--border-radius);
+            color: var(--white-color);
+            box-shadow: var(--box-shadow);
+            animation: slideIn 0.3s ease forwards;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            min-width: 300px;
+        }
+
+        .toast.success {
+            background-color: var(--success-color);
+        }
+
+        .toast.error {
+            background-color: var(--danger-color);
+        }
+
+        .toast.warning {
+            background-color: var(--warning-color);
+        }
+
+        .toast-close {
+            background: none;
+            border: none;
+            color: var(--white-color);
+            cursor: pointer;
+            font-size: 1rem;
+            opacity: 0.8;
+            transition: var(--transition);
+        }
+
+        .toast-close:hover {
+            opacity: 1;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+
+            .sidebar.open {
+                transform: translateX(0);
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 1.5rem;
+            }
+
+            .invoice-addresses {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            header {
+                padding: 1rem;
+            }
+
+            .page-title {
+                font-size: 1.5rem;
+            }
+
+            .invoice-modal-footer {
+                flex-direction: column;
+            }
+
+            .invoice-modal-footer .btn {
+                width: 100%;
+            }
+        }
+
+        /* Animations */
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <i class="fas fa-chart-line logo-icon"></i>
+            <span class="logo-text">Trade World</span>
+        </div>
+        
+        <div class="user-profile" id="userProfile">
+            <div class="user-avatar" id="userAvatar">U</div>
+        </div>
+        
+        <button class="menu-toggle" id="menuToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+    </header>
+
+    <!-- Sidebar Menu -->
+    <aside class="sidebar" id="sidebar">
+        <ul class="sidebar-menu">
+            <li><a href="index.html"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="profile.html"><i class="fas fa-user"></i> My Profile</a></li>
+            <li><a href="deposit.html"><i class="fas fa-money-bill-wave"></i> Deposit Funds</a></li>
+            <li><a href="withdrawal.html"><i class="fas fa-wallet"></i> Withdraw Funds</a></li>
+            <li><a href="transfer.html"><i class="fas fa-exchange-alt"></i> Transfer Funds</a></li>
+            <li><a href="referral.html"><i class="fas fa-users"></i> Referral Program</a></li>
+            <li><a href="trading-history.html"><i class="fas fa-history"></i> Transaction History</a></li>
+            <li><a href="invoices.html" class="active"><i class="fas fa-file-invoice"></i> My Invoices</a></li>
+            <li><a href="team-structure.html"><i class="fas fa-box-open"></i> team-structure</a></li>
+            <li><a href="#" id="logoutLink"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+        </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <h1 class="page-title"><i class="fas fa-file-invoice-dollar"></i> My Invoices</h1>
+        
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title"><i class="fas fa-list me-2"></i> Invoice History</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Invoice #</th>
+                                <th>Date & Time</th>
+                                <th>Package</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="invoiceList">
+                            <tr>
+                                <td colspan="6" class="text-center text-muted">Loading invoices...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Invoice Modal -->
+    <div class="invoice-modal" id="invoiceModal" style="display: none;">
+        <div class="invoice-modal-content">
+            <div class="invoice-modal-header">
+                <h3>Invoice Details</h3>
+                <button class="close-invoice" id="closeInvoiceModal">&times;</button>
+            </div>
+            
+            <div class="invoice-container" id="invoiceContent">
+                <div class="invoice-header">
+                    <div>
+                        <h2>INVOICE</h2>
+                        <p id="invoiceNumber">#INV-0001</p>
+                    </div>
+                    <div class="text-end">
+                        <img src="https://via.placeholder.com/150x50?text=TradeWorld" alt="TradeWorld Logo" style="height: 40px;">
+                        <p>Invoice Date: <span id="invoiceDate">01 Jan 2023</span></p>
+                    </div>
+                </div>
+                
+                <div class="invoice-addresses">
+                    <div>
+                        <h5>From:</h5>
+                        <p><strong>TradeWorld Investments</strong></p>
+                        <p>123 Business Street</p>
+                        <p>Financial District</p>
+                        <p>New York, NY 10001</p>
+                        <p>Email: support@tradeworld.com</p>
+                    </div>
+                    <div class="text-end">
+                        <h5>To:</h5>
+                        <p><strong id="customerName">John Doe</strong></p>
+                        <p id="customerEmail">john.doe@example.com</p>
+                        <p id="customerId">User ID: U123456</p>
+                        <p>Invoice Status: <span class="badge status-active" id="invoiceStatus">Active</span></p>
+                    </div>
+                </div>
+                
+                <table class="invoice-items">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="packageDescription">Starter Investment Package</td>
+                            <td id="packageAmount">$10.00</td>
+                        </tr>
+                        <tr>
+                            <td>Expected Return (100%)</td>
+                            <td id="expectedReturn">$20.00</td>
+                        </tr>
+                        <tr class="total">
+                            <td><strong>Total</strong></td>
+                            <td><strong id="totalAmount">$10.00</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="invoice-footer">
+                    <p>Thank you for your investment with TradeWorld</p>
+                    <p>For any questions regarding this invoice, please contact our support team</p>
+                </div>
+            </div>
+            
+            <div class="invoice-modal-footer">
+                <button class="btn btn-outline-primary" id="printInvoice">
+                    <i class="fas fa-print me-1"></i> Print
+                </button>
+                <button class="btn btn-primary" id="downloadInvoice">
+                    <i class="fas fa-download me-1"></i> Download PDF
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Firebase and other JS -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
+    <!-- jsPDF for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <script>
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBshAGZScyo7PJegLHMzORbkkrCLGD6U5s",
+            authDomain: "mywebsite-600d3.firebaseapp.com",
+            databaseURL: "https://mywebsite-600d3-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "mywebsite-600d3",
+            storageBucket: "mywebsite-600d3.appspot.com",
+            messagingSenderId: "584485288598",
+            appId: "1:584485288598:web:01856eaa18ba5ada49e0b7",
+            measurementId: "G-GQ9J9QH42J"
+        };
+
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const database = firebase.database();
+        const { jsPDF } = window.jspdf;
+
+        let currentUser = null;
+        let userData = null;
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            // Setup sidebar toggle
+            document.getElementById('menuToggle').addEventListener('click', function() {
+                document.getElementById('sidebar').classList.toggle('open');
+            });
+            
+            // Check if user is logged in
+            auth.onAuthStateChanged((user) => {
+                if (user) {
+                    currentUser = user;
+                    loadUserData(user.uid);
+                    
+                    // Update user avatar
+                    updateUserAvatar(user.email || 'User');
+                } else {
+                    window.location.href = 'login.html';
+                }
+            });
+            
+            // Setup logout
+            document.getElementById('logoutLink').addEventListener('click', (e) => {
+                e.preventDefault();
+                logoutUser();
+            });
+            
+            // Close invoice modal
+            document.getElementById('closeInvoiceModal').addEventListener('click', () => {
+                document.getElementById('invoiceModal').style.display = 'none';
+            });
+            
+            // Print invoice
+            document.getElementById('printInvoice').addEventListener('click', () => {
+                window.print();
+            });
+            
+            // Download invoice as PDF
+            document.getElementById('downloadInvoice').addEventListener('click', generatePdf);
+        });
+
+        // Update user avatar with initials
+        function updateUserAvatar(email) {
+            const avatar = document.getElementById('userAvatar');
+            if (!avatar) return;
+            
+            // Extract initials from email or name
+            let initials = 'U';
+            if (email) {
+                const namePart = email.split('@')[0];
+                if (namePart.includes('.')) {
+                    initials = namePart.split('.').map(n => n[0]).join('').toUpperCase();
+                } else {
+                    initials = namePart.substring(0, 2).toUpperCase();
+                }
+            }
+            
+            avatar.textContent = initials;
+        }
+
+        // Load user data
+        function loadUserData(uid) {
+            const userRef = database.ref('users/' + uid);
+            
+            userRef.on('value', (snapshot) => {
+                userData = snapshot.val();
+                
+                if (userData) {
+                    // Load invoices
+                    loadInvoices(uid);
+                }
+            });
+        }
+
+        // Load user invoices
+        function loadInvoices(uid) {
+            const invoicesRef = database.ref('users/' + uid + '/invoices');
+            const invoiceList = document.getElementById('invoiceList');
+            
+            invoicesRef.on('value', (snapshot) => {
+                const invoices = snapshot.val();
+                invoiceList.innerHTML = '';
+                
+                if (invoices) {
+                    // Convert to array and sort by timestamp (newest first)
+                    const invoicesArray = Object.entries(invoices).map(([id, invoice]) => ({ 
+                        id, 
+                        ...invoice,
+                        // Use the Firebase push ID as the invoice number if not specified
+                        invoiceNumber: invoice.invoiceNumber || 'INV-' + id.substring(0, 8),
+                        // Convert Firebase timestamp to milliseconds if it's an object
+                        timestamp: typeof invoice.timestamp === 'object' ? 
+                                 (invoice.timestamp.seconds * 1000 + Math.round(invoice.timestamp.nanoseconds / 1000000)) : 
+                                 (invoice.timestamp || invoice.date || Date.now())
+                    }));
+                    
+                    // Sort by timestamp (newest first)
+                    invoicesArray.sort((a, b) => b.timestamp - a.timestamp);
+                    
+                    invoicesArray.forEach(invoice => {
+                        const row = document.createElement('tr');
+                        
+                        // Format date and time from the timestamp
+                        const invoiceDate = new Date(invoice.timestamp);
+                        const formattedDate = invoiceDate.toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        });
+                        
+                        // Determine status class
+                        let statusClass = 'status-pending';
+                        if (invoice.status === 'active') statusClass = 'status-active';
+                        else if (invoice.status === 'completed') statusClass = 'status-completed';
+                        else if (invoice.status === 'cancelled') statusClass = 'status-cancelled';
+                        
+                        row.innerHTML = `
+                            <td>${invoice.invoiceNumber}</td>
+                            <td>${formattedDate}</td>
+                            <td>${invoice.packageName || 'Investment Package'}</td>
+                            <td>$${invoice.amount?.toFixed(2) || '0.00'}</td>
+                            <td><span class="badge ${statusClass}">${invoice.status || 'pending'}</span></td>
+                            <td>
+                                <button class="btn btn-sm btn-outline-primary view-invoice" data-invoice-id="${invoice.id}">
+                                    <i class="fas fa-eye"></i> View
+                                </button>
+                            </td>
+                        `;
+                        
+                        invoiceList.appendChild(row);
+                    });
+                    
+                    // Add event listeners to view buttons
+                    document.querySelectorAll('.view-invoice').forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            const invoiceId = btn.getAttribute('data-invoice-id');
+                            showInvoiceModal(invoiceId);
+                        });
+                    });
+                } else {
+                    invoiceList.innerHTML = `
+                        <tr>
+                            <td colspan="6" class="text-center text-muted">No invoices found</td>
+                        </tr>
+                    `;
+                }
+            });
+        }
+
+        // Show invoice modal with details
+        function showInvoiceModal(invoiceId) {
+            const invoiceRef = database.ref('users/' + currentUser.uid + '/invoices/' + invoiceId);
+            
+            invoiceRef.once('value').then((snapshot) => {
+                const invoice = snapshot.val();
+                
+                if (invoice) {
+                    // Update modal with invoice data
+                    document.getElementById('invoiceNumber').textContent = invoice.invoiceNumber || 'INV-' + invoiceId.substring(0, 8);
+                    
+                    // Convert Firebase timestamp to milliseconds if it's an object
+                    const invoiceTimestamp = typeof invoice.timestamp === 'object' ? 
+                                          (invoice.timestamp.seconds * 1000 + Math.round(invoice.timestamp.nanoseconds / 1000000)) : 
+                                          (invoice.timestamp || invoice.date || Date.now());
+                    
+                    // Set invoice date with proper formatting
+                    const invoiceDate = new Date(invoiceTimestamp);
+                    document.getElementById('invoiceDate').textContent = invoiceDate.toLocaleDateString('en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    
+                    // Update customer info
+                    document.getElementById('customerName').textContent = userData.name || 'User';
+                    document.getElementById('customerEmail').textContent = userData.email || '';
+                    document.getElementById('customerId').textContent = 'User ID: ' + currentUser.uid.substring(0, 8);
+                    
+                    // Set status with appropriate class
+                    const statusElement = document.getElementById('invoiceStatus');
+                    statusElement.textContent = invoice.status || 'active';
+                    statusElement.className = 'badge ';
+                    
+                    if (invoice.status === 'active') statusElement.classList.add('status-active');
+                    else if (invoice.status === 'completed') statusElement.classList.add('status-completed');
+                    else if (invoice.status === 'cancelled') statusElement.classList.add('status-cancelled');
+                    else statusElement.classList.add('status-pending');
+                    
+                    // Update package details
+                    document.getElementById('packageDescription').textContent = invoice.packageName || 'Investment Package';
+                    document.getElementById('packageAmount').textContent = '$' + (invoice.amount?.toFixed(2) || '0.00');
+                    
+                    // Calculate and show expected return
+                    const expectedReturn = invoice.returnAmount || (invoice.amount * 2) || 0;
+                    document.getElementById('expectedReturn').textContent = '$' + expectedReturn.toFixed(2);
+                    document.getElementById('totalAmount').textContent = '$' + (invoice.amount?.toFixed(2) || '0.00');
+                    
+                    // Show modal
+                    document.getElementById('invoiceModal').style.display = 'flex';
+                }
+            });
+        }
+
+        // Generate PDF from invoice
+        function generatePdf() {
+            const invoiceContent = document.getElementById('invoiceContent');
+            const invoiceNumber = document.getElementById('invoiceNumber').textContent;
+            
+            // Use html2canvas to capture the invoice content
+            html2canvas(invoiceContent).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                const imgWidth = 210; // A4 width in mm
+                const pageHeight = 295; // A4 height in mm
+                const imgHeight = canvas.height * imgWidth / canvas.width;
+                let heightLeft = imgHeight;
+                let position = 0;
+                
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+                
+                // Add new page if content is too long
+                while (heightLeft >= 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+                
+                pdf.save(`${invoiceNumber}.pdf`);
+                showToast('Invoice downloaded successfully', 'success');
+            }).catch(error => {
+                console.error('Error generating PDF:', error);
+                showToast('Failed to generate PDF', 'error');
+            });
+        }
+
+        // Logout user
+        async function logoutUser() {
+            try {
+                await auth.signOut();
+                showToast('Logged out successfully', 'success');
+                window.location.href = 'login.html';
+            } catch (error) {
+                showToast('Error logging out: ' + error.message, 'error');
+            }
+        }
+
+        // Show toast notification
+        function showToast(message, type) {
+            const toastContainer = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <span>${message}</span>
+                <button class="toast-close">&times;</button>
+            `;
+            
+            toastContainer.appendChild(toast);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                toast.remove();
+            }, 5000);
+            
+            // Close button
+            toast.querySelector('.toast-close').addEventListener('click', () => {
+                toast.remove();
+            });
+        }
+    </script>
+</body>
+</html>
