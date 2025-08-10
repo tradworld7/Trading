@@ -369,13 +369,29 @@
         // Create user data in database
         async function createUserData(userId, email, name, mobile, sponsorId) {
             const userData = {
-                email: email,
-                fullName: name,
-                mobileNumber: mobile,
-                balance: 0,
-                sponsorId: sponsorId || '',
-                joinDate: new Date().toISOString(),
-                lastLogin: new Date().toISOString()
+               
+                    uid: user.uid,
+                    name: name,
+                    email: email,
+                    balance: 0,
+                    tradingProfit: 0,
+                    referralEarnings: 0,
+                    teamEarnings: 0,
+                    createdAt: Date.now(),
+                    lastActive: Date.now(),
+                    teamStructure: {
+                        level1: 0,
+                        level2: 0,
+                        level3: 0,
+                        level4: 0,
+                        level5: 0
+                    },
+                    deposits: {},
+                    withdrawals: {},
+                    investments: {},
+                    invoices: {},
+                    transactions: {},
+                    directReferrals: {}
             };
             
             try {
@@ -486,4 +502,5 @@
     </script>
 </body>
 </html>
+
 
