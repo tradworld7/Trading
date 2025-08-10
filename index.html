@@ -1222,6 +1222,7 @@
                 
                 const userRef = ref(database, 'users/' + user.uid);
                 const userData = {
+                   
                     uid: user.uid,
                     name: name,
                     email: email,
@@ -1229,7 +1230,6 @@
                     tradingProfit: 0,
                     referralEarnings: 0,
                     teamEarnings: 0,
-                    totalInvestment: 0,
                     createdAt: Date.now(),
                     lastActive: Date.now(),
                     teamStructure: {
@@ -1741,6 +1741,7 @@
     </script>
 </body>
 </html>
+
 
 
 
