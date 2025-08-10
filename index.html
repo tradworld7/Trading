@@ -1222,7 +1222,6 @@
                 
                 const userRef = ref(database, 'users/' + user.uid);
                 const userData = {
-                   
                     uid: user.uid,
                     name: name,
                     email: email,
@@ -1230,6 +1229,7 @@
                     tradingProfit: 0,
                     referralEarnings: 0,
                     teamEarnings: 0,
+                    totalInvestment: 0,
                     createdAt: Date.now(),
                     lastActive: Date.now(),
                     teamStructure: {
@@ -1563,7 +1563,7 @@
                             amount: share,
                             status: 'completed',
                             timestamp: Date.now(),
-                            details: 'Trading profit '
+                            details: 'Trading profit distribution'
                         };
                     }
                 });
@@ -1587,9 +1587,9 @@
             // Calculate commission based on level
             let commissionRate = 0;
             if (currentLevel === 1) {
-                commissionRate = systemSettings.directCommission; // Direct referral commission
+                commissionRate = systemSettings.directCommission; // Direct referral commission (10%)
             } else if (currentLevel <= 5) {
-                commissionRate = systemSettings.levelCommissions[currentLevel-2]; // Level commission
+                commissionRate = systemSettings.levelCommissions[currentLevel-2]; // Level commission (2% each)
             }
             
             const commission = packageAmount * commissionRate;
@@ -1609,8 +1609,8 @@
                     status: 'completed',
                     timestamp: Date.now(),
                     details: currentLevel === 1 
-                        ? `Direct referral commission from ${userData.name}` 
-                        : `Level ${currentLevel} team commission from ${userData.name}`
+                        ? `Direct referral commission from ${userData.name || 'User'}` 
+                        : `Level ${currentLevel} team commission from ${userData.name || 'User'}`
                 };
                 
                 // If referrer has an upline, continue recursively
@@ -1741,7 +1741,3 @@
     </script>
 </body>
 </html>
-
-
-
-
