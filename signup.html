@@ -273,28 +273,28 @@
             
             <div class="form-group">
                 <label class="form-label">Full Name</label>
-                <input type="text" class="form-control" id="signupName" placeholder="Enter your full name">
+                <input type="text" class="form-control" id="signupName" placeholder="Enter your full name" required>
             </div>
             
             <div class="form-group">
                 <label class="form-label">Mobile Number</label>
-                <input type="tel" class="form-control" id="signupMobile" placeholder="Enter your mobile number">
+                <input type="tel" class="form-control" id="signupMobile" placeholder="Enter your mobile number" required>
             </div>
             
             <div class="form-group">
                 <label class="form-label">Email Address</label>
-                <input type="email" class="form-control" id="signupEmail" placeholder="Enter your email">
+                <input type="email" class="form-control" id="signupEmail" placeholder="Enter your email" required>
             </div>
             
             <div class="form-group">
                 <label class="form-label">Password</label>
-                <input type="password" class="form-control" id="signupPassword" placeholder="Create a password">
+                <input type="password" class="form-control" id="signupPassword" placeholder="Create a password" minlength="8" required>
                 <small class="form-text">Password must be at least 8 characters long</small>
             </div>
             
             <div class="form-group">
                 <label class="form-label">Confirm Password</label>
-                <input type="password" class="form-control" id="signupConfirmPassword" placeholder="Confirm your password">
+                <input type="password" class="form-control" id="signupConfirmPassword" placeholder="Confirm your password" required>
             </div>
             
             <button class="btn btn-primary btn-block" id="signupBtn">
@@ -312,26 +312,38 @@
     <div class="toast-container" id="toastContainer"></div>
 
     <!-- Firebase and App Scripts -->
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-database-compat.js"></script>
     <script>
         // Firebase configuration
         const firebaseConfig = {
             apiKey: "AIzaSyCzHmIimieea8H9KzYFDSqD0lGOCZjxHYw",
-  authDomain: "myapp-ee226.firebaseapp.com",
-  databaseURL: "https://myapp-ee226-default-rtdb.asia-southeast1.firebasedatabase.app",
-  projectId: "myapp-ee226",
-  storageBucket: "myapp-ee226.firebasestorage.app",
-  messagingSenderId: "272405753135",
-  appId: "1:272405753135:web:598ec27c28bcf6b04105da",
-  measurementId: "G-D5KYTMJ5WK"
+            authDomain: "myapp-ee226.firebaseapp.com",
+            databaseURL: "https://myapp-ee226-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "myapp-ee226",
+            storageBucket: "myapp-ee226.firebasestorage.app",
+            messagingSenderId: "272405753135",
+            appId: "1:272405753135:web:598ec27c28bcf6b04105da",
+            measurementId: "G-D5KYTMJ5WK"
         };
 
         // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
+        const app = firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const database = firebase.database();
+
+        // Admin details
+        const ADMIN_ID = "QXKfDkvQxjO9a4AKQXS4XdRp2i32";
+        const ADMIN_NAME = "Ramesh kumar Verma";
+
+        // System settings
+        const systemSettings = {
+            adminCommission: 0.60,
+            directCommission: 0.10,
+            levelCommissions: [0.02, 0.02, 0.02, 0.02, 0.02],
+            tradingProfitPool: 0.20
+        };
 
         // Show toast notification
         function showToast(message, type) {
@@ -366,49 +378,103 @@
             }
         }
 
+        // Update referrer's team structure when new user signs up
+        async function updateReferrerTeamStructure(referrerId, newUserId, updates) {
+            try {
+                // Get referrer data
+                const referrerSnapshot = await database.ref(`users/${referrerId}`).get();
+                if (!referrerSnapshot.exists()) return;
+                
+                // Add new user to referrer's direct referrals
+                updates[`users/${referrerId}/directReferrals/${newUserId}`] = {
+                    userId: newUserId,
+                    joinedAt: Date.now()
+                };
+                
+                // Update team structure counts
+                updates[`users/${referrerId}/teamStructure/level1`] = (referrerSnapshot.val().teamStructure?.level1 || 0) + 1;
+                
+                // If referrer has an upline, update their team structure recursively
+                if (referrerSnapshot.val().referredBy) {
+                    await updateUplineTeamStructure(referrerSnapshot.val().referredBy, 2, updates);
+                }
+                
+            } catch (error) {
+                console.error('Error updating referrer team structure:', error);
+                throw error;
+            }
+        }
+
+        // Recursively update upline team structure
+        async function updateUplineTeamStructure(uplineId, currentLevel, updates) {
+            if (currentLevel > 5) return;
+            
+            // Get upline data
+            const uplineSnapshot = await database.ref(`users/${uplineId}`).get();
+            if (!uplineSnapshot.exists()) return;
+            
+            const uplineData = uplineSnapshot.val();
+            
+            // Update this upline's team structure for current level
+            updates[`users/${uplineId}/teamStructure/level${currentLevel}`] = 
+                (uplineData.teamStructure?.[`level${currentLevel}`] || 0) + 1;
+            
+            // If upline has an upline, continue recursively
+            if (uplineData.referredBy && currentLevel < 5) {
+                await updateUplineTeamStructure(uplineData.referredBy, currentLevel + 1, updates);
+            }
+        }
+
         // Create user data in database
         async function createUserData(userId, email, name, mobile, sponsorId) {
             const userData = {
-               
-                    uid: user.uid,
-                    name: name,
-                    email: email,
-                    balance: 0,
-                    tradingProfit: 0,
-                    referralEarnings: 0,
-                    teamEarnings: 0,
-                    createdAt: Date.now(),
-                    lastActive: Date.now(),
-                    teamStructure: {
-                        level1: 0,
-                        level2: 0,
-                        level3: 0,
-                        level4: 0,
-                        level5: 0
-                    },
-                    deposits: {},
-                    withdrawals: {},
-                    investments: {},
-                    invoices: {},
-                    transactions: {},
-                    directReferrals: {}
+                uid: userId,
+                name: name,
+                email: email,
+                mobile: mobile,
+                balance: 0,
+                tradingProfit: 0,
+                referralEarnings: 0,
+                teamEarnings: 0,
+                totalInvestment: 0,
+                createdAt: Date.now(),
+                lastActive: Date.now(),
+                teamStructure: {
+                    level1: 0,
+                    level2: 0,
+                    level3: 0,
+                    level4: 0,
+                    level5: 0
+                },
+                deposits: {},
+                withdrawals: {},
+                investments: {},
+                invoices: {},
+                transactions: {},
+                directReferrals: {}
             };
             
+            // If there's a sponsor, set the referredBy field
+            if (sponsorId) {
+                userData.referredBy = sponsorId;
+            }
+            
+            const updates = {};
+            updates[`users/${userId}`] = userData;
+            
             try {
-                await database.ref('users/' + userId).set(userData);
-                
-                // If there's a sponsor, update sponsor's referrals
+                // If there's a sponsor, update sponsor's team structure
                 if (sponsorId) {
-                    await database.ref(`users/${sponsorId}/referrals/${userId}`).set({
-                        joinDate: new Date().toISOString(),
-                        status: 'active'
-                    });
+                    await updateReferrerTeamStructure(sponsorId, userId, updates);
                 }
+                
+                // Execute all updates
+                await database.ref().update(updates);
                 
                 return true;
             } catch (error) {
                 console.error('Error creating user data:', error);
-                return false;
+                throw error;
             }
         }
 
@@ -452,18 +518,15 @@
                 });
                 
                 // Create user data in database
-                const success = await createUserData(userCredential.user.uid, email, name, mobile, sponsorId);
+                await createUserData(userCredential.user.uid, email, name, mobile, sponsorId);
                 
-                if (success) {
-                    showToast('Account created successfully!', 'success');
-                    
-                    // Redirect to dashboard after 2 seconds
-                    setTimeout(() => {
-                        window.location.href = 'index.html';
-                    }, 2000);
-                } else {
-                    showToast('Account created but profile setup failed', 'error');
-                }
+                showToast('Account created successfully!', 'success');
+                
+                // Redirect to dashboard after 2 seconds
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+                
             } catch (error) {
                 console.error('Signup error:', error);
                 
@@ -502,5 +565,3 @@
     </script>
 </body>
 </html>
-
-
