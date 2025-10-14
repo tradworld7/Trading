@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💼 प्रोबोट एक्स बिज़नेस प्लान</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #2e026d, #00bfa6);
+      color: white;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.6;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 15px;
+      background: rgba(0, 0, 0, 0.4);
+      page-break-inside: avoid;
+    }
+
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    header p {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      background: rgba(255,255,255,0.1);
+      padding: 20px 15px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+
+    .table-container {
+      overflow-x: auto;
+      margin-top: 20px;
+    }
+
+    table {
+      width: 100%;
+      min-width: 800px;
+      border-collapse: collapse;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    th, td {
+      padding: 12px 8px;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+    }
+
+    th {
+      background: rgba(255,255,255,0.2);
+      font-size: 1.2rem;
+      font-weight: 800;
+    }
+
+    h2 {
+      text-align: center;
+      color: #fff;
+      margin-top: 30px;
+      font-size: 1.8rem;
+      font-weight: 900;
+    }
+
+    .total-income {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 900;
+      margin: 25px 0;
+      padding: 15px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 10px;
+    }
+
+    .level-detail {
+      margin-top: 20px;
+      background: rgba(0,0,0,0.3);
+      padding: 20px;
+      border-radius: 12px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      page-break-inside: avoid;
+    }
+
+    .level-detail h3 {
+      margin-top: 0;
+      color: #ffd700;
+      font-size: 1.3rem;
+    }
+
+    strong {
+      font-weight: 900;
+      color: #ffd700;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 300px;
+      margin: 30px 0;
+    }
+
+    canvas {
+      background: rgba(255,255,255,0.1);
+      border-radius: 15px;
+      padding: 10px;
+      page-break-inside: avoid;
+    }
+
+    /* --- Print Mode (For PDF Conversion) --- */
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+        font-size: 18px;
+      }
+      header {
+        background: #2e026d !important;
+        color: white !important;
+      }
+      .container {
+        box-shadow: none !important;
+        background: white !important;
+        color: black !important;
+        border: 2px solid #2e026d;
+      }
+      th {
+        background: #2e026d !important;
+        color: white !important;
+      }
+      canvas {
+        display: none;
+      }
+    }
+
+    /* --- Very Small Screens --- */
+    @media (max-width: 480px) {
+      body { font-size: 16px; }
+      header h1 { font-size: 1.8rem; }
+      header p { font-size: 1rem; }
+      .container { padding: 15px 10px; margin: 15px 10px; }
+      h2 { font-size: 1.5rem; margin-top: 25px; }
+      .total-income { font-size: 1.2rem; }
+      .level-detail { padding: 15px; font-size: 1rem; }
+      .level-detail h3 { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>💼 प्रोबोट एक्स बिज़नेस प्लान</h1>
+    <p>6 लेवल का स्मार्ट इनकम स्ट्रक्चर – आपकी फाइनेंशियल ग्रोथ का नया तरीका</p>
+  </header>
+
+  <div class="container">
+    <h2>📊 लेवल इनकम चार्ट</h2>
+    <div class="table-container">
+      <table>
+        <tr>
+          <th>लेवल</th>
+          <th>सदस्य संख्या</th>
+          <th>प्रति सदस्य निवेश ($)</th>
+          <th>कुल निवेश ($)</th>
+          <th>मासिक प्रॉफिट (8%)</th>
+          <th>आपकी कमाई प्रतिशत</th>
+          <th>प्रति सदस्य इनकम ($)</th>
+          <th>लेवल की कुल इनकम ($)</th>
+        </tr>
+        <tr><td>1</td><td>10</td><td>100</td><td>1,000</td><td>8</td><td>10%</td><td>0.8</td><td>8</td></tr>
+        <tr><td>2</td><td>100</td><td>100</td><td>10,000</td><td>8</td><td>5%</td><td>0.4</td><td>40</td></tr>
+        <tr><td>3</td><td>1,000</td><td>100</td><td>100,000</td><td>8</td><td>2.5%</td><td>0.2</td><td>200</td></tr>
+        <tr><td>4</td><td>10,000</td><td>100</td><td>1,000,000</td><td>8</td><td>2%</td><td>0.16</td><td>1,600</td></tr>
+        <tr><td>5</td><td>100,000</td><td>100</td><td>10,000,000</td><td>8</td><td>1.5%</td><td>0.12</td><td>12,000</td></tr>
+        <tr><td>6</td><td>1,000,000</td><td>100</td><td>100,000,000</td><td>8</td><td>1%</td><td>0.08</td><td>80,000</td></tr>
+      </table>
+    </div>
+
+    <h2>💰 आपकी कुल मासिक इनकम</h2>
+    <div class="total-income">
+      $8 + $40 + $200 + $1,600 + $12,000 + $80,000 = 
+      <strong>$93,848 प्रति माह</strong>
+    </div>
+
+    <h2>📈 लेवल-वाइज इनकम चार्ट</h2>
+    <div class="chart-container">
+      <canvas id="incomeChart"></canvas>
+    </div>
+
+    <div class="level-detail">
+      <h3>🔹 लेवल 1 – डायरेक्ट इनकम</h3>
+      <p>आपने 10 लोगों को सीधे जोड़ा। हर व्यक्ति ने $100 लगाया और हर महीने 8% यानी $8 कमाए। उनके $8 प्रॉफिट पर आपको 10% कमीशन मिलेगा → प्रति व्यक्ति $0.8।</p>
+      <p><strong>➡️ कुल इनकम = $8 प्रति माह</strong></p>
+    </div>
+
+    <div class="level-detail">
+      <h3>🔹 लेवल 2 – इंडायरेक्ट टीम</h3>
+      <p>आपके 10 लोग अपने-अपने 10-10 लोगों को जोड़ते हैं → कुल 100 सदस्य। हर व्यक्ति को $8 प्रॉफिट मिल रहा है। आपको उस प्रॉफिट का 5% मिलेगा → $0.4 प्रति व्यक्ति।</p>
+      <p><strong>➡️ कुल इनकम = $40 प्रति माह</strong></p>
+    </div>
+
+    <div class="level-detail">
+      <h3>🔹 लेवल 3</h3>
+      <p>100 लोग अब अपने 10-10 लोगों को जोड़ते हैं → 1,000 सदस्य। हर एक का प्रॉफिट $8, आपका हिस्सा 2.5% यानी $0.2 प्रति व्यक्ति।</p>
+      <p><strong>➡️ कुल इनकम = $200 प्रति माह</strong></p>
+    </div>
+
+    <div class="level-detail">
+      <h3>🔹 लेवल 4</h3>
+      <p>1,000 लोग अपने 10-10 लोगों को जोड़ते हैं → 10,000 सदस्य। हर व्यक्ति को $8 प्रॉफिट, आपको 2% यानी $0.16 प्रति व्यक्ति।</p>
+      <p><strong>➡️ कुल इनकम = $1,600 प्रति माह</strong></p>
+    </div>
+
+    <div class="level-detail">
+      <h3>🔹 लेवल 5</h3>
+      <p>10,000 लोग अपने 10-10 लोगों को जोड़ते हैं → 1,00,000 सदस्य। आपको 1.5% यानी $0.12 प्रति व्यक्ति।</p>
+      <p><strong>➡️ कुल इनकम = $12,000 प्रति माह</strong></p>
+    </div>
+
+    <div class="level-detail">
+      <h3>🔹 लेवल 6</h3>
+      <p>1,00,000 लोग अपने 10-10 लोगों को जोड़ते हैं → 10,00,000 सदस्य। आपको 1% यानी $0.08 प्रति व्यक्ति।</p>
+      <p><strong>➡️ कुल इनकम = $80,000 प्रति माह</strong></p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('incomeChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['लेवल 1', 'लेवल 2', 'लेवल 3', 'लेवल 4', 'लेवल 5', 'लेवल 6'],
+        datasets: [{
+          label: 'मासिक इनकम ($)',
+          data: [8, 40, 200, 1600, 12000, 80000],
+          backgroundColor: ['#00f2fe','#4facfe','#43e97b','#fa709a','#a18cd1','#ff9a9e']
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { 
+            labels: { 
+              color: '#fff', 
+              font: { 
+                size: window.innerWidth < 768 ? 14 : 18, 
+                weight: 'bold' 
+              } 
+            } 
+          },
+          title: { 
+            display: true, 
+            text: 'प्रोबोट एक्स लेवल-वाइज मासिक इनकम चार्ट', 
+            color: '#fff', 
+            font: { 
+              size: window.innerWidth < 768 ? 16 : 22, 
+              weight: 'bold' 
+            } 
+          }
+        },
+        scales: {
+          x: { 
+            ticks: { 
+              color: '#fff', 
+              font: { 
+                size: window.innerWidth < 768 ? 12 : 16, 
+                weight: 'bold' 
+              } 
+            } 
+          },
+          y: { 
+            ticks: { 
+              color: '#fff', 
+              font: { 
+                size: window.innerWidth < 768 ? 12 : 16, 
+                weight: 'bold' 
+              } 
+            } 
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
