@@ -8,6 +8,8 @@
   <style>
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
     
     body {
@@ -20,16 +22,247 @@
       line-height: 1.6;
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
+      transition: all 0.3s ease;
+      padding-top: 80px;
     }
 
-    header {
+    /* Professional Header Styles */
+    .main-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-icon {
+      font-size: 2rem;
+      color: #ffd700;
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: white;
+    }
+
+    /* Header Right Section - Side Menu */
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Side Menu Styles - Horizontal Lines */
+    .side-menu {
+      position: relative;
+    }
+
+    .menu-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 8px;
+    }
+
+    .menu-icon:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.05);
+    }
+
+    .menu-line {
+      width: 25px;
+      height: 3px;
+      background: white;
+      margin: 2px 0;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    /* Side Menu Content - Left Side */
+    .menu-content {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 300px;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.98);
+      padding: 80px 0 20px 0;
+      box-shadow: 2px 0 25px rgba(0, 0, 0, 0.7);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(10px);
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 999;
+      overflow-y: auto;
+    }
+
+    .menu-content.active {
+      left: 0;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .menu-header {
+      text-align: center;
+      padding: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .menu-header h3 {
+      color: #ffd700;
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+    }
+
+    .menu-header p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+
+    .menu-item {
+      padding: 15px 25px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 1rem;
+    }
+
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+
+    .menu-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      padding-left: 30px;
+    }
+
+    .menu-item i {
+      margin-right: 15px;
+      font-size: 1.3rem;
+      width: 25px;
+      text-align: center;
+      color: #ffd700;
+    }
+
+    .menu-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: none;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .menu-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
+    }
+
+    /* Overlay for menu */
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 998;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Header Left Section - Language Switcher */
+    .language-switcher {
+      display: flex;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 8px 15px;
+      border-radius: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .lang-btn {
+      background: transparent;
+      color: white;
+      border: none;
+      padding: 6px 15px;
+      border-radius: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .lang-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .lang-btn.active {
+      background: white;
+      color: #2e026d;
+    }
+
+    /* Page Container */
+    .page-container {
+      display: none;
+    }
+
+    .page-container.active {
+      display: block;
+    }
+
+    /* Main Content Header */
+    .content-header {
       text-align: center;
       padding: 30px 15px;
       background: rgba(0, 0, 0, 0.4);
       page-break-inside: avoid;
+      position: relative;
+      margin-top: 20px;
     }
 
-    header h1 {
+    .content-header h1 {
       font-size: 2.2rem;
       font-weight: 800;
       letter-spacing: 1px;
@@ -37,7 +270,7 @@
       text-transform: uppercase;
     }
 
-    header p {
+    .content-header p {
       font-size: 1.2rem;
       font-weight: 700;
       margin: 0;
@@ -130,14 +363,28 @@
       page-break-inside: avoid;
     }
 
+    /* English Page Specific Styles */
+    .english-page .content-header h1,
+    .english-page .content-header p,
+    .english-page h2,
+    .english-page .level-detail h3,
+    .english-page .total-income,
+    .english-page table {
+      font-family: 'Poppins', sans-serif;
+    }
+
     /* --- Print Mode (For PDF Conversion) --- */
     @media print {
       body {
         background: white !important;
         color: black !important;
         font-size: 18px;
+        padding-top: 0;
       }
-      header {
+      .main-header {
+        display: none;
+      }
+      .content-header {
         background: #2e026d !important;
         color: white !important;
       }
@@ -156,154 +403,463 @@
       }
     }
 
-    /* --- Very Small Screens --- */
+    /* --- Mobile Responsive --- */
+    @media (max-width: 768px) {
+      body {
+        font-size: 16px;
+        padding-top: 70px;
+      }
+      
+      .main-header {
+        padding: 10px 15px;
+      }
+      
+      .logo-text {
+        font-size: 1.2rem;
+      }
+      
+      .language-switcher {
+        padding: 5px 10px;
+      }
+      
+      .lang-btn {
+        padding: 4px 10px;
+        font-size: 0.8rem;
+      }
+      
+      .content-header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .content-header p {
+        font-size: 1rem;
+      }
+      
+      .container {
+        padding: 15px 10px;
+        margin: 15px 10px;
+      }
+      
+      .menu-content {
+        width: 280px;
+        left: -280px;
+      }
+    }
+
     @media (max-width: 480px) {
-      body { font-size: 16px; }
-      header h1 { font-size: 1.8rem; }
-      header p { font-size: 1rem; }
-      .container { padding: 15px 10px; margin: 15px 10px; }
-      h2 { font-size: 1.5rem; margin-top: 25px; }
-      .total-income { font-size: 1.2rem; }
-      .level-detail { padding: 15px; font-size: 1rem; }
-      .level-detail h3 { font-size: 1.2rem; }
+      .header-right {
+        gap: 10px;
+      }
+      
+      .language-switcher {
+        flex-direction: column;
+        gap: 5px;
+        padding: 8px 12px;
+      }
+      
+      .menu-content {
+        width: 250px;
+        left: -250px;
+      }
     }
   </style>
+  
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <header>
-    <h1>💼 प्रोबोट एक्स बिज़नेस प्लान</h1>
-    <p>6 लेवल का स्मार्ट इनकम स्ट्रक्चर – आपकी फाइनेंशियल ग्रोथ का नया तरीका</p>
+  <!-- Professional Header -->
+  <header class="main-header">
+    <!-- Left Side - Logo and Language Switcher -->
+    <div class="logo">
+      <div class="logo-icon">💼</div>
+      <div class="logo-text">Probot X</div>
+    </div>
+
+    <!-- Right Side - Language Switcher and Side Menu -->
+    <div class="header-right">
+      <!-- Language Switcher -->
+      <div class="language-switcher">
+        <button class="lang-btn active" id="hindiBtn" onclick="showPage('hindi')">हिंदी</button>
+        <button class="lang-btn" id="englishBtn" onclick="showPage('english')">English</button>
+      </div>
+
+      <!-- Side Menu - Horizontal Lines -->
+      <div class="side-menu">
+        <div class="menu-icon" id="menuIcon">
+          <div class="menu-line"></div>
+          <div class="menu-line"></div>
+          <div class="menu-line"></div>
+        </div>
+        
+        <!-- Side Menu Content -->
+        <div class="menu-content" id="menuContent">
+          <button class="menu-close" onclick="closeMenu()">
+            <i class="fas fa-times"></i>
+          </button>
+          
+          <div class="menu-header">
+            <h3>Probot X</h3>
+            <p>Welcome to your dashboard</p>
+          </div>
+          
+          <div class="menu-item" onclick="openPage('wealth25')">
+            <i class="fas fa-coins"></i> Wealth 25
+          </div>
+          <div class="menu-item" onclick="openPage('profile')">
+            <i class="fas fa-user"></i> Profile
+          </div>
+          <div class="menu-item" onclick="openPage('settings')">
+            <i class="fas fa-cog"></i> Settings
+          </div>
+          <div class="menu-item" onclick="openPage('help')">
+            <i class="fas fa-question-circle"></i> Help & Support
+          </div>
+          <div class="menu-item" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </div>
+        </div>
+        
+        <!-- Menu Overlay -->
+        <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+      </div>
+    </div>
   </header>
 
-  <div class="container">
-    <h2>📊 लेवल इनकम चार्ट</h2>
-    <div class="table-container">
-      <table>
-        <tr>
-          <th>लेवल</th>
-          <th>सदस्य संख्या</th>
-          <th>प्रति सदस्य निवेश ($)</th>
-          <th>कुल निवेश ($)</th>
-          <th>मासिक प्रॉफिट (8%)</th>
-          <th>आपकी कमाई प्रतिशत</th>
-          <th>प्रति सदस्य इनकम ($)</th>
-          <th>लेवल की कुल इनकम ($)</th>
-        </tr>
-        <tr><td>1</td><td>10</td><td>100</td><td>1,000</td><td>8</td><td>10%</td><td>0.8</td><td>8</td></tr>
-        <tr><td>2</td><td>100</td><td>100</td><td>10,000</td><td>8</td><td>5%</td><td>0.4</td><td>40</td></tr>
-        <tr><td>3</td><td>1,000</td><td>100</td><td>100,000</td><td>8</td><td>2.5%</td><td>0.2</td><td>200</td></tr>
-        <tr><td>4</td><td>10,000</td><td>100</td><td>1,000,000</td><td>8</td><td>2%</td><td>0.16</td><td>1,600</td></tr>
-        <tr><td>5</td><td>100,000</td><td>100</td><td>10,000,000</td><td>8</td><td>1.5%</td><td>0.12</td><td>12,000</td></tr>
-        <tr><td>6</td><td>1,000,000</td><td>100</td><td>100,000,000</td><td>8</td><td>1%</td><td>0.08</td><td>80,000</td></tr>
-      </table>
+  <!-- Hindi Page -->
+  <div class="page-container active" id="hindiPage">
+    <div class="content-header">
+      <h1>💼 प्रोबोट एक्स बिज़नेस प्लान</h1>
+      <p>6 लेवल का स्मार्ट इनकम स्ट्रक्चर – आपकी फाइनेंशियल ग्रोथ का नया तरीका</p>
     </div>
 
-    <h2>💰 आपकी कुल मासिक इनकम</h2>
-    <div class="total-income">
-      $8 + $40 + $200 + $1,600 + $12,000 + $80,000 = 
-      <strong>$93,848 प्रति माह</strong>
+    <div class="container">
+      <h2>📊 लेवल इनकम चार्ट</h2>
+      <div class="table-container">
+        <table>
+          <tr>
+            <th>लेवल</th>
+            <th>सदस्य संख्या</th>
+            <th>प्रति सदस्य निवेश ($)</th>
+            <th>कुल निवेश ($)</th>
+            <th>मासिक प्रॉफिट (8%)</th>
+            <th>आपकी कमाई प्रतिशत</th>
+            <th>प्रति सदस्य इनकम ($)</th>
+            <th>लेवल की कुल इनकम ($)</th>
+          </tr>
+          <tr><td>1</td><td>10</td><td>100</td><td>1,000</td><td>8</td><td>10%</td><td>0.8</td><td>8</td></tr>
+          <tr><td>2</td><td>100</td><td>100</td><td>10,000</td><td>8</td><td>5%</td><td>0.4</td><td>40</td></tr>
+          <tr><td>3</td><td>1,000</td><td>100</td><td>100,000</td><td>8</td><td>2.5%</td><td>0.2</td><td>200</td></tr>
+          <tr><td>4</td><td>10,000</td><td>100</td><td>1,000,000</td><td>8</td><td>2%</td><td>0.16</td><td>1,600</td></tr>
+          <tr><td>5</td><td>100,000</td><td>100</td><td>10,000,000</td><td>8</td><td>1.5%</td><td>0.12</td><td>12,000</td></tr>
+          <tr><td>6</td><td>1,000,000</td><td>100</td><td>100,000,000</td><td>8</td><td>1%</td><td>0.08</td><td>80,000</td></tr>
+        </table>
+      </div>
+
+      <h2>💰 आपकी कुल मासिक इनकम</h2>
+      <div class="total-income">
+        $8 + $40 + $200 + $1,600 + $12,000 + $80,000 = 
+        <strong>$93,848 प्रति माह</strong>
+      </div>
+
+      <h2>📈 लेवल-वाइज इनकम चार्ट</h2>
+      <div class="chart-container">
+        <canvas id="incomeChartHindi"></canvas>
+      </div>
+
+      <div class="level-detail">
+        <h3>🔹 लेवल 1 – डायरेक्ट इनकम</h3>
+        <p>आपने 10 लोगों को सीधे जोड़ा। हर व्यक्ति ने $100 लगाया और हर महीने 8% यानी $8 कमाए। उनके $8 प्रॉफिट पर आपको 10% कमीशन मिलेगा → प्रति व्यक्ति $0.8।</p>
+        <p><strong>➡️ कुल इनकम = $8 प्रति माह</strong></p>
+      </div>
+
+      <div class="level-detail">
+        <h3>🔹 लेवल 2 – इंडायरेक्ट टीम</h3>
+        <p>आपके 10 लोग अपने-अपने 10-10 लोगों को जोड़ते हैं → कुल 100 सदस्य। हर व्यक्ति को $8 प्रॉफिट मिल रहा है। आपको उस प्रॉफिट का 5% मिलेगा → $0.4 प्रति व्यक्ति।</p>
+        <p><strong>➡️ कुल इनकम = $40 प्रति माह</strong></p>
+      </div>
+
+      <div class="level-detail">
+        <h3>🔹 लेवल 3</h3>
+        <p>100 लोग अब अपने 10-10 लोगों को जोड़ते हैं → 1,000 सदस्य। हर एक का प्रॉफिट $8, आपका हिस्सा 2.5% यानी $0.2 प्रति व्यक्ति।</p>
+        <p><strong>➡️ कुल इनकम = $200 प्रति माह</strong></p>
+      </div>
+
+      <div class="level-detail">
+        <h3>🔹 लेवल 4</h3>
+        <p>1,000 लोग अपने 10-10 लोगों को जोड़ते हैं → 10,000 सदस्य। हर व्यक्ति को $8 प्रॉफिट, आपको 2% यानी $0.16 प्रति व्यक्ति।</p>
+        <p><strong>➡️ कुल इनकम = $1,600 प्रति माह</strong></p>
+      </div>
+
+      <div class="level-detail">
+        <h3>🔹 लेवल 5</h3>
+        <p>10,000 लोग अपने 10-10 लोगों को जोड़ते हैं → 1,00,000 सदस्य। आपको 1.5% यानी $0.12 प्रति व्यक्ति।</p>
+        <p><strong>➡️ कुल इनकम = $12,000 प्रति माह</strong></p>
+      </div>
+
+      <div class="level-detail">
+        <h3>🔹 लेवल 6</h3>
+        <p>1,00,000 लोग अपने 10-10 लोगों को जोड़ते हैं → 10,00,000 सदस्य। आपको 1% यानी $0.08 प्रति व्यक्ति।</p>
+        <p><strong>➡️ कुल इनकम = $80,000 प्रति माह</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- English Page -->
+  <div class="page-container english-page" id="englishPage">
+    <div class="content-header">
+      <h1>💼 Probot X Business Plan</h1>
+      <p>6 Level Smart Income Structure - New Way to Your Financial Growth</p>
     </div>
 
-    <h2>📈 लेवल-वाइज इनकम चार्ट</h2>
-    <div class="chart-container">
-      <canvas id="incomeChart"></canvas>
-    </div>
+    <div class="container">
+      <h2>📊 Level Income Chart</h2>
+      <div class="table-container">
+        <table>
+          <tr>
+            <th>Level</th>
+            <th>Members</th>
+            <th>Investment per Member ($)</th>
+            <th>Total Investment ($)</th>
+            <th>Monthly Profit (8%)</th>
+            <th>Your Earnings %</th>
+            <th>Income per Member ($)</th>
+            <th>Total Level Income ($)</th>
+          </tr>
+          <tr><td>1</td><td>10</td><td>100</td><td>1,000</td><td>8</td><td>10%</td><td>0.8</td><td>8</td></tr>
+          <tr><td>2</td><td>100</td><td>100</td><td>10,000</td><td>8</td><td>5%</td><td>0.4</td><td>40</td></tr>
+          <tr><td>3</td><td>1,000</td><td>100</td><td>100,000</td><td>8</td><td>2.5%</td><td>0.2</td><td>200</td></tr>
+          <tr><td>4</td><td>10,000</td><td>100</td><td>1,000,000</td><td>8</td><td>2%</td><td>0.16</td><td>1,600</td></tr>
+          <tr><td>5</td><td>100,000</td><td>100</td><td>10,000,000</td><td>8</td><td>1.5%</td><td>0.12</td><td>12,000</td></tr>
+          <tr><td>6</td><td>1,000,000</td><td>100</td><td>100,000,000</td><td>8</td><td>1%</td><td>0.08</td><td>80,000</td></tr>
+        </table>
+      </div>
 
-    <div class="level-detail">
-      <h3>🔹 लेवल 1 – डायरेक्ट इनकम</h3>
-      <p>आपने 10 लोगों को सीधे जोड़ा। हर व्यक्ति ने $100 लगाया और हर महीने 8% यानी $8 कमाए। उनके $8 प्रॉफिट पर आपको 10% कमीशन मिलेगा → प्रति व्यक्ति $0.8।</p>
-      <p><strong>➡️ कुल इनकम = $8 प्रति माह</strong></p>
-    </div>
+      <h2>💰 Your Total Monthly Income</h2>
+      <div class="total-income">
+        $8 + $40 + $200 + $1,600 + $12,000 + $80,000 = 
+        <strong>$93,848 Per Month</strong>
+      </div>
 
-    <div class="level-detail">
-      <h3>🔹 लेवल 2 – इंडायरेक्ट टीम</h3>
-      <p>आपके 10 लोग अपने-अपने 10-10 लोगों को जोड़ते हैं → कुल 100 सदस्य। हर व्यक्ति को $8 प्रॉफिट मिल रहा है। आपको उस प्रॉफिट का 5% मिलेगा → $0.4 प्रति व्यक्ति।</p>
-      <p><strong>➡️ कुल इनकम = $40 प्रति माह</strong></p>
-    </div>
+      <h2>📈 Level-wise Income Chart</h2>
+      <div class="chart-container">
+        <canvas id="incomeChartEnglish"></canvas>
+      </div>
 
-    <div class="level-detail">
-      <h3>🔹 लेवल 3</h3>
-      <p>100 लोग अब अपने 10-10 लोगों को जोड़ते हैं → 1,000 सदस्य। हर एक का प्रॉफिट $8, आपका हिस्सा 2.5% यानी $0.2 प्रति व्यक्ति।</p>
-      <p><strong>➡️ कुल इनकम = $200 प्रति माह</strong></p>
-    </div>
+      <div class="level-detail">
+        <h3>🔹 Level 1 – Direct Income</h3>
+        <p>You directly added 10 people. Each person invested $100 and earns 8% i.e. $8 every month. You will get 10% commission on their $8 profit → $0.8 per person.</p>
+        <p><strong>➡️ Total Income = $8 per month</strong></p>
+      </div>
 
-    <div class="level-detail">
-      <h3>🔹 लेवल 4</h3>
-      <p>1,000 लोग अपने 10-10 लोगों को जोड़ते हैं → 10,000 सदस्य। हर व्यक्ति को $8 प्रॉफिट, आपको 2% यानी $0.16 प्रति व्यक्ति।</p>
-      <p><strong>➡️ कुल इनकम = $1,600 प्रति माह</strong></p>
-    </div>
+      <div class="level-detail">
+        <h3>🔹 Level 2 – Indirect Team</h3>
+        <p>Your 10 people add their 10-10 people each → total 100 members. Each person gets $8 profit. You will get 5% of that profit → $0.4 per person.</p>
+        <p><strong>➡️ Total Income = $40 per month</strong></p>
+      </div>
 
-    <div class="level-detail">
-      <h3>🔹 लेवल 5</h3>
-      <p>10,000 लोग अपने 10-10 लोगों को जोड़ते हैं → 1,00,000 सदस्य। आपको 1.5% यानी $0.12 प्रति व्यक्ति।</p>
-      <p><strong>➡️ कुल इनकम = $12,000 प्रति माह</strong></p>
-    </div>
+      <div class="level-detail">
+        <h3>🔹 Level 3</h3>
+        <p>100 people now add their 10-10 people each → 1,000 members. Each one's profit $8, your share 2.5% i.e. $0.2 per person.</p>
+        <p><strong>➡️ Total Income = $200 per month</strong></p>
+      </div>
 
-    <div class="level-detail">
-      <h3>🔹 लेवल 6</h3>
-      <p>1,00,000 लोग अपने 10-10 लोगों को जोड़ते हैं → 10,00,000 सदस्य। आपको 1% यानी $0.08 प्रति व्यक्ति।</p>
-      <p><strong>➡️ कुल इनकम = $80,000 प्रति माह</strong></p>
+      <div class="level-detail">
+        <h3>🔹 Level 4</h3>
+        <p>1,000 people add their 10-10 people each → 10,000 members. Each person gets $8 profit, you get 2% i.e. $0.16 per person.</p>
+        <p><strong>➡️ Total Income = $1,600 per month</strong></p>
+      </div>
+
+      <div class="level-detail">
+        <h3>🔹 Level 5</h3>
+        <p>10,000 people add their 10-10 people each → 1,00,000 members. You get 1.5% i.e. $0.12 per person.</p>
+        <p><strong>➡️ Total Income = $12,000 per month</strong></p>
+      </div>
+
+      <div class="level-detail">
+        <h3>🔹 Level 6</h3>
+        <p>1,00,000 people add their 10-10 people each → 10,00,000 members. You get 1% i.e. $0.08 per person.</p>
+        <p><strong>➡️ Total Income = $80,000 per month</strong></p>
+      </div>
     </div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    const ctx = document.getElementById('incomeChart').getContext('2d');
-    new Chart(ctx, {
-      type: 'bar',
-      data: {
-        labels: ['लेवल 1', 'लेवल 2', 'लेवल 3', 'लेवल 4', 'लेवल 5', 'लेवल 6'],
-        datasets: [{
-          label: 'मासिक इनकम ($)',
-          data: [8, 40, 200, 1600, 12000, 80000],
-          backgroundColor: ['#00f2fe','#4facfe','#43e97b','#fa709a','#a18cd1','#ff9a9e']
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: { 
-            labels: { 
-              color: '#fff', 
-              font: { 
-                size: window.innerWidth < 768 ? 14 : 18, 
-                weight: 'bold' 
-              } 
-            } 
-          },
-          title: { 
-            display: true, 
-            text: 'प्रोबोट एक्स लेवल-वाइज मासिक इनकम चार्ट', 
-            color: '#fff', 
-            font: { 
-              size: window.innerWidth < 768 ? 16 : 22, 
-              weight: 'bold' 
-            } 
-          }
+  <script type="text/javascript">
+    // Side Menu Functionality
+    document.getElementById('menuIcon').addEventListener('click', function(event) {
+      event.stopPropagation();
+      openMenu();
+    });
+
+    function openMenu() {
+      document.getElementById('menuContent').classList.add('active');
+      document.getElementById('menuOverlay').classList.add('active');
+    }
+
+    function closeMenu() {
+      document.getElementById('menuContent').classList.remove('active');
+      document.getElementById('menuOverlay').classList.remove('active');
+    }
+
+    // Close menu when clicking on overlay
+    document.getElementById('menuOverlay').addEventListener('click', closeMenu);
+
+    // Page Switching Function
+    function showPage(page) {
+      const hindiBtn = document.getElementById('hindiBtn');
+      const englishBtn = document.getElementById('englishBtn');
+      const hindiPage = document.getElementById('hindiPage');
+      const englishPage = document.getElementById('englishPage');
+      
+      // Update button states
+      if (page === 'hindi') {
+        hindiBtn.classList.add('active');
+        englishBtn.classList.remove('active');
+        hindiPage.classList.add('active');
+        englishPage.classList.remove('active');
+      } else {
+        englishBtn.classList.add('active');
+        hindiBtn.classList.remove('active');
+        englishPage.classList.add('active');
+        hindiPage.classList.remove('active');
+      }
+      
+      // Close side menu if open
+      closeMenu();
+    }
+    
+    // Menu Item Functions
+    function openPage(pageName) {
+      alert(`${pageName} page will be added later`);
+      closeMenu();
+    }
+    
+    function logout() {
+      if(confirm('क्या आप लॉगआउट करना चाहते हैं?')) {
+        alert('लॉगआउट सफलतापूर्वक किया गया');
+        closeMenu();
+      }
+    }
+    
+    // Initialize when page loads
+    window.onload = function() {
+      // Chart initialization for Hindi
+      const ctxHindi = document.getElementById('incomeChartHindi').getContext('2d');
+      new Chart(ctxHindi, {
+        type: 'bar',
+        data: {
+          labels: ['लेवल 1', 'लेवल 2', 'लेवल 3', 'लेवल 4', 'लेवल 5', 'लेवल 6'],
+          datasets: [{
+            label: 'मासिक इनकम ($)',
+            data: [8, 40, 200, 1600, 12000, 80000],
+            backgroundColor: ['#00f2fe','#4facfe','#43e97b','#fa709a','#a18cd1','#ff9a9e']
+          }]
         },
-        scales: {
-          x: { 
-            ticks: { 
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { 
+              labels: { 
+                color: '#fff', 
+                font: { 
+                  size: window.innerWidth < 768 ? 14 : 18, 
+                  weight: 'bold' 
+                } 
+              } 
+            },
+            title: { 
+              display: true, 
+              text: 'प्रोबोट एक्स लेवल-वाइज मासिक इनकम चार्ट', 
               color: '#fff', 
               font: { 
-                size: window.innerWidth < 768 ? 12 : 16, 
+                size: window.innerWidth < 768 ? 16 : 22, 
                 weight: 'bold' 
               } 
-            } 
+            }
           },
-          y: { 
-            ticks: { 
-              color: '#fff', 
-              font: { 
-                size: window.innerWidth < 768 ? 12 : 16, 
-                weight: 'bold' 
+          scales: {
+            x: { 
+              ticks: { 
+                color: '#fff', 
+                font: { 
+                  size: window.innerWidth < 768 ? 12 : 16, 
+                  weight: 'bold' 
+                } 
               } 
-            } 
+            },
+            y: { 
+              ticks: { 
+                color: '#fff', 
+                font: { 
+                  size: window.innerWidth < 768 ? 12 : 16, 
+                  weight: 'bold' 
+                } 
+              } 
+            }
           }
         }
-      }
-    });
+      });
+
+      // Chart initialization for English
+      const ctxEnglish = document.getElementById('incomeChartEnglish').getContext('2d');
+      new Chart(ctxEnglish, {
+        type: 'bar',
+        data: {
+          labels: ['Level 1', 'Level 2', 'Level 3', 'Level 4', 'Level 5', 'Level 6'],
+          datasets: [{
+            label: 'Monthly Income ($)',
+            data: [8, 40, 200, 1600, 12000, 80000],
+            backgroundColor: ['#00f2fe','#4facfe','#43e97b','#fa709a','#a18cd1','#ff9a9e']
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { 
+              labels: { 
+                color: '#fff', 
+                font: { 
+                  size: window.innerWidth < 768 ? 14 : 18, 
+                  weight: 'bold' 
+                } 
+              } 
+            },
+            title: { 
+              display: true, 
+              text: 'Probot X Level-wise Monthly Income Chart', 
+              color: '#fff', 
+              font: { 
+                size: window.innerWidth < 768 ? 16 : 22, 
+                weight: 'bold' 
+              } 
+            }
+          },
+          scales: {
+            x: { 
+              ticks: { 
+                color: '#fff', 
+                font: { 
+                  size: window.innerWidth < 768 ? 12 : 16, 
+                  weight: 'bold' 
+                } 
+              } 
+            },
+            y: { 
+              ticks: { 
+                color: '#fff', 
+                font: { 
+                  size: window.innerWidth < 768 ? 12 : 16, 
+                  weight: 'bold' 
+                } 
+              } 
+            }
+          }
+        }
+      });
+    };
   </script>
 </body>
 </html>
