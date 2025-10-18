@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dollar & Level Income Calculator</title>
+  <title>Probot X Income Calculator</title>
   <style>
     * {
       margin: 0;
@@ -13,100 +13,145 @@
     }
 
     body {
-      background: #f4f8fb;
-      color: #222;
+      background: linear-gradient(135deg, #2e026d, #00bfa6);
+      color: white;
       display: flex;
       flex-direction: column;
       align-items: center;
       padding: 20px;
+      min-height: 100vh;
     }
 
     .container {
       width: 100%;
-      max-width: 480px;
-      background: #fff;
+      max-width: 500px;
+      background: rgba(255, 255, 255, 0.1);
       padding: 25px;
       border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
       margin-bottom: 30px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     h2 {
       text-align: center;
-      color: #007bff;
+      color: #ffd700;
       margin-bottom: 20px;
+      font-size: 1.5rem;
     }
 
     label {
       display: block;
-      margin-top: 10px;
+      margin-top: 15px;
       font-weight: 500;
+      color: #fff;
     }
 
     input[type="number"],
     input[type="text"] {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin-top: 5px;
-      border: 1px solid #ccc;
+      background: rgba(255, 255, 255, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       border-radius: 8px;
       outline: none;
       font-size: 15px;
+      color: white;
       transition: 0.2s;
     }
 
     input[type="number"]:focus,
     input[type="text"]:focus {
-      border-color: #007bff;
-      box-shadow: 0 0 4px rgba(0,123,255,0.3);
+      border-color: #ffd700;
+      box-shadow: 0 0 4px rgba(255, 215, 0, 0.5);
+    }
+
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
     }
 
     button {
       width: 100%;
-      background: #007bff;
-      color: white;
-      padding: 12px;
-      margin-top: 20px;
+      background: #ffd700;
+      color: #2e026d;
+      padding: 14px;
+      margin-top: 25px;
       border: none;
       border-radius: 8px;
       font-size: 16px;
+      font-weight: 600;
       cursor: pointer;
       transition: 0.3s;
     }
 
     button:hover {
-      background: #0056b3;
+      background: #ffed4e;
+      transform: translateY(-2px);
     }
 
     .result {
       margin-top: 20px;
-      background: #e9f5ff;
+      background: rgba(0, 0, 0, 0.3);
       border-radius: 10px;
-      padding: 15px;
-      border: 1px solid #bde0fe;
+      padding: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .result h3 {
-      color: #007bff;
+      color: #ffd700;
       text-align: center;
-      margin-bottom: 10px;
+      margin-bottom: 15px;
+      font-size: 1.3rem;
     }
 
     .result p {
       font-size: 15px;
-      margin: 4px 0;
+      margin: 8px 0;
+      line-height: 1.5;
+    }
+
+    .level-detail {
+      background: rgba(0, 0, 0, 0.2);
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 15px;
+    }
+
+    .level-detail h4 {
+      color: #ffd700;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
     }
 
     footer {
       text-align: center;
       margin-top: 20px;
       font-size: 13px;
-      color: #555;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .back-btn {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      width: auto;
+      padding: 10px 20px;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
     }
 
     @media (max-width: 480px) {
       .container {
         padding: 20px;
+      }
+      
+      h2 {
+        font-size: 1.3rem;
       }
     }
   </style>
@@ -115,59 +160,96 @@
 
   <!-- 🔹 Basic Dollar Calculator -->
   <div class="container">
-    <h2>💰 Dollar to INR Income Calculator</h2>
+    <h2>💰 डॉलर से रुपया इनकम कैलकुलेटर</h2>
 
-    <label>Enter Amount (USD):</label>
-    <input type="number" id="usd" placeholder="e.g. 100">
+    <label>राशि दर्ज करें (USD):</label>
+    <input type="number" id="usd" placeholder="जैसे 100">
 
-    <label>Set Percentage (%):</label>
-    <input type="number" id="percent" placeholder="e.g. 25">
+    <label>प्रतिशत सेट करें (%):</label>
+    <input type="number" id="percent" placeholder="जैसे 25">
 
     <label>1 USD = (INR)</label>
-    <input type="number" id="rate" value="90" step="0.01">
+    <input type="number" id="rate" value="83.50" step="0.01">
 
-    <button onclick="calculateIncome()">Calculate</button>
+    <button onclick="calculateIncome()">गणना करें</button>
 
     <div class="result" id="result1" style="display:none;">
-      <h3>Result</h3>
+      <h3>परिणाम</h3>
       <p id="usdIncome"></p>
       <p id="inrIncome"></p>
       <p id="summary"></p>
     </div>
   </div>
 
-  <!-- 🔹 Advanced Level Calculator -->
+  <!-- 🔹 Level Income Calculator -->
   <div class="container">
-    <h2>🌐 Level Income Calculator</h2>
+    <h2>🌐 लेवल इनकम कैलकुलेटर</h2>
 
-    <label>Number of Levels:</label>
-    <input type="number" id="levels" value="5" min="1" max="10">
+    <label>लेवल चुनें:</label>
+    <select id="levelSelect" onchange="updateLevelFields()">
+      <option value="1">लेवल 1</option>
+      <option value="2">लेवल 2</option>
+      <option value="3">लेवल 3</option>
+      <option value="4">लेवल 4</option>
+      <option value="5">लेवल 5</option>
+      <option value="6">लेवल 6</option>
+    </select>
 
-    <label>People in Level 1:</label>
-    <input type="number" id="level1people" placeholder="e.g. 10">
+    <div id="levelFields">
+      <!-- Level fields will be dynamically generated here -->
+    </div>
 
-    <label>Investment per Person (USD):</label>
-    <input type="number" id="perPerson" placeholder="e.g. 100">
-
-    <label>Referral % per Level (comma separated):</label>
-    <input type="text" id="refPercents" placeholder="e.g. 10,2,2,2,2">
+    <label>प्रति व्यक्ति निवेश (USD):</label>
+    <input type="number" id="perPerson" value="100">
 
     <label>1 USD = (INR)</label>
-    <input type="number" id="levelRate" value="90" step="0.01">
+    <input type="number" id="levelRate" value="83.50" step="0.01">
 
-    <button onclick="calculateLevelIncome()">Calculate Level Income</button>
+    <button onclick="calculateLevelIncome()">लेवल इनकम गणना करें</button>
 
     <div class="result" id="levelResult" style="display:none;">
-      <h3>Level Income Breakdown</h3>
+      <h3>लेवल इनकम विवरण</h3>
       <div id="levelDetails"></div>
-      <hr style="margin: 10px 0;">
-      <p id="totalSummary" style="font-weight:600;"></p>
+      <hr style="margin: 15px 0; border-color: rgba(255,255,255,0.2);">
+      <p id="totalSummary" style="font-weight:600; text-align: center;"></p>
     </div>
   </div>
 
-  <footer>Designed by Mohammad Waqil Khan</footer>
+  <button class="back-btn" onclick="goBack()">← वापस जाएं</button>
+
+  <footer>Probot X इनकम कैलकुलेटर</footer>
 
   <script>
+    // Level configuration data
+    const levelConfig = {
+      1: { people: 10, commission: 10 },
+      2: { people: 100, commission: 5 },
+      3: { people: 1000, commission: 2.5 },
+      4: { people: 10000, commission: 2 },
+      5: { people: 100000, commission: 1.5 },
+      6: { people: 1000000, commission: 1 }
+    };
+
+    // Initialize level fields
+    function updateLevelFields() {
+      const levelSelect = document.getElementById("levelSelect");
+      const selectedLevel = parseInt(levelSelect.value);
+      const levelFields = document.getElementById("levelFields");
+      
+      levelFields.innerHTML = `
+        <label>लेवल ${selectedLevel} में लोगों की संख्या:</label>
+        <input type="number" id="levelPeople" value="${levelConfig[selectedLevel].people}" readonly>
+        
+        <label>लेवल ${selectedLevel} के लिए कमीशन (%):</label>
+        <input type="number" id="levelCommission" value="${levelConfig[selectedLevel].commission}" step="0.1">
+      `;
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      updateLevelFields();
+    });
+
     // 🔹 Basic Dollar → INR Calculator
     function calculateIncome() {
       const usd = parseFloat(document.getElementById("usd").value);
@@ -175,7 +257,7 @@
       const rate = parseFloat(document.getElementById("rate").value);
 
       if (isNaN(usd) || isNaN(percent) || usd <= 0 || percent < 0) {
-        alert("Please enter valid values!");
+        alert("कृपया सही मान दर्ज करें!");
         return;
       }
 
@@ -183,53 +265,51 @@
       const incomeINR = incomeUSD * rate;
 
       document.getElementById("result1").style.display = "block";
-      document.getElementById("usdIncome").innerText = `💵 Income in USD: ${incomeUSD.toFixed(2)} USD`;
-      document.getElementById("inrIncome").innerText = `🇮🇳 Income in INR: ₹${incomeINR.toFixed(2)}`;
-      document.getElementById("summary").innerText =
-        `You earned ${incomeUSD.toFixed(2)} USD which equals ₹${incomeINR.toFixed(2)} at ₹${rate}/USD.`;
+      document.getElementById("usdIncome").innerHTML = `💵 USD में इनकम: <strong>${incomeUSD.toFixed(2)} USD</strong>`;
+      document.getElementById("inrIncome").innerHTML = `🇮🇳 INR में इनकम: <strong>₹${incomeINR.toFixed(2)}</strong>`;
+      document.getElementById("summary").innerHTML =
+        `आपने ${incomeUSD.toFixed(2)} USD कमाए जो ₹${rate}/USD की दर से ₹${incomeINR.toFixed(2)} के बराबर है।`;
     }
 
-    // 🔹 Level Income Calculator (with total investment)
+    // 🔹 Level Income Calculator
     function calculateLevelIncome() {
-      const levels = parseInt(document.getElementById("levels").value);
-      const firstLevelPeople = parseInt(document.getElementById("level1people").value);
+      const selectedLevel = parseInt(document.getElementById("levelSelect").value);
+      const levelPeople = parseInt(document.getElementById("levelPeople").value);
+      const levelCommission = parseFloat(document.getElementById("levelCommission").value);
       const perPerson = parseFloat(document.getElementById("perPerson").value);
-      const refPercents = document.getElementById("refPercents").value.split(",").map(v => parseFloat(v.trim()));
       const rate = parseFloat(document.getElementById("levelRate").value);
 
-      if (isNaN(levels) || isNaN(firstLevelPeople) || isNaN(perPerson) || refPercents.length < 1) {
-        alert("Please fill all details properly!");
+      if (isNaN(levelPeople) || isNaN(levelCommission) || isNaN(perPerson)) {
+        alert("कृपया सभी विवरण सही से भरें!");
         return;
       }
 
-      let levelPeople = firstLevelPeople;
-      let totalUSD = 0, totalINR = 0, totalInvest = 0;
-      let output = "";
-
-      for (let i = 0; i < levels; i++) {
-        const percent = refPercents[i] || 0;
-        const levelInvest = levelPeople * perPerson;
-        const levelIncomeUSD = (levelInvest * percent) / 100;
-        const levelIncomeINR = levelIncomeUSD * rate;
-
-        totalUSD += levelIncomeUSD;
-        totalINR += levelIncomeINR;
-        totalInvest += levelInvest;
-
-        output += `
-          <p><b>Level ${i+1}</b>: ${levelPeople} people × $${perPerson} = <b>$${levelInvest.toFixed(2)}</b> invested</p>
-          <p>➡ ${percent}% of $${levelInvest.toFixed(2)} = <b>$${levelIncomeUSD.toFixed(2)} (₹${levelIncomeINR.toFixed(2)})</b></p>
-          <hr>
-        `;
-
-        levelPeople *= firstLevelPeople; // next level = previous × 10 etc.
-      }
+      const levelInvest = levelPeople * perPerson;
+      const monthlyProfit = (levelInvest * 8) / 100; // 8% monthly profit
+      const levelIncomeUSD = (monthlyProfit * levelCommission) / 100;
+      const levelIncomeINR = levelIncomeUSD * rate;
 
       document.getElementById("levelResult").style.display = "block";
-      document.getElementById("levelDetails").innerHTML = output;
+      document.getElementById("levelDetails").innerHTML = `
+        <div class="level-detail">
+          <h4>लेवल ${selectedLevel} विवरण</h4>
+          <p><strong>सदस्य संख्या:</strong> ${levelPeople.toLocaleString()}</p>
+          <p><strong>प्रति सदस्य निवेश:</strong> $${perPerson}</p>
+          <p><strong>कुल निवेश:</strong> $${levelInvest.toLocaleString()}</p>
+          <p><strong>मासिक प्रॉफिट (8%):</strong> $${monthlyProfit.toLocaleString()}</p>
+          <p><strong>आपकी कमाई प्रतिशत:</strong> ${levelCommission}%</p>
+          <p><strong>प्रति सदस्य इनकम:</strong> $${(levelIncomeUSD / levelPeople).toFixed(4)}</p>
+          <p><strong>लेवल की कुल इनकम:</strong> $${levelIncomeUSD.toFixed(2)} (₹${levelIncomeINR.toFixed(2)})</p>
+        </div>
+      `;
+      
       document.getElementById("totalSummary").innerHTML =
-        `💰 Total Investment: <b>$${totalInvest.toFixed(2)}</b><br>
-         🎯 Total Income: <b>$${totalUSD.toFixed(2)} USD</b> ≈ <b>₹${totalINR.toFixed(2)} INR</b>`;
+        `💰 लेवल ${selectedLevel} की कुल इनकम: <strong>$${levelIncomeUSD.toFixed(2)} USD</strong> ≈ <strong>₹${levelIncomeINR.toFixed(2)} INR</strong>`;
+    }
+
+    // Back button function
+    function goBack() {
+      window.history.back();
     }
   </script>
 
