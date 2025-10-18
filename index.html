@@ -151,6 +151,8 @@
       align-items: center;
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       font-size: 1rem;
+      text-decoration: none;
+      color: white;
     }
 
     .menu-item:last-child {
@@ -503,21 +505,21 @@
             <p>Welcome to your dashboard</p>
           </div>
           
-          <div class="menu-item" onclick="openPage('wealth25')">
+          <a href="wealth25.html" class="menu-item">
             <i class="fas fa-coins"></i> Wealth 25
-          </div>
-            <div class="menu-item" onclick="openPage('income-calculator')">
-            <i class="fas fa-coins"></i> income-calculator.html
-          </div>
-          <div class="menu-item" onclick="openPage('profile')">
+          </a>
+          <a href="income-calculator.html" class="menu-item">
+            <i class="fas fa-calculator"></i> Income Calculator
+          </a>
+          <a href="profile.html" class="menu-item">
             <i class="fas fa-user"></i> Profile
-          </div>
-          <div class="menu-item" onclick="openPage('settings')">
+          </a>
+          <a href="settings.html" class="menu-item">
             <i class="fas fa-cog"></i> Settings
-          </div>
-          <div class="menu-item" onclick="openPage('help')">
+          </a>
+          <a href="help.html" class="menu-item">
             <i class="fas fa-question-circle"></i> Help & Support
-          </div>
+          </a>
           <div class="menu-item" onclick="logout()">
             <i class="fas fa-sign-out-alt"></i> Logout
           </div>
@@ -866,4 +868,3 @@
   </script>
 </body>
 </html>
-
