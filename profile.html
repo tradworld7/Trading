@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💼 प्रोबोट एक्स - ज्वाइन करें</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #2e026d, #00bfa6);
+      color: white;
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.6;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      transition: all 0.3s ease;
+      padding-top: 80px;
+    }
+
+    /* Professional Header Styles */
+    .main-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-icon {
+      font-size: 2rem;
+      color: #ffd700;
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: white;
+    }
+
+    /* Header Right Section - Side Menu */
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Side Menu Styles - Horizontal Lines */
+    .side-menu {
+      position: relative;
+    }
+
+    .menu-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 8px;
+    }
+
+    .menu-icon:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.05);
+    }
+
+    .menu-line {
+      width: 25px;
+      height: 3px;
+      background: white;
+      margin: 2px 0;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    /* Side Menu Content - Left Side */
+    .menu-content {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 300px;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.98);
+      padding: 80px 0 20px 0;
+      box-shadow: 2px 0 25px rgba(0, 0, 0, 0.7);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(10px);
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 999;
+      overflow-y: auto;
+    }
+
+    .menu-content.active {
+      left: 0;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .menu-header {
+      text-align: center;
+      padding: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .menu-header h3 {
+      color: #ffd700;
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+    }
+
+    .menu-header p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+
+    .menu-item {
+      padding: 15px 25px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 1rem;
+      text-decoration: none;
+      color: white;
+    }
+
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+
+    .menu-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      padding-left: 30px;
+    }
+
+    .menu-item i {
+      margin-right: 15px;
+      font-size: 1.3rem;
+      width: 25px;
+      text-align: center;
+      color: #ffd700;
+    }
+
+    .menu-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: none;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .menu-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
+    }
+
+    /* Overlay for menu */
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 998;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Header Left Section - Language Switcher */
+    .language-switcher {
+      display: flex;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 8px 15px;
+      border-radius: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .lang-btn {
+      background: transparent;
+      color: white;
+      border: none;
+      padding: 6px 15px;
+      border-radius: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .lang-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .lang-btn.active {
+      background: white;
+      color: #2e026d;
+    }
+
+    /* Page Container */
+    .page-container {
+      display: none;
+    }
+
+    .page-container.active {
+      display: block;
+    }
+
+    /* Main Content Header */
+    .content-header {
+      text-align: center;
+      padding: 30px 15px;
+      background: rgba(0, 0, 0, 0.4);
+      page-break-inside: avoid;
+      position: relative;
+      margin-top: 20px;
+    }
+
+    .content-header h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .content-header p {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      background: rgba(255,255,255,0.1);
+      padding: 20px 15px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    }
+
+    /* Joining Page Specific Styles */
+    .joining-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .referral-info {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 25px;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 800px;
+      text-align: center;
+    }
+
+    .referral-info h2 {
+      color: #ffd700;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+
+    .referral-link-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 20px;
+    }
+
+    .referral-link {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      word-break: break-all;
+      font-size: 1.1rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .copy-btn {
+      background: #ffd700;
+      color: #2e026d;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1.1rem;
+      margin-top: 10px;
+    }
+
+    .copy-btn:hover {
+      background: #ffed4a;
+      transform: scale(1.05);
+    }
+
+    .profile-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 25px;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .profile-image {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #ffd700;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    }
+
+    .profile-name {
+      font-size: 1.8rem;
+      color: #ffd700;
+      text-align: center;
+    }
+
+    .profile-id {
+      font-size: 1.2rem;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 8px 15px;
+      border-radius: 25px;
+    }
+
+    .pdf-section {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 25px;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 800px;
+      text-align: center;
+    }
+
+    .pdf-section h2 {
+      color: #ffd700;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+
+    .pdf-download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #ff6b6b;
+      color: white;
+      text-decoration: none;
+      padding: 15px 30px;
+      border-radius: 10px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      font-size: 1.2rem;
+      margin-top: 15px;
+    }
+
+    .pdf-download-btn:hover {
+      background: #ff5252;
+      transform: scale(1.05);
+    }
+
+    .join-now-section {
+      text-align: center;
+      padding: 30px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 15px;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .join-now-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #ffd700, #ffed4a);
+      color: #2e026d;
+      text-decoration: none;
+      padding: 18px 40px;
+      border-radius: 50px;
+      font-weight: 800;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      margin-top: 15px;
+    }
+
+    .join-now-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .benefits-section {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 25px;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    .benefits-section h2 {
+      color: #ffd700;
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+      text-align: center;
+    }
+
+    .benefits-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .benefits-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .benefits-list li:last-child {
+      border-bottom: none;
+    }
+
+    .benefits-list li i {
+      color: #ffd700;
+      font-size: 1.3rem;
+    }
+
+    /* --- Print Mode (For PDF Conversion) --- */
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+        font-size: 18px;
+        padding-top: 0;
+      }
+      .main-header {
+        display: none;
+      }
+      .content-header {
+        background: #2e026d !important;
+        color: white !important;
+      }
+      .container {
+        box-shadow: none !important;
+        background: white !important;
+        color: black !important;
+        border: 2px solid #2e026d;
+      }
+      .referral-info, .profile-section, .pdf-section, .join-now-section, .benefits-section {
+        background: #f8f9fa !important;
+        color: black !important;
+      }
+    }
+
+    /* --- Mobile Responsive --- */
+    @media (max-width: 768px) {
+      body {
+        font-size: 16px;
+        padding-top: 70px;
+      }
+      
+      .main-header {
+        padding: 10px 15px;
+      }
+      
+      .logo-text {
+        font-size: 1.2rem;
+      }
+      
+      .language-switcher {
+        padding: 5px 10px;
+      }
+      
+      .lang-btn {
+        padding: 4px 10px;
+        font-size: 0.8rem;
+      }
+      
+      .content-header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .content-header p {
+        font-size: 1rem;
+      }
+      
+      .container {
+        padding: 15px 10px;
+        margin: 15px 10px;
+      }
+      
+      .menu-content {
+        width: 280px;
+        left: -280px;
+      }
+      
+      .profile-image {
+        width: 150px;
+        height: 150px;
+      }
+      
+      .profile-name {
+        font-size: 1.5rem;
+      }
+      
+      .join-now-btn {
+        padding: 15px 30px;
+        font-size: 1.3rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-right {
+        gap: 10px;
+      }
+      
+      .language-switcher {
+        flex-direction: column;
+        gap: 5px;
+        padding: 8px 12px;
+      }
+      
+      .menu-content {
+        width: 250px;
+        left: -250px;
+      }
+      
+      .referral-link {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+  
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Professional Header -->
+  <header class="main-header">
+    <!-- Left Side - Logo and Language Switcher -->
+    <div class="logo">
+      <div class="logo-icon">💼</div>
+      <div class="logo-text">Probot X</div>
+    </div>
+
+    <!-- Right Side - Language Switcher and Side Menu -->
+    <div class="header-right">
+      <!-- Language Switcher -->
+      <div class="language-switcher">
+        <button class="lang-btn active" id="hindiBtn" onclick="showPage('hindi')">हिंदी</button>
+        <button class="lang-btn" id="englishBtn" onclick="showPage('english')">English</button>
+      </div>
+
+      <!-- Side Menu - Horizontal Lines -->
+      <div class="side-menu">
+        <div class="menu-icon" id="menuIcon">
+          <div class="menu-line"></div>
+          <div class="menu-line"></div>
+          <div class="menu-line"></div>
+        </div>
+        
+        <!-- Side Menu Content -->
+        <div class="menu-content" id="menuContent">
+          <button class="menu-close" onclick="closeMenu()">
+            <i class="fas fa-times"></i>
+          </button>
+          
+          <div class="menu-header">
+            <h3>Probot X</h3>
+            <p>Welcome to your dashboard</p>
+          </div>
+          
+          <a href="wealth25.html" class="menu-item">
+            <i class="fas fa-coins"></i> Wealth 25
+          </a>
+          <a href="income-calculator.html" class="menu-item">
+            <i class="fas fa-calculator"></i> Income Calculator
+          </a>
+          <a href="business-plan.html" class="menu-item">
+            <i class="fas fa-chart-line"></i> Business Plan
+          </a>
+          <a href="settings.html" class="menu-item">
+            <i class="fas fa-cog"></i> Settings
+          </a>
+          <a href="help.html" class="menu-item">
+            <i class="fas fa-question-circle"></i> Help & Support
+          </a>
+          <div class="menu-item" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </div>
+        </div>
+        
+        <!-- Menu Overlay -->
+        <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hindi Joining Page -->
+  <div class="page-container active" id="hindiPage">
+    <div class="content-header">
+      <h1>💼 प्रोबोट एक्स - ज्वाइन करें</h1>
+      <p>आपकी फाइनेंशियल फ्रीडम की यात्रा यहाँ से शुरू होती है</p>
+    </div>
+
+    <div class="container">
+      <div class="joining-container">
+        <!-- Profile Section -->
+        <div class="profile-section">
+          <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/ramesh.png" alt="Ramesh Kumar Verma" class="profile-image">
+          <h2 class="profile-name">रमेश कुमार वर्मा</h2>
+          <div class="profile-id">ID: RKVERMA25</div>
+          <p>आपका प्रोबोट एक्स स्पॉन्सर</p>
+        </div>
+
+        <!-- Referral Link Section -->
+        <div class="referral-info">
+          <h2>📎 आपका रेफरल लिंक</h2>
+          <p>इस लिंक को अपने दोस्तों और परिवार के साथ शेयर करें और प्रोबोट एक्स में ज्वाइन करवाएं</p>
+          <div class="referral-link-container">
+            <div class="referral-link" id="referralLinkHindi">https://probotx.io/follow/RKVERMA25</div>
+            <button class="copy-btn" onclick="copyReferralLink('hindi')">
+              <i class="fas fa-copy"></i> लिंक कॉपी करें
+            </button>
+          </div>
+        </div>
+
+        <!-- PDF Section -->
+        <div class="pdf-section">
+          <h2>📄 प्रोबोट एक्स प्रेजेंटेशन</h2>
+          <p>प्रोबोट एक्स बिज़नेस प्लान की पूरी जानकारी के लिए इस PDF को डाउनलोड करें</p>
+          <a href="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/ProbotX-Presentation-PDF-latest-june-2.pdf" class="pdf-download-btn" target="_blank">
+            <i class="fas fa-download"></i> PDF डाउनलोड करें
+          </a>
+        </div>
+
+        <!-- Benefits Section -->
+        <div class="benefits-section">
+          <h2>🚀 प्रोबोट एक्स के फायदे</h2>
+          <ul class="benefits-list">
+            <li><i class="fas fa-check-circle"></i> 6 लेवल की इनकम स्ट्रक्चर</li>
+            <li><i class="fas fa-check-circle"></i> $100 से शुरुआत</li>
+            <li><i class="fas fa-check-circle"></i> 8% मासिक प्रॉफिट</li>
+            <li><i class="fas fa-check-circle"></i> डायरेक्ट और इंडायरेक्ट इनकम</li>
+            <li><i class="fas fa-check-circle"></i> वैश्विक पहुँच</li>
+            <li><i class="fas fa-check-circle"></i> 24/7 सपोर्ट</li>
+            <li><i class="fas fa-check-circle"></i> डिजिटल पेमेंट सिस्टम</li>
+            <li><i class="fas fa-check-circle"></i> प्रोफेशनल ट्रेनिंग</li>
+          </ul>
+        </div>
+
+        <!-- Join Now Section -->
+        <div class="join-now-section">
+          <h2>🚀 आज ही ज्वाइन करें!</h2>
+          <p>अपनी फाइनेंशियल फ्रीडम की यात्रा आज ही शुरू करें</p>
+          <a href="https://probotx.io/follow/RKVERMA25" class="join-now-btn" target="_blank">
+            <i class="fas fa-rocket"></i> अभी ज्वाइन करें
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- English Joining Page -->
+  <div class="page-container english-page" id="englishPage">
+    <div class="content-header">
+      <h1>💼 Probot X - Join Now</h1>
+      <p>Your Financial Freedom Journey Starts Here</p>
+    </div>
+
+    <div class="container">
+      <div class="joining-container">
+        <!-- Profile Section -->
+        <div class="profile-section">
+          <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/ramesh.png" alt="Ramesh Kumar Verma" class="profile-image">
+          <h2 class="profile-name">Ramesh Kumar Verma</h2>
+          <div class="profile-id">ID: RKVERMA25</div>
+          <p>Your Probot X Sponsor</p>
+        </div>
+
+        <!-- Referral Link Section -->
+        <div class="referral-info">
+          <h2>📎 Your Referral Link</h2>
+          <p>Share this link with your friends and family to join Probot X</p>
+          <div class="referral-link-container">
+            <div class="referral-link" id="referralLinkEnglish">https://probotx.io/follow/RKVERMA25</div>
+            <button class="copy-btn" onclick="copyReferralLink('english')">
+              <i class="fas fa-copy"></i> Copy Link
+            </button>
+          </div>
+        </div>
+
+        <!-- PDF Section -->
+        <div class="pdf-section">
+          <h2>📄 Probot X Presentation</h2>
+          <p>Download this PDF for complete information about Probot X Business Plan</p>
+          <a href="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/ProbotX-Presentation-PDF-latest-june-2.pdf" class="pdf-download-btn" target="_blank">
+            <i class="fas fa-download"></i> Download PDF
+          </a>
+        </div>
+
+        <!-- Benefits Section -->
+        <div class="benefits-section">
+          <h2>🚀 Probot X Benefits</h2>
+          <ul class="benefits-list">
+            <li><i class="fas fa-check-circle"></i> 6 Level Income Structure</li>
+            <li><i class="fas fa-check-circle"></i> Start with $100</li>
+            <li><i class="fas fa-check-circle"></i> 8% Monthly Profit</li>
+            <li><i class="fas fa-check-circle"></i> Direct & Indirect Income</li>
+            <li><i class="fas fa-check-circle"></i> Global Reach</li>
+            <li><i class="fas fa-check-circle"></i> 24/7 Support</li>
+            <li><i class="fas fa-check-circle"></i> Digital Payment System</li>
+            <li><i class="fas fa-check-circle"></i> Professional Training</li>
+          </ul>
+        </div>
+
+        <!-- Join Now Section -->
+        <div class="join-now-section">
+          <h2>🚀 Join Now!</h2>
+          <p>Start your financial freedom journey today</p>
+          <a href="https://probotx.io/follow/RKVERMA25" class="join-now-btn" target="_blank">
+            <i class="fas fa-rocket"></i> Join Now
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    // Side Menu Functionality
+    document.getElementById('menuIcon').addEventListener('click', function(event) {
+      event.stopPropagation();
+      openMenu();
+    });
+
+    function openMenu() {
+      document.getElementById('menuContent').classList.add('active');
+      document.getElementById('menuOverlay').classList.add('active');
+    }
+
+    function closeMenu() {
+      document.getElementById('menuContent').classList.remove('active');
+      document.getElementById('menuOverlay').classList.remove('active');
+    }
+
+    // Close menu when clicking on overlay
+    document.getElementById('menuOverlay').addEventListener('click', closeMenu);
+
+    // Page Switching Function
+    function showPage(page) {
+      const hindiBtn = document.getElementById('hindiBtn');
+      const englishBtn = document.getElementById('englishBtn');
+      const hindiPage = document.getElementById('hindiPage');
+      const englishPage = document.getElementById('englishPage');
+      
+      // Update button states
+      if (page === 'hindi') {
+        hindiBtn.classList.add('active');
+        englishBtn.classList.remove('active');
+        hindiPage.classList.add('active');
+        englishPage.classList.remove('active');
+      } else {
+        englishBtn.classList.add('active');
+        hindiBtn.classList.remove('active');
+        englishPage.classList.add('active');
+        hindiPage.classList.remove('active');
+      }
+      
+      // Close side menu if open
+      closeMenu();
+    }
+    
+    // Copy Referral Link Function
+    function copyReferralLink(language) {
+      const linkText = language === 'hindi' 
+        ? document.getElementById('referralLinkHindi').innerText 
+        : document.getElementById('referralLinkEnglish').innerText;
+      
+      navigator.clipboard.writeText(linkText).then(function() {
+        alert(language === 'hindi' ? 'लिंक कॉपी हो गया!' : 'Link Copied!');
+      }, function(err) {
+        console.error('Could not copy text: ', err);
+      });
+    }
+    
+    // Menu Item Functions
+    function openPage(pageName) {
+      alert(`${pageName} page will be added later`);
+      closeMenu();
+    }
+    
+    function logout() {
+      if(confirm('क्या आप लॉगआउट करना चाहते हैं?')) {
+        alert('लॉगआउट सफलतापूर्वक किया गया');
+        closeMenu();
+      }
+    }
+  </script>
+</body>
+</html>
