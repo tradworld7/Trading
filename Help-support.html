@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🆘 Probot X Help & Support</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+      color: white;
+      font-size: 18px;
+      font-weight: 600;
+      line-height: 1.6;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      transition: all 0.3s ease;
+      padding-top: 80px;
+    }
+
+    /* Professional Header Styles */
+    .main-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-icon {
+      font-size: 2rem;
+      color: #ffd700;
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: white;
+    }
+
+    /* Header Right Section - Side Menu */
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Side Menu Styles - Horizontal Lines */
+    .side-menu {
+      position: relative;
+    }
+
+    .menu-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 8px;
+    }
+
+    .menu-icon:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.05);
+    }
+
+    .menu-line {
+      width: 25px;
+      height: 3px;
+      background: white;
+      margin: 2px 0;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    /* Side Menu Content - Left Side */
+    .menu-content {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 300px;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.98);
+      padding: 80px 0 20px 0;
+      box-shadow: 2px 0 25px rgba(0, 0, 0, 0.7);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(10px);
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 999;
+      overflow-y: auto;
+    }
+
+    .menu-content.active {
+      left: 0;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .menu-header {
+      text-align: center;
+      padding: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .menu-header h3 {
+      color: #ffd700;
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+    }
+
+    .menu-header p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+
+    .menu-item {
+      padding: 15px 25px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 1rem;
+      text-decoration: none;
+      color: white;
+    }
+
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+
+    .menu-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      padding-left: 30px;
+    }
+
+    .menu-item i {
+      margin-right: 15px;
+      font-size: 1.3rem;
+      width: 25px;
+      text-align: center;
+      color: #ffd700;
+    }
+
+    .menu-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: none;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .menu-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
+    }
+
+    /* Overlay for menu */
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 998;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Header Left Section - Language Switcher */
+    .language-switcher {
+      display: flex;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 8px 15px;
+      border-radius: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .lang-btn {
+      background: transparent;
+      color: white;
+      border: none;
+      padding: 6px 15px;
+      border-radius: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .lang-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .lang-btn.active {
+      background: white;
+      color: #1a1a2e;
+    }
+
+    /* Page Container */
+    .page-container {
+      display: none;
+    }
+
+    .page-container.active {
+      display: block;
+    }
+
+    /* Main Content Header */
+    .content-header {
+      text-align: center;
+      padding: 40px 15px;
+      background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,107,0,0.2));
+      page-break-inside: avoid;
+      position: relative;
+      margin-top: 20px;
+      border-bottom: 3px solid #ffd700;
+    }
+
+    .content-header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+
+    .content-header p {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin: 0;
+      color: #ffd700;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      background: rgba(255,255,255,0.05);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Support Cards */
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin: 30px 0;
+    }
+
+    .support-card {
+      background: rgba(255,255,255,0.08);
+      padding: 30px;
+      border-radius: 15px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .support-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255,255,255,0.12);
+    }
+
+    .support-card i {
+      font-size: 3rem;
+      color: #ffd700;
+      margin-bottom: 20px;
+    }
+
+    .support-card h3 {
+      color: #ffd700;
+      margin-bottom: 15px;
+      font-size: 1.4rem;
+    }
+
+    /* WhatsApp Button */
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-decoration: none;
+      margin: 10px 0;
+      box-shadow: 0 10px 25px rgba(37,211,102,0.4);
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .whatsapp-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(37,211,102,0.6);
+      background: linear-gradient(135deg, #128C7E, #25D366);
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      margin: 40px 0;
+    }
+
+    .faq-item {
+      background: rgba(255,255,255,0.08);
+      margin: 15px 0;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .faq-question {
+      padding: 20px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 700;
+      transition: background 0.3s ease;
+    }
+
+    .faq-question:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .faq-answer {
+      padding: 0 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      background: rgba(255,255,255,0.05);
+    }
+
+    .faq-answer.active {
+      padding: 20px;
+      max-height: 500px;
+    }
+
+    .faq-toggle {
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+
+    .faq-toggle.active {
+      transform: rotate(45deg);
+    }
+
+    /* Chat Bot Section */
+    .chat-bot {
+      background: rgba(255,255,255,0.08);
+      border-radius: 15px;
+      padding: 25px;
+      margin: 30px 0;
+    }
+
+    .chat-messages {
+      height: 300px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+      padding: 15px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 10px;
+    }
+
+    .message {
+      margin: 10px 0;
+      padding: 12px 15px;
+      border-radius: 10px;
+      max-width: 80%;
+    }
+
+    .user-message {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      margin-left: auto;
+      text-align: right;
+    }
+
+    .bot-message {
+      background: rgba(255,255,255,0.1);
+      margin-right: auto;
+    }
+
+    .chat-input {
+      display: flex;
+      gap: 10px;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 12px 15px;
+      border: none;
+      border-radius: 25px;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      font-size: 1rem;
+    }
+
+    .chat-input button {
+      background: #ffd700;
+      color: #1a1a2e;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: 700;
+      transition: all 0.3s ease;
+    }
+
+    .chat-input button:hover {
+      background: #ff6b00;
+      transform: scale(1.05);
+    }
+
+    /* Quick Questions */
+    .quick-questions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .quick-btn {
+      background: rgba(255,255,255,0.1);
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .quick-btn:hover {
+      background: rgba(255,255,255,0.2);
+      transform: translateY(-2px);
+    }
+
+    /* Contact Info */
+    .contact-info {
+      text-align: center;
+      margin: 30px 0;
+      padding: 25px;
+      background: rgba(255,215,0,0.1);
+      border-radius: 15px;
+      border: 2px solid #ffd700;
+    }
+
+    /* English Page Specific Styles */
+    .english-page .content-header h1,
+    .english-page .content-header p,
+    .english-page h2,
+    .english-page .support-card h3 {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    /* Package Cards */
+    .package-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 30px 0;
+    }
+
+    .package-card {
+      background: rgba(255,255,255,0.08);
+      padding: 25px;
+      border-radius: 15px;
+      border: 2px solid rgba(255,215,0,0.3);
+      transition: all 0.3s ease;
+    }
+
+    .package-card:hover {
+      transform: translateY(-5px);
+      border-color: #ffd700;
+    }
+
+    .package-card.popular {
+      border-color: #ff6b00;
+      background: rgba(255,107,0,0.1);
+    }
+
+    .package-badge {
+      background: #ff6b00;
+      color: white;
+      padding: 5px 15px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+
+    .package-price {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #ffd700;
+      margin: 10px 0;
+    }
+
+    .package-features {
+      list-style: none;
+      margin: 15px 0;
+    }
+
+    .package-features li {
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .package-features li:last-child {
+      border-bottom: none;
+    }
+
+    .package-btn {
+      background: #ffd700;
+      color: #1a1a2e;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 25px;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .package-btn:hover {
+      background: #ff6b00;
+      transform: scale(1.05);
+    }
+
+    /* --- Mobile Responsive --- */
+    @media (max-width: 768px) {
+      body {
+        font-size: 16px;
+        padding-top: 70px;
+      }
+      
+      .main-header {
+        padding: 10px 15px;
+      }
+      
+      .logo-text {
+        font-size: 1.2rem;
+      }
+      
+      .language-switcher {
+        padding: 5px 10px;
+      }
+      
+      .lang-btn {
+        padding: 4px 10px;
+        font-size: 0.8rem;
+      }
+      
+      .content-header h1 {
+        font-size: 2rem;
+      }
+      
+      .content-header p {
+        font-size: 1.1rem;
+      }
+      
+      .container {
+        padding: 20px 15px;
+        margin: 15px 10px;
+      }
+      
+      .menu-content {
+        width: 280px;
+        left: -280px;
+      }
+      
+      .support-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .quick-questions {
+        grid-template-columns: 1fr;
+      }
+      
+      .package-cards {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-right {
+        gap: 10px;
+      }
+      
+      .language-switcher {
+        flex-direction: column;
+        gap: 5px;
+        padding: 8px 12px;
+      }
+      
+      .menu-content {
+        width: 250px;
+        left: -250px;
+      }
+      
+      .whatsapp-btn {
+        padding: 12px 20px;
+        font-size: 1rem;
+      }
+    }
+  </style>
+  
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Professional Header -->
+  <header class="main-header">
+    <!-- Left Side - Logo and Language Switcher -->
+    <div class="logo">
+      <div class="logo-icon">💼</div>
+      <div class="logo-text">Probot X</div>
+    </div>
+
+    <!-- Right Side - Language Switcher and Side Menu -->
+    <div class="header-right">
+      <!-- Language Switcher -->
+      <div class="language-switcher">
+        <button class="lang-btn active" id="hindiBtn" onclick="showPage('hindi')">हिंदी</button>
+        <button class="lang-btn" id="englishBtn" onclick="showPage('english')">English</button>
+      </div>
+
+      <!-- Side Menu - Horizontal Lines -->
+      <div class="side-menu">
+        <div class="menu-icon" id="menuIcon">
+          <div class="menu-line"></div>
+          <div class="menu-line"></div>
+          <div class="menu-line"></div>
+        </div>
+        
+        <!-- Side Menu Content -->
+        <div class="menu-content" id="menuContent">
+          <button class="menu-close" onclick="closeMenu()">
+            <i class="fas fa-times"></i>
+          </button>
+          
+          <div class="menu-header">
+            <h3>Probot X</h3>
+            <p>Welcome to your dashboard</p>
+          </div>
+          
+          <a href="index.html" class="menu-item">
+            <i class="fas fa-tachometer-alt"></i> Dashboard
+          </a>
+          <a href="wealth25.html" class="menu-item">
+            <i class="fas fa-coins"></i> Wealth 25
+          </a>
+          <a href="income-calculator.html" class="menu-item">
+            <i class="fas fa-calculator"></i> Income Calculator
+          </a>
+          <a href="business-plan.html" class="menu-item">
+            <i class="fas fa-chart-line"></i> Business Plan
+          </a>
+          <a href="joining.html" class="menu-item">
+            <i class="fas fa-user-plus"></i> Joining
+          </a>
+          <a href="package.html" class="menu-item">
+            <i class="fas fa-box"></i> Package
+          </a>
+          <a href="health-support.html" class="menu-item">
+            <i class="fas fa-heartbeat"></i> Health Support
+          </div>
+          <div class="menu-item" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </div>
+        </div>
+        
+        <!-- Menu Overlay -->
+        <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hindi Page -->
+  <div class="page-container active" id="hindiPage">
+    <div class="content-header">
+      <h1>🆘 प्रोबोट एक्स हेल्प & सपोर्ट</h1>
+      <p>24x7 सपोर्ट - हम आपकी मदद के लिए हमेशा तैयार हैं!</p>
+    </div>
+
+    <div class="container">
+      <!-- Support Options Grid -->
+      <div class="support-grid">
+        <div class="support-card">
+          <i class="fab fa-whatsapp"></i>
+          <h3>WhatsApp सपोर्ट</h3>
+          <p>सीधे WhatsApp पर बात करें</p>
+          <a href="https://wa.me/916394607174?text=नमस्ते! मैं Probot X के बारे में जानकारी चाहता/चाहती हूं" 
+             class="whatsapp-btn" target="_blank">
+            <i class="fab fa-whatsapp"></i> WhatsApp पर बात करें
+          </a>
+        </div>
+
+        <div class="support-card">
+          <i class="fas fa-robot"></i>
+          <h3>ऑटोमेटेड असिस्टेंट</h3>
+          <p>तुरंत जवाब पाएं</p>
+          <button class="whatsapp-btn" onclick="openChatBot()">
+            <i class="fas fa-comments"></i> चैट असिस्टेंट
+          </button>
+        </div>
+
+        <div class="support-card">
+          <i class="fas fa-phone-alt"></i>
+          <h3>कॉल सपोर्ट</h3>
+          <p>सीधे बात करें</p>
+          <a href="tel:+916394607174" class="whatsapp-btn">
+            <i class="fas fa-phone"></i> +91 63946 07174
+          </a>
+        </div>
+      </div>
+
+      <!-- Subscription Packages -->
+      <div style="margin: 40px 0;">
+        <h2 style="text-align: center; color: #ffd700; margin-bottom: 30px;">📦 सब्सक्रिप्शन पैकेजेस</h2>
+        <div class="package-cards">
+          <div class="package-card">
+            <h3>स्टार्टर पैकेज</h3>
+            <div class="package-price">$99</div>
+            <ul class="package-features">
+              <li>✅ 12 महीने की सदस्यता</li>
+              <li>✅ प्रोबोटएक्स के साथ मैनेज्ड ट्रेडिंग</li>
+              <li>✅ एफिलिएट प्रोग्राम एक्सेस</li>
+              <li>✅ दूसरे लेवल रेजिडुअल बोनस</li>
+            </ul>
+            <button class="package-btn" onclick="askQuestion('स्टार्टर पैकेज के बारे में जानकारी')">अभी खरीदें</button>
+          </div>
+
+          <div class="package-card">
+            <h3>प्रीमियम पैकेज</h3>
+            <div class="package-price">$180</div>
+            <ul class="package-features">
+              <li>✅ 12 महीने की सदस्यता</li>
+              <li>✅ प्रोबोटएक्स के साथ मैनेज्ड ट्रेडिंग</li>
+              <li>✅ क्लियोस एकेडमी एक्सेस</li>
+              <li>✅ एफिलिएट प्रोग्राम एक्सेस</li>
+              <li>✅ चौथे लेवल रेजिडुअल बोनस</li>
+            </ul>
+            <button class="package-btn" onclick="askQuestion('प्रीमियम पैकेज के बारे में जानकारी')">अभी खरीदें</button>
+          </div>
+
+          <div class="package-card popular">
+            <div class="package-badge">MOST POPULAR</div>
+            <h3>एडवांस्ड पैकेज</h3>
+            <div class="package-price">$399</div>
+            <ul class="package-features">
+              <li>✅ 36 महीने की सदस्यता</li>
+              <li>✅ प्रोबोटएक्स के साथ मैनेज्ड ट्रेडिंग</li>
+              <li>✅ क्लियोस एकेडमी एक्सेस + सिग्नल्स</li>
+              <li>✅ एफिलिएट प्रोग्राम एक्सेस</li>
+              <li>✅ एमकार्ड (मास्टरकार्ड) $117</li>
+              <li>✅ सातवें लेवल रेजिडुअल बोनस</li>
+            </ul>
+            <button class="package-btn" onclick="askQuestion('एडवांस्ड पैकेज के बारे में जानकारी')">अभी खरीदें</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Information -->
+      <div class="contact-info">
+        <h2 style="color: #ffd700; margin-bottom: 15px;">📞 संपर्क जानकारी</h2>
+        <p><strong>WhatsApp Number:</strong> +91 63946 07174</p>
+        <p><strong>Email:</strong> support@probotx.io</p>
+        <p><strong>Website:</strong> www.probotx.io</p>
+        <p><strong>सपोर्ट टाइम:</strong> 24x7 उपलब्ध</p>
+      </div>
+
+      <!-- Quick Questions -->
+      <div style="text-align: center; margin: 30px 0;">
+        <h3 style="color: #ffd700; margin-bottom: 20px;">🚀 त्वरित प्रश्न</h3>
+        <div class="quick-questions">
+          <button class="quick-btn" onclick="askQuestion('Probot X क्या है?')">Probot X क्या है?</button>
+          <button class="quick-btn" onclick="askQuestion('सब्सक्रिप्शन पैकेजेस क्या हैं?')">सब्सक्रिप्शन पैकेजेस</button>
+          <button class="quick-btn" onclick="askQuestion('Wealth25 बोनस क्या है?')">Wealth25 बोनस</button>
+          <button class="quick-btn" onclick="askQuestion('फंडिंग स्लॉट्स क्या हैं?')">फंडिंग स्लॉट्स</button>
+          <button class="quick-btn" onclick="askQuestion('एफिलिएट प्रोग्राम कैसे काम करता है?')">एफिलिएट प्रोग्राम</button>
+          <button class="quick-btn" onclick="askQuestion('रेफरल बोनस कितना मिलेगा?')">रेफरल बोनस</button>
+        </div>
+      </div>
+
+      <!-- Chat Bot Section -->
+      <div class="chat-bot">
+        <h3 style="color: #ffd700; text-align: center; margin-bottom: 20px;">🤖 Probot X असिस्टेंट</h3>
+        <div class="chat-messages" id="chatMessages">
+          <div class="message bot-message">
+            नमस्ते! मैं Probot X असिस्टेंट हूं। आप कैसे मदद कर सकता हूं?
+          </div>
+        </div>
+        <div class="chat-input">
+          <input type="text" id="chatInput" placeholder="अपना प्रश्न यहाँ टाइप करें..." onkeypress="handleKeyPress(event)">
+          <button onclick="sendMessage()">भेजें</button>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="faq-section">
+        <h2 style="text-align: center; color: #ffd700; margin-bottom: 30px;">❓ अक्सर पूछे जाने वाले प्रश्न</h2>
+        
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(1)">
+            Probot X क्या है?
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer" id="faq1">
+            Probot X एक ऑटोमेटेड ट्रेडिंग प्लेटफॉर्म है जो Forex, Indices, और Commodities में स्मार्ट ट्रेडिंग स्ट्रेटेजीज प्रदान करता है। यह Kleos Academy द्वारा पावर्ड है।
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(2)">
+            सब्सक्रिप्शन पैकेजेस क्या हैं?
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer" id="faq2">
+            हमारे पास तीन मुख्य पैकेज हैं: स्टार्टर ($99/12 महीने), प्रीमियम ($180/12 महीने), और एडवांस्ड ($399/36 महीने)। प्रत्येक पैकेज के साथ अलग-अलग फीचर्स और बोनस मिलते हैं।
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(3)">
+            Wealth25 बोनस क्या है?
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer" id="faq3">
+            Wealth25 बोनस में आप 25 महीने तक 8% मासिक ट्रेडिंग रिवार्ड्स प्राप्त कर सकते हैं। यह $100 से $10,800 तक के पैकेजेस पर उपलब्ध है।
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(4)">
+            एफिलिएट प्रोग्राम कैसे काम करता है?
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer" id="faq4">
+            हमारे एफिलिएट प्रोग्राम में 8 तरह के बोनस हैं: डायरेक्ट रेफरल, एडवाइजरी, W25 इंट्रो, रेजिडुअल, लीडरशिप, टीम बिल्डिंग, टीम मैचिंग, और रैंक रिवार्ड बोनस।
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(5)">
+            क्या यह सुरक्षित है?
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer" id="faq5">
+            हाँ, Probot X पूरी तरह safe और secure platform है। हमारे पास SSL encryption और secure payment gateway है। सभी ट्रांजैक्शन सुरक्षित हैं।
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- English Page -->
+  <div class="page-container english-page" id="englishPage">
+    <div class="content-header">
+      <h1>🆘 Probot X Help & Support</h1>
+      <p>24x7 Support - We're always ready to help you!</p>
+    </div>
+
+    <div class="container">
+      <!-- Support Options Grid -->
+      <div class="support-grid">
+        <div class="support-card">
+          <i class="fab fa-whatsapp"></i>
+          <h3>WhatsApp Support</h3>
+          <p>Talk directly on WhatsApp</p>
+          <a href="https://wa.me/916394607174?text=Hello! I want information about Probot X" 
+             class="whatsapp-btn" target="_blank">
+            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+          </a>
+        </div>
+
+        <div class="support-card">
+          <i class="fas fa-robot"></i>
+          <h3>Automated Assistant</h3>
+          <p>Get instant answers</p>
+          <button class="whatsapp-btn" onclick="openChatBot()">
+            <i class="fas fa-comments"></i> Chat Assistant
+          </button>
+        </div>
+
+        <div class="support-card">
+          <i class="fas fa-phone-alt"></i>
+          <h3>Call Support</h3>
+          <p>Talk directly</p>
+          <a href="tel:+916394607174" class="whatsapp-btn">
+            <i class="fas fa-phone"></i> +91 63946 07174
+          </a>
+        </div>
+      </div>
+
+      <!-- Subscription Packages -->
+      <div style="margin: 40px 0;">
+        <h2 style="text-align: center; color: #ffd700; margin-bottom: 30px;">📦 Subscription Packages</h2>
+        <div class="package-cards">
+          <div class="package-card">
+            <h3>Starter Package</h3>
+            <div class="package-price">$99</div>
+            <ul class="package-features">
+              <li>✅ 12 Months Subscription</li>
+              <li>✅ Managed Trading with ProBotX</li>
+              <li>✅ Access to ProBotX Affiliate Program</li>
+              <li>✅ 2nd-Level Residual Bonus Eligibility</li>
+            </ul>
+            <button class="package-btn" onclick="askQuestion('Information about Starter Package')">Buy Now</button>
+          </div>
+
+          <div class="package-card">
+            <h3>Premium Package</h3>
+            <div class="package-price">$180</div>
+            <ul class="package-features">
+              <li>✅ 12 Months Subscription</li>
+              <li>✅ Managed Trading with ProBotX</li>
+              <li>✅ Kleos Academy Access</li>
+              <li>✅ Access to ProBotX Affiliate Program</li>
+              <li>✅ 4th-Level Residual Bonus Eligibility</li>
+            </ul>
+            <button class="package-btn" onclick="askQuestion('Information about Premium Package')">Buy Now</button>
+          </div>
+
+          <div class="package-card popular">
+            <div class="package-badge">MOST POPULAR</div>
+            <h3>Advanced Package</h3>
+            <div class="package-price">$399</div>
+            <ul class="package-features">
+              <li>✅ 36 Months Subscription</li>
+              <li>✅ Managed Trading with ProBotX</li>
+              <li>✅ Kleos Academy Access + Trading Signals</li>
+              <li>✅ Access to ProBotX Affiliate Program</li>
+              <li>✅ MCard Powered by MasterCard Worth $117</li>
+              <li>✅ 7th-Level Residual Bonus Eligibility</li>
+            </ul>
+            <button class="package-btn" onclick="askQuestion('Information about Advanced Package')">Buy Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Information -->
+      <div class="contact-info">
+        <h2 style="color: #ffd700; margin-bottom: 15px;">📞 Contact Information</h2>
+        <p><strong>WhatsApp Number:</strong> +91 63946 07174</p>
+        <p><strong>Email:</strong> support@probotx.io</p>
+        <p><strong>Website:</strong> www.probotx.io</p>
+        <p><strong>Support Time:</strong> 24x7 Available</p>
+      </div>
+
+      <!-- Quick Questions -->
+      <div style="text-align: center; margin: 30px 0;">
+        <h3 style="color: #ffd700; margin-bottom: 20px;">🚀 Quick Questions</h3>
+        <div class="quick-questions">
+          <button class="quick-btn" onclick="askQuestion('What is Probot X?')">What is Probot X?</button>
+          <button class="quick-btn" onclick="askQuestion('What are subscription packages?')">Subscription Packages</button>
+          <button class="quick-btn" onclick="askQuestion('What is Wealth25 bonus?')">Wealth25 Bonus</button>
+          <button class="quick-btn" onclick="askQuestion('What are funding slots?')">Funding Slots</button>
+          <button class="quick-btn" onclick="askQuestion('How does affiliate program work?')">Affiliate Program</button>
+          <button class="quick-btn" onclick="askQuestion('How much referral bonus?')">Referral Bonus</button>
+        </div>
+      </div>
+
+      <!-- Chat Bot Section -->
+      <div class="chat-bot">
+        <h3 style="color: #ffd700; text-align: center; margin-bottom: 20px;">🤖 Probot X Assistant</h3>
+        <div class="chat-messages" id="chatMessagesEnglish">
+          <div class="message bot-message">
+            Hello! I'm Probot X Assistant. How can I help you?
+          </div>
+        </div>
+        <div class="chat-input">
+          <input type="text" id="chatInputEnglish" placeholder="Type your question here..." onkeypress="handleKeyPressEnglish(event)">
+          <button onclick="sendMessageEnglish()">Send</button>
+        </div>
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="faq-section">
+        <h2 style="text-align: center; color: #ffd700; margin-bottom: 30px;">❓ Frequently Asked Questions</h2>
+        
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(6)">
+            What is Probot X?
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer" id="faq6">
+            Probot X is an automated trading platform that provides smart trading strategies for Forex, Indices, and Commodities. It is powered by Kleos Academy.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(7)">
+            What are subscription packages?
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer" id="faq7">
+            We have three main packages: Starter ($99/12 months), Premium ($180/12 months), and Advanced ($399/36 months). Each package comes with different features and bonuses.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(8)">
+            What is Wealth25 bonus?
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer" id="faq8">
+            With Wealth25 bonus, you can earn 8% monthly trading rewards for 25 months. It's available on packages ranging from $100 to $10,800.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(9)">
+            How does affiliate program work?
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer" id="faq9">
+            Our affiliate program includes 8 types of bonuses: Direct Referral, Advisory, W25 Intro, Residual, Leadership, Team Building, Team Matching, and Rank Reward bonuses.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(10)">
+            Is it safe and secure?
+            <span class="faq-toggle">+</span>
+          </div>
+          <div class="faq-answer" id="faq10">
+            Yes, Probot X is completely safe and secure platform. We have SSL encryption and secure payment gateway. All transactions are protected.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    // Side Menu Functionality
+    document.getElementById('menuIcon').addEventListener('click', function(event) {
+      event.stopPropagation();
+      openMenu();
+    });
+
+    function openMenu() {
+      document.getElementById('menuContent').classList.add('active');
+      document.getElementById('menuOverlay').classList.add('active');
+    }
+
+    function closeMenu() {
+      document.getElementById('menuContent').classList.remove('active');
+      document.getElementById('menuOverlay').classList.remove('active');
+    }
+
+    // Close menu when clicking on overlay
+    document.getElementById('menuOverlay').addEventListener('click', closeMenu);
+
+    // Page Switching Function
+    function showPage(page) {
+      const hindiBtn = document.getElementById('hindiBtn');
+      const englishBtn = document.getElementById('englishBtn');
+      const hindiPage = document.getElementById('hindiPage');
+      const englishPage = document.getElementById('englishPage');
+      
+      // Update button states
+      if (page === 'hindi') {
+        hindiBtn.classList.add('active');
+        englishBtn.classList.remove('active');
+        hindiPage.classList.add('active');
+        englishPage.classList.remove('active');
+      } else {
+        englishBtn.classList.add('active');
+        hindiBtn.classList.remove('active');
+        englishPage.classList.add('active');
+        hindiPage.classList.remove('active');
+      }
+      
+      // Close side menu if open
+      closeMenu();
+    }
+
+    // FAQ Toggle Function
+    function toggleFAQ(id) {
+      const answer = document.getElementById('faq' + id);
+      const toggle = answer.previousElementSibling.querySelector('.faq-toggle');
+      
+      answer.classList.toggle('active');
+      toggle.classList.toggle('active');
+    }
+
+    // Chat Bot Functions for Hindi
+    function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const message = input.value.trim();
+      
+      if (message) {
+        addMessage(message, 'user');
+        input.value = '';
+        
+        // Simulate bot response
+        setTimeout(() => {
+          const response = getBotResponse(message);
+          addMessage(response, 'bot');
+        }, 1000);
+      }
+    }
+
+    function handleKeyPress(event) {
+      if (event.key === 'Enter') {
+        sendMessage();
+      }
+    }
+
+    function addMessage(text, sender) {
+      const messages = document.getElementById('chatMessages');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${sender}-message`;
+      messageDiv.textContent = text;
+      messages.appendChild(messageDiv);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function getBotResponse(question) {
+      const responses = {
+        'नमस्ते': 'नमस्ते! मैं Probot X असिस्टेंट हूं। आप कैसे मदद कर सकता हूं?',
+        'hello': 'Hello! I am Probot X Assistant. How can I help you?',
+        'probot x क्या है': 'Probot X एक ऑटोमेटेड ट्रेडिंग प्लेटफॉर्म है जो Forex, Indices, और Commodities में स्मार्ट ट्रेडिंग स्ट्रेटेजीज प्रदान करता है। यह Kleos Academy द्वारा पावर्ड है।',
+        'सब्सक्रिप्शन': 'हमारे पास तीन मुख्य पैकेज हैं: स्टार्टर ($99), प्रीमियम ($180), और एडवांस्ड ($399)। प्रत्येक के अलग-अलग फीचर्स और बोनस हैं।',
+        'पैकेज': 'स्टार्टर पैकेज: $99 (12 महीने), प्रीमियम: $180 (12 महीने), एडवांस्ड: $399 (36 महीने) - सबसे पॉपुलर',
+        'वेल्थ25': 'Wealth25 बोनस में आप 25 महीने तक 8% मासिक ट्रेडिंग रिवार्ड्स प्राप्त कर सकते हैं ($100 से $10,800 पैकेजेस)।',
+        'फंडिंग स्लॉट': 'फंडिंग स्लॉट्स $100 से $10,800 तक available हैं, जिनपर 5% तक मासिक बोनस मिलता है।',
+        'एफिलिएट': 'हमारे एफिलिएट प्रोग्राम में 8 तरह के बोनस: डायरेक्ट रेफरल, एडवाइजरी, W25 इंट्रो, रेजिडुअल, लीडरशिप, टीम बिल्डिंग, टीम मैचिंग, और रैंक रिवार्ड।',
+        'रेफरल': 'रेफरल बोनस: हर सब्सक्रिप्शन पर $10 डायरेक्ट बोनस। एडवाइजरी बोनस 9 लेवल्स तक (3% से 5%)।',
+        'कमीशन': 'रेजिडुअल बोनस 45 लेवल्स तक मिलता है (0.5% से 10% तक)। लीडरशिप और टीम बिल्डिंग बोनस भी available हैं।',
+        'ट्रेडिंग': 'Probot X ऑटोमेटेड ट्रेडिंग करता है Forex, Indices, और Commodities में। यूजर-फ्रेंडली इंटरफेस के साथ।',
+        'क्लियोस': 'Kleos Academy Web 3.0 experts द्वारा डिज़ाइन किया गया world-class learning platform है।',
+        'डेनिस शेहू': 'Denis Shehu M20Chain के CEO हैं, जिन्होंने नवंबर 2020 में कंपनी established की। वे 2017 से ट्रेडिंग और इन्फ्लुएंस मार्केटिंग में active हैं।',
+        'एम20': 'M20Chain Probot X का हिस्सा है, जो Web3 technologies पर focus करता है - Crypto, NFTs, Blockchain, DeFi, और dApps।',
+        'default': 'मैं आपकी बात समझ गया। कृपया हमारे WhatsApp support +91 63946 07174 पर contact करें for detailed information।'
+      };
+
+      question = question.toLowerCase();
+      
+      for (const [key, response] of Object.entries(responses)) {
+        if (question.includes(key.toLowerCase())) {
+          return response;
+        }
+      }
+      
+      return responses['default'];
+    }
+
+    function askQuestion(question) {
+      if (document.getElementById('hindiPage').classList.contains('active')) {
+        document.getElementById('chatInput').value = question;
+        sendMessage();
+      } else {
+        document.getElementById('chatInputEnglish').value = question;
+        sendMessageEnglish();
+      }
+    }
+
+    function openChatBot() {
+      const chatSection = document.querySelector('.chat-bot');
+      chatSection.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Chat Bot Functions for English
+    function sendMessageEnglish() {
+      const input = document.getElementById('chatInputEnglish');
+      const message = input.value.trim();
+      
+      if (message) {
+        addMessageEnglish(message, 'user');
+        input.value = '';
+        
+        // Simulate bot response
+        setTimeout(() => {
+          const response = getBotResponseEnglish(message);
+          addMessageEnglish(response, 'bot');
+        }, 1000);
+      }
+    }
+
+    function handleKeyPressEnglish(event) {
+      if (event.key === 'Enter') {
+        sendMessageEnglish();
+      }
+    }
+
+    function addMessageEnglish(text, sender) {
+      const messages = document.getElementById('chatMessagesEnglish');
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${sender}-message`;
+      messageDiv.textContent = text;
+      messages.appendChild(messageDiv);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function getBotResponseEnglish(question) {
+      const responses = {
+        'hello': 'Hello! I am Probot X Assistant. How can I help you?',
+        'hi': 'Hi! How can I assist you with Probot X?',
+        'what is probot x': 'Probot X is an automated trading platform that provides smart trading strategies for Forex, Indices, and Commodities. Powered by Kleos Academy.',
+        'subscription': 'We have three main packages: Starter ($99), Premium ($180), and Advanced ($399). Each has different features and bonuses.',
+        'packages': 'Starter Package: $99 (12 months), Premium: $180 (12 months), Advanced: $399 (36 months) - Most Popular',
+        'wealth25': 'With Wealth25 bonus, you can earn 8% monthly trading rewards for 25 months (packages from $100 to $10,800).',
+        'funding slots': 'Funding slots available from $100 to $10,800 with up to 5% monthly bonus.',
+        'affiliate': 'Our affiliate program includes 8 bonuses: Direct Referral, Advisory, W25 Intro, Residual, Leadership, Team Building, Team Matching, and Rank Reward.',
+        'referral': 'Referral Bonus: $10 on every subscription. Advisory bonus up to 9 levels deep (3% to 5%).',
+        'commission': 'Residual bonus up to 45 levels (0.5% to 10%). Leadership and Team Building bonuses also available.',
+        'trading': 'Probot X does automated trading in Forex, Indices, and Commodities. User-friendly interface with smart strategies.',
+        'kleos': 'Kleos Academy is a world-class learning platform designed by Web 3.0 experts and renowned trainers.',
+        'denis shehu': 'Denis Shehu is CEO of M20Chain, established in November 2020. He has been in trading and influence marketing since 2017.',
+        'm20': 'M20Chain is part of Probot X ecosystem, focusing on Web3 technologies - Crypto, NFTs, Blockchain, DeFi, and dApps.',
+        'default': 'I understand your query. Please contact our WhatsApp support at +91 63946 07174 for detailed assistance.'
+      };
+
+      question = question.toLowerCase();
+      
+      for (const [key, response] of Object.entries(responses)) {
+        if (question.includes(key.toLowerCase())) {
+          return response;
+        }
+      }
+      
+      return responses['default'];
+    }
+
+    function logout() {
+      if(confirm('क्या आप लॉगआउट करना चाहते हैं?')) {
+        alert('लॉगआउट सफलतापूर्वक किया गया');
+        closeMenu();
+      }
+    }
+
+    // Initialize page with Hindi by default
+    window.onload = function() {
+      showPage('hindi');
+    };
+  </script>
+</body>
+</html>
