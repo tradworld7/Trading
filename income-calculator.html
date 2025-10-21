@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Selected Level Income Calculator</title>
+  <title>ProbotX - Selected Level Income Calculator</title>
   <style>
     * {
       margin: 0;
@@ -13,108 +13,162 @@
     }
 
     body {
-      background: #f5f8ff;
-      color: #222;
+      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+      color: white;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
+      min-height: 100vh;
       padding: 25px;
     }
 
     .container {
       width: 100%;
-      max-width: 480px;
-      background: #fff;
-      padding: 25px;
+      max-width: 500px;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 30px;
       border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       margin-bottom: 30px;
     }
 
     h2 {
       text-align: center;
-      color: #007bff;
-      margin-bottom: 20px;
+      color: #ffd700;
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+      font-weight: 700;
     }
 
     label {
       display: block;
-      margin-top: 10px;
+      margin-top: 15px;
       font-weight: 500;
+      color: #ffd700;
     }
 
     input[type="number"] {
       width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
+      padding: 12px 15px;
+      margin-top: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 8px;
       outline: none;
       font-size: 15px;
+      color: white;
       transition: 0.2s;
     }
 
     input:focus {
-      border-color: #007bff;
-      box-shadow: 0 0 4px rgba(0,123,255,0.3);
+      border-color: #ffd700;
+      box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
     }
 
     button {
       width: 100%;
-      background: #007bff;
-      color: white;
-      padding: 12px;
-      margin-top: 20px;
+      background: linear-gradient(135deg, #ffd700, #ff6b00);
+      color: #1a1a2e;
+      padding: 14px;
+      margin-top: 25px;
       border: none;
       border-radius: 8px;
       font-size: 16px;
+      font-weight: 700;
       cursor: pointer;
-      transition: 0.3s;
+      transition: all 0.3s ease;
     }
 
     button:hover {
-      background: #0056b3;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(255, 215, 0, 0.4);
     }
 
     .result {
-      margin-top: 20px;
-      background: #e9f5ff;
+      margin-top: 25px;
+      background: rgba(255, 255, 255, 0.08);
       border-radius: 10px;
       padding: 20px;
-      border: 1px solid #bde0fe;
+      border: 1px solid rgba(255, 215, 0, 0.3);
       line-height: 1.6;
+      display: none;
     }
 
     .result h3 {
-      color: #007bff;
+      color: #ffd700;
       text-align: center;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
+      font-size: 1.4rem;
     }
 
     .result p {
       font-size: 15px;
-      margin: 8px 0; /* Added spacing between lines */
+      margin: 10px 0;
     }
 
     .result section {
-      margin-bottom: 12px; /* Gap between groups */
-      padding-bottom: 5px;
-      border-bottom: 1px dashed #cce5ff;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed rgba(255, 215, 0, 0.3);
     }
 
     .result section:last-child {
       border-bottom: none;
     }
 
+    .result b {
+      color: #ffd700;
+    }
+
     footer {
       text-align: center;
       margin-top: 20px;
       font-size: 13px;
-      color: #555;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .logo {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .logo-text {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      font-size: 2rem;
+      color: #ffd700;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px;
+      }
+      
+      h2 {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
 <body>
+
+  <div class="logo">
+    <div class="logo-text">
+      <div class="logo-icon">💼</div>
+      Probot X Calculator
+    </div>
+  </div>
 
   <div class="container">
     <h2>🌐 Selected Level Income Calculator</h2>
@@ -139,13 +193,13 @@
 
     <button onclick="calculateSelectedLevel()">Calculate Selected Level</button>
 
-    <div class="result" id="resultBox" style="display:none;">
+    <div class="result" id="resultBox">
       <h3>📘 Selected Level Income Details</h3>
       <div id="details"></div>
     </div>
   </div>
 
-  <footer>Designed by Mohammad Waqil Khan</footer>
+
 
   <script>
     function numberToWords(num) {
@@ -163,7 +217,7 @@
       str += (n[3] != 0) ? (a[Number(n[3])] || b[n[3][0]] + ' ' + a[n[3][1]]) + ' thousand ' : '';
       str += (n[4] != 0) ? (a[Number(n[4])] || b[n[4][0]] + ' ' + a[n[4][1]]) + ' hundred ' : '';
       str += (n[5] != 0) ? ((str != '') ? 'and ' : '') + (a[Number(n[5])] || b[n[5][0]] + ' ' + a[n[5][1]]) + ' ' : '';
-      return str.trim() + 'only';
+      return str.trim() + ' only';
     }
 
     function calculateSelectedLevel() {
