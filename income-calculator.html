@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ProbotX - Selected Level Income Calculator</title>
+  
+  <!-- Font Awesome for Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
   <style>
     * {
       margin: 0;
@@ -21,8 +25,198 @@
       justify-content: center;
       min-height: 100vh;
       padding: 25px;
+      padding-top: 100px; /* Added for header space */
     }
 
+    /* Professional Header Styles */
+    .main-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-icon {
+      font-size: 2rem;
+      color: #ffd700;
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: white;
+    }
+
+    /* Header Right Section - Side Menu */
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Side Menu Styles - Horizontal Lines */
+    .side-menu {
+      position: relative;
+    }
+
+    .menu-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 8px;
+    }
+
+    .menu-icon:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.05);
+    }
+
+    .menu-line {
+      width: 25px;
+      height: 3px;
+      background: white;
+      margin: 2px 0;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    /* Side Menu Content - Left Side */
+    .menu-content {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 300px;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.98);
+      padding: 80px 0 20px 0;
+      box-shadow: 2px 0 25px rgba(0, 0, 0, 0.7);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(10px);
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 999;
+      overflow-y: auto;
+    }
+
+    .menu-content.active {
+      left: 0;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .menu-header {
+      text-align: center;
+      padding: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .menu-header h3 {
+      color: #ffd700;
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+    }
+
+    .menu-header p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+
+    .menu-item {
+      padding: 15px 25px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 1rem;
+      text-decoration: none;
+      color: white;
+    }
+
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+
+    .menu-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      padding-left: 30px;
+    }
+
+    .menu-item i {
+      margin-right: 15px;
+      font-size: 1.3rem;
+      width: 25px;
+      text-align: center;
+      color: #ffd700;
+    }
+
+    .menu-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: none;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .menu-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
+    }
+
+    /* Overlay for menu */
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 998;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Calculator Container Styles */
     .container {
       width: 100%;
       max-width: 500px;
@@ -129,12 +323,12 @@
       color: rgba(255, 255, 255, 0.7);
     }
 
-    .logo {
+    .logo-center {
       text-align: center;
       margin-bottom: 20px;
     }
 
-    .logo-text {
+    .logo-center-text {
       font-size: 1.8rem;
       font-weight: 800;
       color: white;
@@ -144,12 +338,31 @@
       gap: 10px;
     }
 
-    .logo-icon {
+    .logo-center-icon {
       font-size: 2rem;
       color: #ffd700;
     }
 
     /* Responsive adjustments */
+    @media (max-width: 768px) {
+      body {
+        padding-top: 80px;
+      }
+      
+      .main-header {
+        padding: 10px 15px;
+      }
+      
+      .logo-text {
+        font-size: 1.2rem;
+      }
+      
+      .menu-content {
+        width: 280px;
+        left: -280px;
+      }
+    }
+
     @media (max-width: 480px) {
       .container {
         padding: 20px;
@@ -158,14 +371,87 @@
       h2 {
         font-size: 1.5rem;
       }
+      
+      .header-right {
+        gap: 10px;
+      }
+      
+      .menu-content {
+        width: 250px;
+        left: -250px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <div class="logo">
-    <div class="logo-text">
+  <!-- Professional Header -->
+  <header class="main-header">
+    <!-- Left Side - Logo -->
+    <div class="logo">
       <div class="logo-icon">💼</div>
+      <div class="logo-text">Probot X</div>
+    </div>
+
+    <!-- Right Side - Side Menu -->
+    <div class="header-right">
+      <!-- Side Menu - Horizontal Lines -->
+      <div class="side-menu">
+        <div class="menu-icon" id="menuIcon">
+          <div class="menu-line"></div>
+          <div class="menu-line"></div>
+          <div class="menu-line"></div>
+        </div>
+        
+        <!-- Side Menu Content -->
+        <div class="menu-content" id="menuContent">
+          <button class="menu-close" onclick="closeMenu()">
+            <i class="fas fa-times"></i>
+          </button>
+          
+          <div class="menu-header">
+            <h3>Probot X</h3>
+            <p>Welcome to your dashboard</p>
+          </div>
+          
+          <a href="index.html" class="menu-item">
+            <i class="fas fa-tachometer-alt"></i> Dashboard
+          </a>
+          <a href="wealth25.html" class="menu-item">
+            <i class="fas fa-coins"></i> Wealth 25
+          </a>
+          <a href="income-calculator.html" class="menu-item">
+            <i class="fas fa-calculator"></i> Income Calculator
+          </a>
+          <a href="business-plan.html" class="menu-item">
+            <i class="fas fa-chart-line"></i> Business Plan
+          </a>
+          <a href="joining.html" class="menu-item">
+            <i class="fas fa-user-plus"></i> Joining
+          </a>
+          <a href="package.html" class="menu-item">
+            <i class="fas fa-box"></i> Package
+          </a>
+          <a href="Help-support.html" class="menu-item">
+            <i class="fas fa-heartbeat"></i> Help Support
+          </a>
+          <a href="my-team.html" class="menu-item">
+            <i class="fas fa-coins"></i> My Team
+          </a>
+          <div class="menu-item" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </div>
+        </div>
+        
+        <!-- Menu Overlay -->
+        <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+      </div>
+    </div>
+  </header>
+
+  <div class="logo-center">
+    <div class="logo-center-text">
+      <div class="logo-center-icon">💼</div>
       Probot X Calculator
     </div>
   </div>
@@ -199,9 +485,35 @@
     </div>
   </div>
 
-
+  <footer>
+    &copy; 2024 Probot X. All rights reserved.
+  </footer>
 
   <script>
+    // Side Menu Functions
+    function openMenu() {
+      document.getElementById('menuContent').classList.add('active');
+      document.getElementById('menuOverlay').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      document.getElementById('menuContent').classList.remove('active');
+      document.getElementById('menuOverlay').classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Menu Icon Click Event
+    document.getElementById('menuIcon').addEventListener('click', openMenu);
+
+    // Logout Function
+    function logout() {
+      if (confirm('Do you want to logout?')) {
+        window.location.href = 'index.html';
+      }
+    }
+
+    // Calculator Functions
     function numberToWords(num) {
       const a = ['', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine',
                  'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen', 'sixteen',
