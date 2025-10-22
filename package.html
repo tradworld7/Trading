@@ -523,6 +523,36 @@
       font-family: 'Poppins', sans-serif;
     }
 
+    /* --- Print Mode (For PDF Conversion) --- */
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+        font-size: 18px;
+        padding-top: 0;
+      }
+      .main-header {
+        display: none;
+      }
+      .content-header {
+        background: #2e026d !important;
+        color: white !important;
+      }
+      .container {
+        box-shadow: none !important;
+        background: white !important;
+        color: black !important;
+        border: 2px solid #2e026d;
+      }
+      th {
+        background: #2e026d !important;
+        color: white !important;
+      }
+      canvas {
+        display: none;
+      }
+    }
+
     /* --- Mobile Responsive --- */
     @media (max-width: 768px) {
       body {
@@ -626,8 +656,8 @@
     <div class="header-right">
       <!-- Language Switcher -->
       <div class="language-switcher">
-        <button class="lang-btn active" id="hindiBtn" onclick="showPage('hindi')">हिंदी</button>
-        <button class="lang-btn" id="englishBtn" onclick="showPage('english')">English</button>
+        <button class="lang-btn" id="hindiBtn" onclick="showPage('hindi')">हिंदी</button>
+        <button class="lang-btn active" id="englishBtn" onclick="showPage('english')">English</button>
       </div>
 
       <!-- Side Menu - Horizontal Lines -->
@@ -667,8 +697,11 @@
           <a href="package.html" class="menu-item">
             <i class="fas fa-box"></i> Package
           </a>
-          <a href="health-support.html" class="menu-item">
-            <i class="fas fa-heartbeat"></i> Health Support
+          <a href="Help-support.html" class="menu-item">
+            <i class="fas fa-heartbeat"></i> Help Support
+          </a>
+          <a href="my-team.html" class="menu-item">
+            <i class="fas fa-coins"></i> My Team
           </a>
           <div class="menu-item" onclick="logout()">
             <i class="fas fa-sign-out-alt"></i> Logout
@@ -682,10 +715,10 @@
   </header>
 
   <!-- Hindi Page -->
-  <div class="page-container active" id="hindiPage">
+  <div class="page-container" id="hindiPage">
     <div class="content-header">
       <h1>💰 प्रोबोट एक्स स्पेशल पैकेज</h1>
-      <p>₹12,500 के निवेश से शुरुआत करें और 2 साल में ₹15,000 से ₹1,00,000+ तक कमाएं!</p>
+      <p>₹12,300 के निवेश से शुरुआत करें और 2 साल में ₹19,000 से ₹1,50,000+ तक कमाएं!</p>
     </div>
 
     <div class="container">
@@ -693,13 +726,13 @@
       <div class="package-card">
         <div class="package-badge">BEST OFFER</div>
         <h2>🚀 प्रीमियम स्टार्टर पैकेज</h2>
-        <div class="package-price">₹12,500</div>
+        <div class="package-price">₹12,300</div>
         <p style="color: #ffd700; font-size: 1.2rem; margin-bottom: 20px;">एक बार का निवेश - लाइफटाइम इनकम</p>
         
         <ul class="package-features">
-          <li><i class="fas fa-check-circle"></i> मेटावर्स वर्ल्ड: $30 (₹2,500) निवेश</li>
-          <li><i class="fas fa-check-circle"></i> प्रोबोट एक्स: $100 (₹10,000) निवेश</li>
-          <li><i class="fas fa-check-circle"></i> राइजर कॉइन: 1,500 कॉइन्स फ्री</li>
+          <li><i class="fas fa-check-circle"></i> M20 Verse: $30 (₹2,800) निवेश</li>
+          <li><i class="fas fa-check-circle"></i> प्रोबोट एक्स: $100 (₹9,500) निवेश</li>
+          <li><i class="fas fa-check-circle"></i> M20 कॉइन: 1,500 कॉइन्स फ्री</li>
           <li><i class="fas fa-check-circle"></i> 8% मासिक रिटर्न - 25 महीने तक</li>
           <li><i class="fas fa-check-circle"></i> फ्री ट्रेनिंग और सपोर्ट</li>
           <li><i class="fas fa-check-circle"></i> रेफरल कमीशन अतिरिक्त</li>
@@ -714,24 +747,24 @@
       <h2 style="text-align: center; color: #ffd700; margin: 40px 0 20px;">📊 आपका निवेश ब्रेकडाउन</h2>
       <div class="investment-breakdown">
         <div class="investment-card">
-          <h3>🌐 मेटावर्स वर्ल्ड</h3>
+          <h3>🌐 M20 Verse</h3>
           <div class="investment-amount">$30</div>
-          <p>₹2,500 का निवेश</p>
-          <p style="margin-top: 10px; color: #4cd137;">🎁 1,500 राइजर कॉइन्स बोनस</p>
-          <p style="font-size: 0.9rem; margin-top: 5px;">(वर्तमान मूल्य: ₹1,500)</p>
+          <p>₹2,800 का निवेश</p>
+          <p style="margin-top: 10px; color: #4cd137;">🎁 1,500 M20 कॉइन्स बोनस</p>
+          <p style="font-size: 0.9rem; margin-top: 5px;">(वर्तमान मूल्य: ₹2,250)</p>
         </div>
         
         <div class="investment-card">
           <h3>🤖 प्रोबोट एक्स</h3>
           <div class="investment-amount">$100</div>
-          <p>₹10,000 का निवेश</p>
+          <p>₹9,500 का निवेश</p>
           <p style="margin-top: 10px; color: #4cd137;">💵 8% मासिक रिटर्न × 25 महीने</p>
-          <p style="font-size: 0.9rem; margin-top: 5px;">कुल रिटर्न: ₹20,000</p>
+          <p style="font-size: 0.9rem; margin-top: 5px;">कुल रिटर्न: ₹19,000</p>
         </div>
         
         <div class="investment-card">
           <h3>💰 टोटल वैल्यू</h3>
-          <div class="investment-amount">₹12,500</div>
+          <div class="investment-amount">₹12,300</div>
           <p>कुल निवेश राशि</p>
           <p style="margin-top: 10px; color: #ffd700;">✨ इंस्टेंट एक्टिवेशन</p>
           <p style="font-size: 0.9rem; margin-top: 5px;">+ बोनस और कमीशन</p>
@@ -741,33 +774,33 @@
       <!-- Profit Calculator -->
       <div class="profit-calculator">
         <h2>📈 आपकी कमाई का सही कैलकुलेशन</h2>
-        <p style="margin-bottom: 20px;">प्रोबोट एक्स में $100 (₹10,000) निवेश पर 8% मासिक रिटर्न × 25 महीने</p>
+        <p style="margin-bottom: 20px;">प्रोबोट एक्स में $100 (₹9,500) निवेश पर 8% मासिक रिटर्न × 25 महीने</p>
         
         <div class="profit-grid">
           <div class="profit-item">
             <h3>प्रोबोट एक्स इनकम</h3>
-            <div class="profit-amount">₹20,000</div>
+            <div class="profit-amount">₹19,000</div>
             <p class="profit-duration">25 महीने में कुल रिटर्न</p>
-            <p style="font-size: 0.9rem; margin-top: 5px;">(₹800 प्रति माह × 25)</p>
+            <p style="font-size: 0.9rem; margin-top: 5px;">(₹760 प्रति माह × 25)</p>
           </div>
           
           <div class="profit-item">
-            <h3>राइजर कॉइन वैल्यू</h3>
-            <div class="profit-amount">₹1,500</div>
+            <h3>M20 कॉइन वैल्यू</h3>
+            <div class="profit-amount">₹2,250</div>
             <p class="profit-duration">वर्तमान मूल्य</p>
-            <p style="font-size: 0.9rem; margin-top: 5px;">1,500 कॉइन्स × ₹1</p>
+            <p style="font-size: 0.9rem; margin-top: 5px;">1,500 कॉइन्स × ₹1.50</p>
           </div>
           
           <div class="profit-item">
             <h3>भविष्य की संभावना</h3>
             <div class="profit-amount">₹1,50,000</div>
-            <p class="profit-duration">राइजर कॉइन ग्रोथ</p>
+            <p class="profit-duration">M20 कॉइन ग्रोथ</p>
             <p style="font-size: 0.9rem; margin-top: 5px;">1,500 कॉइन्स × ₹100</p>
           </div>
         </div>
         
         <p style="color: #ffd700; font-weight: 700; margin-top: 20px;">
-          💡 कुल संभावित रिटर्न: ₹20,000 (Probot X) + ₹1,50,000 (Riser Coin) = ₹1,70,000!
+          💡 कुल संभावित रिटर्न: ₹19,000 (Probot X) + ₹1,50,000 (M20 Coin) = ₹1,69,000!
         </p>
       </div>
 
@@ -777,57 +810,67 @@
         <div class="timeline-item">
           <div class="timeline-content">
             <h3>📅 महीना 1</h3>
-            <p>निवेश: ₹12,500</p>
-            <p style="color: #4cd137;">पहला रिटर्न: ₹800</p>
-            <p style="font-size: 0.9rem;">1,500 राइजर कॉइन्स मिले</p>
+            <p>निवेश: ₹12,300</p>
+            <p style="color: #4cd137;">पहला रिटर्न: ₹760</p>
+            <p style="font-size: 0.9rem;">1,500 M20 कॉइन्स मिले</p>
           </div>
         </div>
         
         <div class="timeline-item">
           <div class="timeline-content">
             <h3>📅 महीना 6</h3>
-            <p>कुल रिटर्न: ₹4,800</p>
-            <p style="color: #4cd137;">₹800 × 6 महीने</p>
-            <p style="font-size: 0.9rem;">राइजर कॉइन वैल्यू बढ़ रही</p>
+            <p>कुल रिटर्न: ₹4,560</p>
+            <p style="color: #4cd137;">₹760 × 6 महीने</p>
+            <p style="font-size: 0.9rem;">M20 कॉइन वैल्यू बढ़ रही</p>
           </div>
         </div>
         
         <div class="timeline-item">
           <div class="timeline-content">
             <h3>📅 महीना 12</h3>
-            <p>कुल रिटर्न: ₹9,600</p>
-            <p style="color: #4cd137;">₹800 × 12 महीने</p>
-            <p style="font-size: 0.9rem;">निवेश का 76% वापस मिल गया</p>
+            <p>कुल रिटर्न: ₹9,120</p>
+            <p style="color: #4cd137;">₹760 × 12 महीने</p>
+            <p style="font-size: 0.9rem;">निवेश का 74% वापस मिल गया</p>
           </div>
         </div>
         
         <div class="timeline-item">
           <div class="timeline-content">
             <h3>📅 महीना 25</h3>
-            <p>कुल रिटर्न: ₹20,000</p>
-            <p style="color: #4cd137;">₹800 × 25 महीने</p>
-            <p style="font-size: 0.9rem;">+ राइजर कॉइन वैल्यू ₹1,50,000</p>
+            <p>कुल रिटर्न: ₹19,000</p>
+            <p style="color: #4cd137;">₹760 × 25 महीने</p>
+            <p style="font-size: 0.9rem;">+ M20 कॉइन वैल्यू ₹1,50,000</p>
           </div>
         </div>
       </div>
 
-      <!-- Riser Coin Growth Explanation -->
+      <!-- M20 Coin Growth Explanation -->
       <div style="background: rgba(255,215,0,0.1); padding: 25px; border-radius: 15px; margin: 30px 0; border-left: 4px solid #ffd700;">
-        <h3 style="color: #ffd700; margin-bottom: 15px;">🚀 राइजर कॉइन ग्रोथ पोटेंशियल</h3>
-        <p><strong>वर्तमान स्थिति:</strong> 1 राइजर कॉइन = ₹1 (लगभग)</p>
-        <p><strong>आपके पास:</strong> 1,500 कॉइन्स = ₹1,500</p>
-        <p><strong>2 साल बाद संभावना:</strong> 1 राइजर कॉइन = ₹100</p>
+        <h3 style="color: #ffd700; margin-bottom: 15px;">🚀 M20 कॉइन ग्रोथ पोटेंशियल</h3>
+        <p><strong>वर्तमान स्थिति:</strong> 1 M20 कॉइन = ₹1.50 (लगभग)</p>
+        <p><strong>आपके पास:</strong> 1,500 कॉइन्स = ₹2,250</p>
+        <p><strong>2 साल बाद संभावना:</strong> 1 M20 कॉइन = ₹100</p>
         <p><strong>आपकी कमाई:</strong> 1,500 × ₹100 = ₹1,50,000</p>
-        <p style="color: #4cd137; font-weight: 700; margin-top: 10px;">यह सिर्फ राइजर कॉइन से होने वाली कमाई है! प्रोबोट एक्स से अलग ₹20,000 मिलेंगे।</p>
+        <p style="color: #4cd137; font-weight: 700; margin-top: 10px;">यह सिर्फ M20 कॉइन से होने वाली कमाई है! प्रोबोट एक्स से अलग ₹19,000 मिलेंगे।</p>
+      </div>
+
+      <!-- M20 Verse Info -->
+      <div style="background: rgba(0,255,255,0.1); padding: 25px; border-radius: 15px; margin: 30px 0; border-left: 4px solid #00ffff;">
+        <h3 style="color: #00ffff; margin-bottom: 15px;">🌐 M20 Verse - मेटावर्स का भविष्य</h3>
+        <p><strong>Official Website:</strong> <a href="https://www.m20verse.com" style="color: #ffd700; text-decoration: none;" target="_blank">www.m20verse.com</a></p>
+        <p><strong>मेटावर्स फेस 1:</strong> पूरा हो चुका है</p>
+        <p><strong>मेटावर्स फेस 2:</strong> चालू है</p>
+        <p><strong>M20 कॉइन:</strong> मेटावर्स की आधिकारिक क्रिप्टोकरेंसी</p>
+        <p style="color: #00ffff; font-weight: 700; margin-top: 10px;">M20 Verse दुनिया का सबसे एडवांस्ड मेटावर्स प्लेटफॉर्म है!</p>
       </div>
 
       <!-- Final CTA -->
       <div style="text-align: center; margin: 50px 0 30px; padding: 30px; background: rgba(255,215,0,0.1); border-radius: 15px; border: 2px solid #ffd700;">
         <h2 style="color: #ffd700; margin-bottom: 20px;">🚀 आज ही शुरुआत करें!</h2>
-        <p style="font-size: 1.2rem; margin-bottom: 15px;">₹12,500 के निवेश से संभावित कमाई: ₹1,70,000 तक!</p>
-        <p style="margin-bottom: 25px; color: #4cd137;">हर दिन की देरी आपके ₹800 के मासिक इनकम को delay कर रही है</p>
+        <p style="font-size: 1.2rem; margin-bottom: 15px;">₹12,300 के निवेश से संभावित कमाई: ₹1,69,000 तक!</p>
+        <p style="margin-bottom: 25px; color: #4cd137;">हर दिन की देरी आपके ₹760 के मासिक इनकम को delay कर रही है</p>
         <button class="cta-button" onclick="buyPackage()">
-          <i class="fas fa-rocket"></i> अभी ज्वाइन करें - ₹12,500
+          <i class="fas fa-rocket"></i> अभी ज्वाइन करें - ₹12,300
         </button>
         <p style="margin-top: 15px; color: #ffd700;">✅ 24x7 सपोर्ट ✅ 100% सेफ इन्वेस्टमेंट</p>
       </div>
@@ -835,10 +878,10 @@
   </div>
 
   <!-- English Page -->
-  <div class="page-container english-page" id="englishPage">
+  <div class="page-container english-page active" id="englishPage">
     <div class="content-header">
       <h1>💰 Probot X Special Package</h1>
-      <p>Start with ₹12,500 investment and earn ₹15,000 to ₹1,00,000+ in 2 years!</p>
+      <p>Start with ₹12,300 investment and earn ₹19,000 to ₹1,50,000+ in 2 years!</p>
     </div>
 
     <div class="container">
@@ -846,13 +889,13 @@
       <div class="package-card">
         <div class="package-badge">BEST OFFER</div>
         <h2>🚀 Premium Starter Package</h2>
-        <div class="package-price">₹12,500</div>
+        <div class="package-price">₹12,300</div>
         <p style="color: #ffd700; font-size: 1.2rem; margin-bottom: 20px;">One Time Investment - Lifetime Income</p>
         
         <ul class="package-features">
-          <li><i class="fas fa-check-circle"></i> Metaverse World: $30 (₹2,500) Investment</li>
-          <li><i class="fas fa-check-circle"></i> Probot X: $100 (₹10,000) Investment</li>
-          <li><i class="fas fa-check-circle"></i> Riser Coin: 1,500 Coins Free</li>
+          <li><i class="fas fa-check-circle"></i> M20 Verse: $30 (₹2,800) Investment</li>
+          <li><i class="fas fa-check-circle"></i> Probot X: $100 (₹9,500) Investment</li>
+          <li><i class="fas fa-check-circle"></i> M20 Coin: 1,500 Coins Free</li>
           <li><i class="fas fa-check-circle"></i> 8% Monthly Return - For 25 Months</li>
           <li><i class="fas fa-check-circle"></i> Free Training & Support</li>
           <li><i class="fas fa-check-circle"></i> Additional Referral Commission</li>
@@ -867,24 +910,24 @@
       <h2 style="text-align: center; color: #ffd700; margin: 40px 0 20px;">📊 Your Investment Breakdown</h2>
       <div class="investment-breakdown">
         <div class="investment-card">
-          <h3>🌐 Metaverse World</h3>
+          <h3>🌐 M20 Verse</h3>
           <div class="investment-amount">$30</div>
-          <p>₹2,500 Investment</p>
-          <p style="margin-top: 10px; color: #4cd137;">🎁 1,500 Riser Coins Bonus</p>
-          <p style="font-size: 0.9rem; margin-top: 5px;">(Current Value: ₹1,500)</p>
+          <p>₹2,800 Investment</p>
+          <p style="margin-top: 10px; color: #4cd137;">🎁 1,500 M20 Coins Bonus</p>
+          <p style="font-size: 0.9rem; margin-top: 5px;">(Current Value: ₹2,250)</p>
         </div>
         
         <div class="investment-card">
           <h3>🤖 Probot X</h3>
           <div class="investment-amount">$100</div>
-          <p>₹10,000 Investment</p>
+          <p>₹9,500 Investment</p>
           <p style="margin-top: 10px; color: #4cd137;">💵 8% Monthly Return × 25 Months</p>
-          <p style="font-size: 0.9rem; margin-top: 5px;">Total Return: ₹20,000</p>
+          <p style="font-size: 0.9rem; margin-top: 5px;">Total Return: ₹19,000</p>
         </div>
         
         <div class="investment-card">
           <h3>💰 Total Value</h3>
-          <div class="investment-amount">₹12,500</div>
+          <div class="investment-amount">₹12,300</div>
           <p>Total Investment</p>
           <p style="margin-top: 10px; color: #ffd700;">✨ Instant Activation</p>
           <p style="font-size: 0.9rem; margin-top: 5px;">+ Bonus & Commission</p>
@@ -894,33 +937,33 @@
       <!-- Profit Calculator -->
       <div class="profit-calculator">
         <h2>📈 Your Accurate Earnings Calculation</h2>
-        <p style="margin-bottom: 20px;">8% Monthly Return on $100 (₹10,000) Probot X Investment × 25 Months</p>
+        <p style="margin-bottom: 20px;">8% Monthly Return on $100 (₹9,500) Probot X Investment × 25 Months</p>
         
         <div class="profit-grid">
           <div class="profit-item">
             <h3>Probot X Income</h3>
-            <div class="profit-amount">₹20,000</div>
+            <div class="profit-amount">₹19,000</div>
             <p class="profit-duration">Total Return in 25 Months</p>
-            <p style="font-size: 0.9rem; margin-top: 5px;">(₹800 per month × 25)</p>
+            <p style="font-size: 0.9rem; margin-top: 5px;">(₹760 per month × 25)</p>
           </div>
           
           <div class="profit-item">
-            <h3>Riser Coin Value</h3>
-            <div class="profit-amount">₹1,500</div>
+            <h3>M20 Coin Value</h3>
+            <div class="profit-amount">₹2,250</div>
             <p class="profit-duration">Current Value</p>
-            <p style="font-size: 0.9rem; margin-top: 5px;">1,500 Coins × ₹1</p>
+            <p style="font-size: 0.9rem; margin-top: 5px;">1,500 Coins × ₹1.50</p>
           </div>
           
           <div class="profit-item">
             <h3>Future Potential</h3>
             <div class="profit-amount">₹1,50,000</div>
-            <p class="profit-duration">Riser Coin Growth</p>
+            <p class="profit-duration">M20 Coin Growth</p>
             <p style="font-size: 0.9rem; margin-top: 5px;">1,500 Coins × ₹100</p>
           </div>
         </div>
         
         <p style="color: #ffd700; font-weight: 700; margin-top: 20px;">
-          💡 Total Potential Return: ₹20,000 (Probot X) + ₹1,50,000 (Riser Coin) = ₹1,70,000!
+          💡 Total Potential Return: ₹19,000 (Probot X) + ₹1,50,000 (M20 Coin) = ₹1,69,000!
         </p>
       </div>
 
@@ -930,57 +973,67 @@
         <div class="timeline-item">
           <div class="timeline-content">
             <h3>📅 Month 1</h3>
-            <p>Investment: ₹12,500</p>
-            <p style="color: #4cd137;">First Return: ₹800</p>
-            <p style="font-size: 0.9rem;">Received 1,500 Riser Coins</p>
+            <p>Investment: ₹12,300</p>
+            <p style="color: #4cd137;">First Return: ₹760</p>
+            <p style="font-size: 0.9rem;">Received 1,500 M20 Coins</p>
           </div>
         </div>
         
         <div class="timeline-item">
           <div class="timeline-content">
             <h3>📅 Month 6</h3>
-            <p>Total Return: ₹4,800</p>
-            <p style="color: #4cd137;">₹800 × 6 months</p>
-            <p style="font-size: 0.9rem;">Riser Coin value growing</p>
+            <p>Total Return: ₹4,560</p>
+            <p style="color: #4cd137;">₹760 × 6 months</p>
+            <p style="font-size: 0.9rem;">M20 Coin value growing</p>
           </div>
         </div>
         
         <div class="timeline-item">
           <div class="timeline-content">
             <h3>📅 Month 12</h3>
-            <p>Total Return: ₹9,600</p>
-            <p style="color: #4cd137;">₹800 × 12 months</p>
-            <p style="font-size: 0.9rem;">76% investment recovered</p>
+            <p>Total Return: ₹9,120</p>
+            <p style="color: #4cd137;">₹760 × 12 months</p>
+            <p style="font-size: 0.9rem;">74% investment recovered</p>
           </div>
         </div>
         
         <div class="timeline-item">
           <div class="timeline-content">
             <h3>📅 Month 25</h3>
-            <p>Total Return: ₹20,000</p>
-            <p style="color: #4cd137;">₹800 × 25 months</p>
-            <p style="font-size: 0.9rem;">+ Riser Coin value ₹1,50,000</p>
+            <p>Total Return: ₹19,000</p>
+            <p style="color: #4cd137;">₹760 × 25 months</p>
+            <p style="font-size: 0.9rem;">+ M20 Coin value ₹1,50,000</p>
           </div>
         </div>
       </div>
 
-      <!-- Riser Coin Growth Explanation -->
+      <!-- M20 Coin Growth Explanation -->
       <div style="background: rgba(255,215,0,0.1); padding: 25px; border-radius: 15px; margin: 30px 0; border-left: 4px solid #ffd700;">
-        <h3 style="color: #ffd700; margin-bottom: 15px;">🚀 Riser Coin Growth Potential</h3>
-        <p><strong>Current Status:</strong> 1 Riser Coin = ₹1 (approximately)</p>
-        <p><strong>You Get:</strong> 1,500 Coins = ₹1,500</p>
-        <p><strong>After 2 Years Potential:</strong> 1 Riser Coin = ₹100</p>
+        <h3 style="color: #ffd700; margin-bottom: 15px;">🚀 M20 Coin Growth Potential</h3>
+        <p><strong>Current Status:</strong> 1 M20 Coin = ₹1.50 (approximately)</p>
+        <p><strong>You Get:</strong> 1,500 Coins = ₹2,250</p>
+        <p><strong>After 2 Years Potential:</strong> 1 M20 Coin = ₹100</p>
         <p><strong>Your Earnings:</strong> 1,500 × ₹100 = ₹1,50,000</p>
-        <p style="color: #4cd137; font-weight: 700; margin-top: 10px;">This is just from Riser Coin! You get additional ₹20,000 from Probot X.</p>
+        <p style="color: #4cd137; font-weight: 700; margin-top: 10px;">This is just from M20 Coin! You get additional ₹19,000 from Probot X.</p>
+      </div>
+
+      <!-- M20 Verse Info -->
+      <div style="background: rgba(0,255,255,0.1); padding: 25px; border-radius: 15px; margin: 30px 0; border-left: 4px solid #00ffff;">
+        <h3 style="color: #00ffff; margin-bottom: 15px;">🌐 M20 Verse - The Future of Metaverse</h3>
+        <p><strong>Official Website:</strong> <a href="https://www.m20verse.com" style="color: #ffd700; text-decoration: none;" target="_blank">www.m20verse.com</a></p>
+        <p><strong>Metaverse Phase 1:</strong> Completed</p>
+        <p><strong>Metaverse Phase 2:</strong> Currently Active</p>
+        <p><strong>M20 Coin:</strong> Official cryptocurrency of the metaverse</p>
+        <p style="color: #00ffff; font-weight: 700; margin-top: 10px;">M20 Verse is the world's most advanced metaverse platform!</p>
       </div>
 
       <!-- Final CTA -->
       <div style="text-align: center; margin: 50px 0 30px; padding: 30px; background: rgba(255,215,0,0.1); border-radius: 15px; border: 2px solid #ffd700;">
         <h2 style="color: #ffd700; margin-bottom: 20px;">🚀 Start Today!</h2>
-        <p style="font-size: 1.2rem; margin-bottom: 15px;">Potential earnings from ₹12,500 investment: Up to ₹1,70,000!</p>
-        <p style="margin-bottom: 25px; color: #4cd137;">Every day you delay is costing you ₹800 monthly income</p>
+        <p style="font-size: 1.2rem; margin-bottom: 15px;">Potential earnings from ₹12,300 investment: Up to ₹1,69,000!</p>
+        <p style="margin-bottom: 25px; color: #4cd137;">Every day you delay is costing you ₹760 monthly income</p>
         <button class="cta-button" onclick="buyPackage()">
-          <i class="fas fa-rocket"></i> Join Now - ₹12,500
+          <i class="fas fa-rocket"></i> Join Now - ₹12,300
         </button>
         <p style="margin-top: 15px; color: #ffd700;">✅ 24x7 Support ✅ 100% Safe Investment</p>
       </div>
@@ -1033,27 +1086,22 @@
     
     // Package Purchase Function
     function buyPackage() {
-      const packagePrice = 12500;
+      const packagePrice = 12300;
       const packageName = "Premium Starter Package";
       
-      if(confirm(`क्या आप ${packageName} खरीदना चाहते हैं?\nकीमत: ₹${packagePrice}`)) {
-        alert('आपका ऑर्डर कन्फर्म हो गया है! हमारी टीम आपसे जल्द संपर्क करेगी।');
+      if(confirm(`Are you sure you want to buy ${packageName}?\nPrice: ₹${packagePrice}`)) {
+        alert('Your order has been confirmed! Our team will contact you shortly.');
         // Here you can redirect to payment page
         // window.location.href = 'payment.html';
       }
     }
     
     function logout() {
-      if(confirm('क्या आप लॉगआउट करना चाहते हैं?')) {
-        alert('लॉगआउट सफलतापूर्वक किया गया');
+      if(confirm('Are you sure you want to logout?')) {
+        alert('Logged out successfully');
         closeMenu();
       }
     }
-
-    // Initialize page with Hindi by default
-    window.onload = function() {
-      showPage('hindi');
-    };
   </script>
 </body>
 </html>
