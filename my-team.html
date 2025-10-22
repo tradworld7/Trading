@@ -890,33 +890,31 @@
       
       <div class="celebrity-grid">
         <div class="celebrity-card">
-          <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/MG_0856-min-1-scaled.jpg" alt="Celebrity 1" class="celebrity-image" onerror="this.src='https://via.placeholder.com/100/ffd700/1a1a2e?text=Star1'">
-          <div class="member-name">बॉलीवुड स्टार</div>
-          <div class="member-role">मुख्य एम्बेसडर</div>
+          <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/selybarty-scaled.jpg" alt="Comedy King Sunil Pal" class="celebrity-image" onerror="this.src='https://via.placeholder.com/100/ffd700/1a1a2e?text=Sunil'">
+          <div class="member-name">सुनील पाल</div>
+          <div class="member-role">कॉमेडी किंग</div>
+          <div class="member-rank">मुख्य एम्बेसडर</div>
         </div>
         
         <div class="celebrity-card">
-          <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/MG_0863-min-scaled.jpg" alt="Celebrity 2" class="celebrity-image" onerror="this.src='https://via.placeholder.com/100/ffd700/1a1a2e?text=Star2'">
-          <div class="member-name">टीवी एक्टर</div>
-          <div class="member-role">ब्रांड एम्बेसडर</div>
+          <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/sunil-pal-scaled.jpg" alt="Sunil Pal" class="celebrity-image" onerror="this.src='https://via.placeholder.com/100/ffd700/1a1a2e?text=SP'">
+          <div class="member-name">सुनील पाल</div>
+          <div class="member-role">एंटरटेनर</div>
+          <div class="member-rank">ब्रांड एम्बेसडर</div>
         </div>
         
         <div class="celebrity-card">
-          <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/MG_0843-min-scaled.jpg" alt="Celebrity 3" class="celebrity-image" onerror="this.src='https://via.placeholder.com/100/ffd700/1a1a2e?text=Star3'">
-          <div class="member-name">स्पोर्ट्स पर्सनैलिटी</div>
-          <div class="member-role">ब्रांड एम्बेसडर</div>
+          <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/reward-scaled.jpg" alt="Reward" class="celebrity-image" onerror="this.src='https://via.placeholder.com/100/ffd700/1a1a2e?text=Reward'">
+          <div class="member-name">सुनील पाल</div>
+          <div class="member-role">अवार्ड विजेता</div>
+          <div class="member-rank">एम्बेसडर</div>
         </div>
         
         <div class="celebrity-card">
-          <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/MG_0847-min-scaled.jpg" alt="Celebrity 4" class="celebrity-image" onerror="this.src='https://via.placeholder.com/100/ffd700/1a1a2e?text=Star4'">
-          <div class="member-name">म्यूजिक डायरेक्टर</div>
-          <div class="member-role">ब्रांड एम्बेसडर</div>
-        </div>
-        
-        <div class="celebrity-card">
-          <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/MG_0840-min-scaled.jpg" alt="Celebrity 5" class="celebrity-image" onerror="this.src='https://via.placeholder.com/100/ffd700/1a1a2e?text=Star5'">
-          <div class="member-name">फिटनेस एक्सपर्ट</div>
-          <div class="member-role">ब्रांड एम्बेसडर</div>
+          <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/sunil1-scaled.jpg" alt="Sunil Pal" class="celebrity-image" onerror="this.src='https://via.placeholder.com/100/ffd700/1a1a2e?text=SP1'">
+          <div class="member-name">सुनील पाल</div>
+          <div class="member-role">कॉमेडी एक्टर</div>
+          <div class="member-rank">ब्रांड एम्बेसडर</div>
         </div>
       </div>
     </div>
@@ -924,46 +922,43 @@
 
   <script>
     // Side Menu Functionality
-    document.getElementById('menuIcon').addEventListener('click', function(event) {
-      event.stopPropagation();
-      openMenu();
-    });
-
     function openMenu() {
       document.getElementById('menuContent').classList.add('active');
       document.getElementById('menuOverlay').classList.add('active');
+      document.body.style.overflow = 'hidden';
     }
 
     function closeMenu() {
       document.getElementById('menuContent').classList.remove('active');
       document.getElementById('menuOverlay').classList.remove('active');
+      document.body.style.overflow = 'auto';
     }
 
-    // Close menu when clicking on overlay
-    document.getElementById('menuOverlay').addEventListener('click', closeMenu);
+    document.getElementById('menuIcon').addEventListener('click', openMenu);
 
-    // Add animation to team members
+    // Logout Function
+    function logout() {
+      if (confirm('क्या आप लॉगआउट करना चाहते हैं?')) {
+        alert('आप सफलतापूर्वक लॉगआउट हो गए हैं!');
+        window.location.href = 'index.html';
+      }
+    }
+
+    // Add some animation to team members
     document.addEventListener('DOMContentLoaded', function() {
       const teamMembers = document.querySelectorAll('.team-member');
       
-      // Add hover effects
-      teamMembers.forEach(member => {
-        member.addEventListener('mouseenter', function() {
-          this.style.zIndex = '100';
-        });
+      teamMembers.forEach((member, index) => {
+        member.style.opacity = '0';
+        member.style.transform = 'translateY(20px)';
         
-        member.addEventListener('mouseleave', function() {
-          this.style.zIndex = '10';
-        });
+        setTimeout(() => {
+          member.style.transition = 'all 0.5s ease';
+          member.style.opacity = '1';
+          member.style.transform = 'translateY(0)';
+        }, 100 * index);
       });
     });
-
-    function logout() {
-      if(confirm('क्या आप लॉगआउट करना चाहते हैं?')) {
-        alert('लॉगआउट सफलतापूर्वक किया गया');
-        closeMenu();
-      }
-    }
   </script>
 </body>
 </html>
