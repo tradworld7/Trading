@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Probot X - Team Leadership Structure</title>
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+      color: white;
+      font-size: 16px;
+      line-height: 1.6;
+      padding-top: 80px;
+    }
+
+    .main-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-icon {
+      font-size: 2rem;
+      color: #ffd700;
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: white;
+    }
+
+    .content-header {
+      text-align: center;
+      padding: 40px 20px;
+      background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,107,0,0.2));
+      margin-bottom: 30px;
+      border-bottom: 3px solid #ffd700;
+    }
+
+    .content-header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .content-header p {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #ffd700;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Team Structure */
+    .team-structure {
+      background: rgba(255,255,255,0.05);
+      padding: 30px;
+      border-radius: 15px;
+      margin: 25px 0;
+      border: 1px solid rgba(255,255,255,0.1);
+      position: relative;
+      min-height: 800px;
+      overflow-x: auto;
+    }
+
+    /* Team Member Cards */
+    .team-member {
+      position: absolute;
+      background: rgba(255,255,255,0.08);
+      border-radius: 15px;
+      padding: 20px;
+      text-align: center;
+      width: 220px;
+      border: 2px solid rgba(255,215,0,0.3);
+      transition: all 0.3s ease;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      z-index: 10;
+    }
+
+    .team-member:hover {
+      transform: scale(1.05);
+      border-color: #ffd700;
+      box-shadow: 0 10px 25px rgba(255,215,0,0.4);
+    }
+
+    .member-image {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #ffd700;
+      margin: 0 auto 15px;
+    }
+
+    .member-name {
+      color: #ffd700;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .member-role {
+      color: #ff6b00;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .member-rank {
+      background: rgba(255,107,0,0.2);
+      color: #ffd700;
+      padding: 5px 10px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .team-stats {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.4;
+    }
+
+    /* Position the team members */
+    /* Level 1 - Director */
+    .level-1 {
+      top: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    /* Level 2 - Senior Leaders */
+    .level-2 {
+      top: 300px;
+    }
+
+    .level-2-1 {
+      left: 20%;
+      transform: translateX(-50%);
+    }
+
+    .level-2-2 {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .level-2-3 {
+      left: 80%;
+      transform: translateX(-50%);
+    }
+
+    /* Level 3 - Downline Level 1 */
+    .level-3 {
+      top: 550px;
+    }
+
+    .level-3-1 {
+      left: 10%;
+      transform: translateX(-50%);
+    }
+
+    .level-3-2 {
+      left: 30%;
+      transform: translateX(-50%);
+    }
+
+    .level-3-3 {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .level-3-4 {
+      left: 70%;
+      transform: translateX(-50%);
+    }
+
+    .level-3-5 {
+      left: 90%;
+      transform: translateX(-50%);
+    }
+
+    /* Level 4 - Celebrities */
+    .level-4 {
+      top: 750px;
+    }
+
+    .level-4-1 {
+      left: 25%;
+      transform: translateX(-50%);
+    }
+
+    .level-4-2 {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .level-4-3 {
+      left: 75%;
+      transform: translateX(-50%);
+    }
+
+    /* Connection Lines */
+    .connector {
+      position: absolute;
+      background: rgba(255,215,0,0.5);
+      z-index: 1;
+      transition: all 0.5s ease;
+    }
+
+    .horizontal {
+      height: 2px;
+    }
+
+    .vertical {
+      width: 2px;
+    }
+
+    /* Team Performance Section */
+    .team-performance {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 40px 0;
+    }
+
+    .performance-card {
+      background: rgba(255,255,255,0.08);
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      border: 1px solid rgba(255,215,0,0.2);
+    }
+
+    .performance-number {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #ffd700;
+      margin-bottom: 10px;
+    }
+
+    .performance-label {
+      color: #ff6b00;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .performance-desc {
+      color: rgba(255,255,255,0.8);
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+
+    /* Celebrity Section */
+    .celebrity-section {
+      background: rgba(255,255,255,0.05);
+      padding: 30px;
+      border-radius: 15px;
+      margin: 40px 0;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .celebrity-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-top: 25px;
+    }
+
+    .celebrity-card {
+      background: rgba(255,255,255,0.08);
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      border: 1px solid rgba(255,215,0,0.2);
+      transition: all 0.3s ease;
+    }
+
+    .celebrity-card:hover {
+      transform: translateY(-5px);
+      border-color: #ffd700;
+    }
+
+    .celebrity-image {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #ffd700;
+      margin: 0 auto 15px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .team-structure {
+        min-height: 1000px;
+      }
+      
+      .level-2 {
+        top: 250px;
+      }
+      
+      .level-3 {
+        top: 500px;
+      }
+      
+      .level-4 {
+        top: 750px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-top: 70px;
+      }
+      
+      .content-header h1 {
+        font-size: 2rem;
+      }
+      
+      .team-structure {
+        min-height: 1200px;
+        padding: 15px;
+      }
+      
+      .team-member {
+        width: 180px;
+        padding: 15px;
+      }
+      
+      .level-1 {
+        top: 30px;
+      }
+      
+      .level-2 {
+        top: 220px;
+      }
+      
+      .level-3 {
+        top: 450px;
+      }
+      
+      .level-4 {
+        top: 680px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .team-structure {
+        min-height: 1500px;
+      }
+      
+      .team-member {
+        width: 160px;
+        padding: 12px;
+      }
+      
+      .member-image {
+        width: 60px;
+        height: 60px;
+      }
+    }
+  </style>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="main-header">
+    <div class="logo">
+      <div class="logo-icon">👑</div>
+      <div class="logo-text">Probot X Leadership Team</div>
+    </div>
+  </header>
+
+  <!-- Content -->
+  <div class="content-header">
+    <h1>🏆 LEADERSHIP TEAM STRUCTURE</h1>
+    <p>Probot X की पावरफुल लीडरशिप टीम - करोड़ों का बिजनेस</p>
+  </div>
+
+  <div class="container">
+    <!-- Team Performance -->
+    <div class="team-performance">
+      <div class="performance-card">
+        <div class="performance-number">₹13Cr+</div>
+        <div class="performance-label">कुल बिजनेस वॉल्यूम</div>
+        <div class="performance-desc">सभी लीडर्स का कंबाइंड बिजनेस</div>
+      </div>
+      
+      <div class="performance-card">
+        <div class="performance-number">10,200+</div>
+        <div class="performance-label">टीम साइज</div>
+        <div class="performance-desc">कुल एक्टिव मेम्बर्स</div>
+      </div>
+      
+      <div class="performance-card">
+        <div class="performance-number">4</div>
+        <div class="performance-label">टॉप लीडर्स</div>
+        <div class="performance-desc">डायमंड एंड ब्लू डायमंड रैंक</div>
+      </div>
+      
+      <div class="performance-card">
+        <div class="performance-number">95%</div>
+        <div class="performance-label">सक्सेस रेट</div>
+        <div class="performance-desc">टीम परफॉर्मेंस</div>
+      </div>
+    </div>
+
+    <!-- Team Structure -->
+    <div class="team-structure">
+      <!-- Level 1 - Director -->
+      <div class="team-member level-1">
+        <div class="member-image" style="background: linear-gradient(135deg, #ffd700, #ff6b00); display: flex; align-items: center; justify-content: center; color: #1a1a2e; font-size: 1.8rem; font-weight: bold;">
+          RKV
+        </div>
+        <div class="member-name">Ramesh Kumar Verma</div>
+        <div class="member-role">नेशनल डायरेक्टर</div>
+        <div class="member-rank">DIRECTOR</div>
+        <div class="team-stats">
+          टीम: 10,200+ मेम्बर्स<br>
+          बिजनेस: ₹13Cr+
+        </div>
+      </div>
+
+      <!-- Level 2 - Senior Leaders -->
+      <div class="team-member level-2 level-2-1">
+        <div class="member-image" style="background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: bold;">
+          JP
+        </div>
+        <div class="member-name">Dr. Jaiprakash</div>
+        <div class="member-role">सीनियर लीडर</div>
+        <div class="member-rank">DIAMOND</div>
+        <div class="team-stats">
+          टीम: 2,100 मेम्बर्स<br>
+          बिजनेस: ₹3 करोड़
+        </div>
+      </div>
+
+      <div class="team-member level-2 level-2-2">
+        <div class="member-image" style="background: linear-gradient(135deg, #f093fb, #f5576c); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: bold;">
+          MK
+        </div>
+        <div class="member-name">Mahesh Kumar</div>
+        <div class="member-role">सीनियर लीडर</div>
+        <div class="member-rank">BLUE DIAMOND</div>
+        <div class="team-stats">
+          टीम: 6,000 मेम्बर्स<br>
+          बिजनेस: ₹7 करोड़
+        </div>
+      </div>
+
+      <div class="team-member level-2 level-2-3">
+        <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/wakeel.jpeg" alt="Mohammed Wakeel" class="member-image" onerror="this.src='https://via.placeholder.com/80/ff6b00/1a1a2e?text=MW'">
+        <div class="member-name">Mohammed Wakeel</div>
+        <div class="member-role">सीनियर लीडर</div>
+        <div class="member-rank">DIAMOND</div>
+        <div class="team-stats">
+          टीम: 2,100 मेम्बर्स<br>
+          बिजनेस: ₹3 करोड़
+        </div>
+      </div>
+
+      <!-- Level 3 - Downline Members -->
+      <!-- Under Dr. JP -->
+      <div class="team-member level-3 level-3-1">
+        <div class="member-image" style="background: linear-gradient(135deg, #4facfe, #00f2fe); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; font-weight: bold;">
+          A1
+        </div>
+        <div class="member-name">अनिल शर्मा</div>
+        <div class="member-role">टीम लीडर</div>
+        <div class="member-rank">MANAGER</div>
+        <div class="team-stats">
+          टीम: 500+ मेम्बर्स
+        </div>
+      </div>
+
+      <div class="team-member level-3 level-3-2">
+        <div class="member-image" style="background: linear-gradient(135deg, #43e97b, #38f9d7); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; font-weight: bold;">
+          R1
+        </div>
+        <div class="member-name">रवि कुमार</div>
+        <div class="member-role">टीम लीडर</div>
+        <div class="member-rank">MANAGER</div>
+        <div class="team-stats">
+          टीम: 450+ मेम्बर्स
+        </div>
+      </div>
+
+      <!-- Under Mahesh Kumar -->
+      <div class="team-member level-3 level-3-3">
+        <div class="member-image" style="background: linear-gradient(135deg, #ff9a9e, #fecfef); display: flex; align-items: center; justify-content: center; color: #1a1a2e; font-size: 1.2rem; font-weight: bold;">
+          S1
+        </div>
+        <div class="member-name">सुरेश यादव</div>
+        <div class="member-role">टीम लीडर</div>
+        <div class="member-rank">SR. MANAGER</div>
+        <div class="team-stats">
+          टीम: 800+ मेम्बर्स
+        </div>
+      </div>
+
+      <!-- Under Mohammed Wakeel -->
+      <div class="team-member level-3 level-3-4">
+        <div class="member-image" style="background: linear-gradient(135deg, #a8edea, #fed6e3); display: flex; align-items: center; justify-content: center; color: #1a1a2e; font-size: 1.2rem; font-weight: bold;">
+          RY
+        </div>
+        <div class="member-name">रियाजुद्दीन</div>
+        <div class="member-role">टीम लीडर</div>
+        <div class="member-rank">MANAGER</div>
+        <div class="team-stats">
+          टीम: 600+ मेम्बर्स
+        </div>
+      </div>
+
+      <div class="team-member level-3 level-3-5">
+        <div class="member-image" style="background: linear-gradient(135deg, #fad0c4, #ffd1ff); display: flex; align-items: center; justify-content: center; color: #1a1a2e; font-size: 1.2rem; font-weight: bold;">
+          BY
+        </div>
+        <div class="member-name">बुधराम यादव</div>
+        <div class="member-role">टीम लीडर</div>
+        <div class="member-rank">MANAGER</div>
+        <div class="team-stats">
+          टीम: 550+ मेम्बर्स
+        </div>
+      </div>
+
+      <!-- Level 4 - Celebrities -->
+      <div class="team-member level-4 level-4-1">
+        <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/MG_0856-min-1-scaled.jpg" alt="Celebrity 1" class="member-image" onerror="this.src='https://via.placeholder.com/80/ffd700/1a1a2e?text=C1'">
+        <div class="member-name">बॉलीवुड स्टार</div>
+        <div class="member-role">ब्रांड एम्बेसडर</div>
+        <div class="member-rank">CELEBRITY</div>
+      </div>
+
+      <div class="team-member level-4 level-4-2">
+        <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/MG_0863-min-scaled.jpg" alt="Celebrity 2" class="member-image" onerror="this.src='https://via.placeholder.com/80/ffd700/1a1a2e?text=C2'">
+        <div class="member-name">टीवी एक्टर</div>
+        <div class="member-role">ब्रांड एम्बेसडर</div>
+        <div class="member-rank">CELEBRITY</div>
+      </div>
+
+      <div class="team-member level-4 level-4-3">
+        <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/MG_0843-min-scaled.jpg" alt="Celebrity 3" class="member-image" onerror="this.src='https://via.placeholder.com/80/ffd700/1a1a2e?text=C3'">
+        <div class="member-name">स्पोर्ट्स पर्सनैलिटी</div>
+        <div class="member-role">ब्रांड एम्बेसडर</div>
+        <div class="member-rank">CELEBRITY</div>
+      </div>
+
+      <!-- Connection Lines -->
+      <!-- From Director to Senior Leaders -->
+      <div class="connector vertical" style="top: 150px; left: 50%; height: 150px;"></div>
+      
+      <div class="connector horizontal" style="top: 300px; left: 20%; width: 60%; height: 2px;"></div>
+      
+      <!-- From Senior Leaders to Downline -->
+      <div class="connector vertical" style="top: 400px; left: 20%; height: 150px;"></div>
+      <div class="connector vertical" style="top: 400px; left: 50%; height: 150px;"></div>
+      <div class="connector vertical" style="top: 400px; left: 80%; height: 150px;"></div>
+      
+      <!-- From Downline to Celebrities -->
+      <div class="connector vertical" style="top: 650px; left: 80%; height: 100px;"></div>
+      
+      <div class="connector horizontal" style="top: 750px; left: 25%; width: 50%; height: 2px;"></div>
+    </div>
+
+    <!-- Celebrity Section -->
+    <div class="celebrity-section">
+      <h2 style="color: #ffd700; text-align: center; margin-bottom: 25px; font-size: 2rem;">🌟 सेलेब्रिटी ब्रांड एम्बेसडर</h2>
+      <p style="text-align: center; margin-bottom: 20px; color: rgba(255,255,255,0.8);">
+        Probot X के साथ जुड़े हुए प्रमुख सेलेब्रिटीज जो हमारे ब्रांड को सपोर्ट कर रहे हैं
+      </p>
+      
+      <div class="celebrity-grid">
+        <div class="celebrity-card">
+          <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/MG_0856-min-1-scaled.jpg" alt="Celebrity 1" class="celebrity-image" onerror="this.src='https://via.placeholder.com/100/ffd700/1a1a2e?text=Star1'">
+          <div class="member-name">बॉलीवुड स्टार</div>
+          <div class="member-role">मुख्य एम्बेसडर</div>
+        </div>
+        
+        <div class="celebrity-card">
+          <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/MG_0863-min-scaled.jpg" alt="Celebrity 2" class="celebrity-image" onerror="this.src='https://via.placeholder.com/100/ffd700/1a1a2e?text=Star2'">
+          <div class="member-name">टीवी एक्टर</div>
+          <div class="member-role">ब्रांड एम्बेसडर</div>
+        </div>
+        
+        <div class="celebrity-card">
+          <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/MG_0843-min-scaled.jpg" alt="Celebrity 3" class="celebrity-image" onerror="this.src='https://via.placeholder.com/100/ffd700/1a1a2e?text=Star3'">
+          <div class="member-name">स्पोर्ट्स पर्सनैलिटी</div>
+          <div class="member-role">ब्रांड एम्बेसडर</div>
+        </div>
+        
+        <div class="celebrity-card">
+          <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/MG_0847-min-scaled.jpg" alt="Celebrity 4" class="celebrity-image" onerror="this.src='https://via.placeholder.com/100/ffd700/1a1a2e?text=Star4'">
+          <div class="member-name">म्यूजिक डायरेक्टर</div>
+          <div class="member-role">ब्रांड एम्बेसडर</div>
+        </div>
+        
+        <div class="celebrity-card">
+          <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/MG_0840-min-scaled.jpg" alt="Celebrity 5" class="celebrity-image" onerror="this.src='https://via.placeholder.com/100/ffd700/1a1a2e?text=Star5'">
+          <div class="member-name">फिटनेस एक्सपर्ट</div>
+          <div class="member-role">ब्रांड एम्बेसडर</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Add animation to connection lines
+    document.addEventListener('DOMContentLoaded', function() {
+      const connectors = document.querySelectorAll('.connector');
+      const teamMembers = document.querySelectorAll('.team-member');
+      
+      // Animate connectors
+      setTimeout(() => {
+        connectors.forEach(connector => {
+          if (connector.classList.contains('horizontal')) {
+            connector.style.width = '60%';
+          } else if (connector.classList.contains('vertical')) {
+            const currentHeight = connector.style.height;
+            connector.style.height = currentHeight;
+          }
+        });
+      }, 1000);
+      
+      // Add hover effects
+      teamMembers.forEach(member => {
+        member.addEventListener('mouseenter', function() {
+          this.style.zIndex = '100';
+        });
+        
+        member.addEventListener('mouseleave', function() {
+          this.style.zIndex = '10';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
