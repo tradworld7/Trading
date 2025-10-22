@@ -22,6 +22,7 @@
       padding-top: 80px;
     }
 
+    /* Professional Header Styles */
     .main-header {
       position: fixed;
       top: 0;
@@ -34,6 +35,7 @@
       align-items: center;
       z-index: 1000;
       box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
@@ -52,6 +54,160 @@
       font-size: 1.5rem;
       font-weight: 800;
       color: white;
+    }
+
+    /* Header Right Section - Side Menu */
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Side Menu Styles - Horizontal Lines */
+    .side-menu {
+      position: relative;
+    }
+
+    .menu-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 8px;
+    }
+
+    .menu-icon:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.05);
+    }
+
+    .menu-line {
+      width: 25px;
+      height: 3px;
+      background: white;
+      margin: 2px 0;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    /* Side Menu Content - Left Side */
+    .menu-content {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 300px;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.98);
+      padding: 80px 0 20px 0;
+      box-shadow: 2px 0 25px rgba(0, 0, 0, 0.7);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(10px);
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 999;
+      overflow-y: auto;
+    }
+
+    .menu-content.active {
+      left: 0;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .menu-header {
+      text-align: center;
+      padding: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .menu-header h3 {
+      color: #ffd700;
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+    }
+
+    .menu-header p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+
+    .menu-item {
+      padding: 15px 25px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 1rem;
+      text-decoration: none;
+      color: white;
+    }
+
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+
+    .menu-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      padding-left: 30px;
+    }
+
+    .menu-item i {
+      margin-right: 15px;
+      font-size: 1.3rem;
+      width: 25px;
+      text-align: center;
+      color: #ffd700;
+    }
+
+    .menu-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: none;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .menu-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
+    }
+
+    /* Overlay for menu */
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 998;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
     }
 
     .content-header {
@@ -81,7 +237,7 @@
       padding: 20px;
     }
 
-    /* Team Structure */
+    /* Team Structure - Mobile Friendly */
     .team-structure {
       background: rgba(255,255,255,0.05);
       padding: 30px;
@@ -93,9 +249,23 @@
       overflow-x: auto;
     }
 
+    /* Desktop Team Structure */
+    .team-levels {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      position: relative;
+    }
+
+    .level-row {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      position: relative;
+    }
+
     /* Team Member Cards */
     .team-member {
-      position: absolute;
       background: rgba(255,255,255,0.08);
       border-radius: 15px;
       padding: 20px;
@@ -152,82 +322,34 @@
       line-height: 1.4;
     }
 
-    /* Position the team members */
-    /* Level 1 - Director */
-    .level-1 {
-      top: 50px;
-      left: 50%;
-      transform: translateX(-50%);
+    /* Mobile Team Structure */
+    .mobile-team-structure {
+      display: none;
+      flex-direction: column;
+      gap: 20px;
     }
 
-    /* Level 2 - Senior Leaders */
-    .level-2 {
-      top: 300px;
+    .mobile-level {
+      background: rgba(255,255,255,0.05);
+      border-radius: 15px;
+      padding: 20px;
+      border: 1px solid rgba(255,215,0,0.2);
     }
 
-    .level-2-1 {
-      left: 20%;
-      transform: translateX(-50%);
+    .mobile-level-title {
+      color: #ffd700;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 15px;
+      text-align: center;
+      border-bottom: 2px solid rgba(255,215,0,0.3);
+      padding-bottom: 10px;
     }
 
-    .level-2-2 {
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .level-2-3 {
-      left: 80%;
-      transform: translateX(-50%);
-    }
-
-    /* Level 3 - Downline Level 1 */
-    .level-3 {
-      top: 550px;
-    }
-
-    .level-3-1 {
-      left: 10%;
-      transform: translateX(-50%);
-    }
-
-    .level-3-2 {
-      left: 30%;
-      transform: translateX(-50%);
-    }
-
-    .level-3-3 {
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .level-3-4 {
-      left: 70%;
-      transform: translateX(-50%);
-    }
-
-    .level-3-5 {
-      left: 90%;
-      transform: translateX(-50%);
-    }
-
-    /* Level 4 - Celebrities */
-    .level-4 {
-      top: 750px;
-    }
-
-    .level-4-1 {
-      left: 25%;
-      transform: translateX(-50%);
-    }
-
-    .level-4-2 {
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .level-4-3 {
-      left: 75%;
-      transform: translateX(-50%);
+    .mobile-members {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
     }
 
     /* Connection Lines */
@@ -325,18 +447,6 @@
       .team-structure {
         min-height: 1000px;
       }
-      
-      .level-2 {
-        top: 250px;
-      }
-      
-      .level-3 {
-        top: 500px;
-      }
-      
-      .level-4 {
-        top: 750px;
-      }
     }
 
     @media (max-width: 768px) {
@@ -349,45 +459,67 @@
       }
       
       .team-structure {
-        min-height: 1200px;
+        min-height: auto;
         padding: 15px;
+      }
+      
+      /* Hide desktop structure, show mobile structure */
+      .team-levels {
+        display: none;
+      }
+      
+      .mobile-team-structure {
+        display: flex;
       }
       
       .team-member {
-        width: 180px;
-        padding: 15px;
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
       }
       
-      .level-1 {
-        top: 30px;
-      }
-      
-      .level-2 {
-        top: 220px;
-      }
-      
-      .level-3 {
-        top: 450px;
-      }
-      
-      .level-4 {
-        top: 680px;
+      .member-image {
+        width: 70px;
+        height: 70px;
       }
     }
 
     @media (max-width: 480px) {
-      .team-structure {
-        min-height: 1500px;
+      .main-header {
+        padding: 10px 15px;
       }
       
-      .team-member {
-        width: 160px;
-        padding: 12px;
+      .logo-text {
+        font-size: 1.2rem;
       }
       
-      .member-image {
-        width: 60px;
-        height: 60px;
+      .content-header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .content-header p {
+        font-size: 1.1rem;
+      }
+      
+      .container {
+        padding: 10px;
+      }
+      
+      .team-performance {
+        grid-template-columns: 1fr;
+      }
+      
+      .mobile-members {
+        grid-template-columns: 1fr;
+      }
+      
+      .celebrity-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .menu-content {
+        width: 280px;
+        left: -280px;
       }
     }
   </style>
@@ -395,11 +527,67 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <!-- Header -->
+  <!-- Professional Header -->
   <header class="main-header">
+    <!-- Left Side - Logo -->
     <div class="logo">
       <div class="logo-icon">👑</div>
-      <div class="logo-text">Probot X Leadership Team</div>
+      <div class="logo-text">Probot X Leadership</div>
+    </div>
+
+    <!-- Right Side - Side Menu -->
+    <div class="header-right">
+      <!-- Side Menu - Horizontal Lines -->
+      <div class="side-menu">
+        <div class="menu-icon" id="menuIcon">
+          <div class="menu-line"></div>
+          <div class="menu-line"></div>
+          <div class="menu-line"></div>
+        </div>
+        
+        <!-- Side Menu Content -->
+        <div class="menu-content" id="menuContent">
+          <button class="menu-close" onclick="closeMenu()">
+            <i class="fas fa-times"></i>
+          </button>
+          
+          <div class="menu-header">
+            <h3>Probot X</h3>
+            <p>Welcome to your dashboard</p>
+          </div>
+          
+          <a href="index.html" class="menu-item">
+            <i class="fas fa-tachometer-alt"></i> Dashboard
+          </a>
+          <a href="wealth25.html" class="menu-item">
+            <i class="fas fa-coins"></i> Wealth 25
+          </a>
+          <a href="income-calculator.html" class="menu-item">
+            <i class="fas fa-calculator"></i> Income Calculator
+          </a>
+          <a href="business-plan.html" class="menu-item">
+            <i class="fas fa-chart-line"></i> Business Plan
+          </a>
+          <a href="joining.html" class="menu-item">
+            <i class="fas fa-user-plus"></i> Joining
+          </a>
+          <a href="package.html" class="menu-item">
+            <i class="fas fa-box"></i> Package
+          </a>
+          <a href="Help-support.html" class="menu-item">
+            <i class="fas fa-heartbeat"></i> Help Support
+          </a>
+          <a href="my-team.html" class="menu-item">
+            <i class="fas fa-coins"></i> My Team
+          </a>
+          <div class="menu-item" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </div>
+        </div>
+        
+        <!-- Menu Overlay -->
+        <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+      </div>
     </div>
   </header>
 
@@ -439,159 +627,258 @@
 
     <!-- Team Structure -->
     <div class="team-structure">
-      <!-- Level 1 - Director -->
-      <div class="team-member level-1">
-        <div class="member-image" style="background: linear-gradient(135deg, #ffd700, #ff6b00); display: flex; align-items: center; justify-content: center; color: #1a1a2e; font-size: 1.8rem; font-weight: bold;">
-          RKV
+      <!-- Desktop Team Structure -->
+      <div class="team-levels">
+        <!-- Level 1 - Director -->
+        <div class="level-row">
+          <div class="team-member">
+            <div class="member-image" style="background: linear-gradient(135deg, #ffd700, #ff6b00); display: flex; align-items: center; justify-content: center; color: #1a1a2e; font-size: 1.8rem; font-weight: bold;">
+              RKV
+            </div>
+            <div class="member-name">Ramesh Kumar Verma</div>
+            <div class="member-role">नेशनल डायरेक्टर</div>
+            <div class="member-rank">DIRECTOR</div>
+            <div class="team-stats">
+              टीम: 10,200+ मेम्बर्स<br>
+              बिजनेस: ₹13Cr+
+            </div>
+          </div>
         </div>
-        <div class="member-name">Ramesh Kumar Verma</div>
-        <div class="member-role">नेशनल डायरेक्टर</div>
-        <div class="member-rank">DIRECTOR</div>
-        <div class="team-stats">
-          टीम: 10,200+ मेम्बर्स<br>
-          बिजनेस: ₹13Cr+
+
+        <!-- Level 2 - Senior Leaders -->
+        <div class="level-row">
+          <div class="team-member">
+            <div class="member-image" style="background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: bold;">
+              JP
+            </div>
+            <div class="member-name">Dr. Jaiprakash</div>
+            <div class="member-role">सीनियर लीडर</div>
+            <div class="member-rank">DIAMOND</div>
+            <div class="team-stats">
+              टीम: 2,100 मेम्बर्स<br>
+              बिजनेस: ₹3 करोड़
+            </div>
+          </div>
+
+          <div class="team-member">
+            <div class="member-image" style="background: linear-gradient(135deg, #f093fb, #f5576c); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: bold;">
+              MK
+            </div>
+            <div class="member-name">Mahesh Kumar</div>
+            <div class="member-role">सीनियर लीडर</div>
+            <div class="member-rank">BLUE DIAMOND</div>
+            <div class="team-stats">
+              टीम: 6,000 मेम्बर्स<br>
+              बिजनेस: ₹7 करोड़
+            </div>
+          </div>
+
+          <div class="team-member">
+            <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/wakeel.jpeg" alt="Mohammed Wakeel" class="member-image" onerror="this.src='https://via.placeholder.com/80/ff6b00/1a1a2e?text=MW'">
+            <div class="member-name">Mohammed Wakeel</div>
+            <div class="member-role">सीनियर लीडर</div>
+            <div class="member-rank">DIAMOND</div>
+            <div class="team-stats">
+              टीम: 2,100 मेम्बर्स<br>
+              बिजनेस: ₹3 करोड़
+            </div>
+          </div>
+        </div>
+
+        <!-- Level 3 - Downline Members -->
+        <div class="level-row">
+          <div class="team-member">
+            <div class="member-image" style="background: linear-gradient(135deg, #4facfe, #00f2fe); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; font-weight: bold;">
+              A1
+            </div>
+            <div class="member-name">अनिल शर्मा</div>
+            <div class="member-role">टीम लीडर</div>
+            <div class="member-rank">MANAGER</div>
+            <div class="team-stats">
+              टीम: 500+ मेम्बर्स
+            </div>
+          </div>
+
+          <div class="team-member">
+            <div class="member-image" style="background: linear-gradient(135deg, #43e97b, #38f9d7); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; font-weight: bold;">
+              R1
+            </div>
+            <div class="member-name">रवि कुमार</div>
+            <div class="member-role">टीम लीडर</div>
+            <div class="member-rank">MANAGER</div>
+            <div class="team-stats">
+              टीम: 450+ मेम्बर्स
+            </div>
+          </div>
+
+          <div class="team-member">
+            <div class="member-image" style="background: linear-gradient(135deg, #ff9a9e, #fecfef); display: flex; align-items: center; justify-content: center; color: #1a1a2e; font-size: 1.2rem; font-weight: bold;">
+              S1
+            </div>
+            <div class="member-name">सुरेश यादव</div>
+            <div class="member-role">टीम लीडर</div>
+            <div class="member-rank">SR. MANAGER</div>
+            <div class="team-stats">
+              टीम: 800+ मेम्बर्स
+            </div>
+          </div>
+
+          <div class="team-member">
+            <div class="member-image" style="background: linear-gradient(135deg, #a8edea, #fed6e3); display: flex; align-items: center; justify-content: center; color: #1a1a2e; font-size: 1.2rem; font-weight: bold;">
+              RY
+            </div>
+            <div class="member-name">रियाजुद्दीन</div>
+            <div class="member-role">टीम लीडर</div>
+            <div class="member-rank">MANAGER</div>
+            <div class="team-stats">
+              टीम: 600+ मेम्बर्स
+            </div>
+          </div>
+
+          <div class="team-member">
+            <div class="member-image" style="background: linear-gradient(135deg, #fad0c4, #ffd1ff); display: flex; align-items: center; justify-content: center; color: #1a1a2e; font-size: 1.2rem; font-weight: bold;">
+              BY
+            </div>
+            <div class="member-name">बुधराम यादव</div>
+            <div class="member-role">टीम लीडर</div>
+            <div class="member-rank">MANAGER</div>
+            <div class="team-stats">
+              टीम: 550+ मेम्बर्स
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- Level 2 - Senior Leaders -->
-      <div class="team-member level-2 level-2-1">
-        <div class="member-image" style="background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: bold;">
-          JP
+      <!-- Mobile Team Structure -->
+      <div class="mobile-team-structure">
+        <!-- Level 1 - Director -->
+        <div class="mobile-level">
+          <div class="mobile-level-title">नेशनल डायरेक्टर</div>
+          <div class="mobile-members">
+            <div class="team-member">
+              <div class="member-image" style="background: linear-gradient(135deg, #ffd700, #ff6b00); display: flex; align-items: center; justify-content: center; color: #1a1a2e; font-size: 1.8rem; font-weight: bold;">
+                RKV
+              </div>
+              <div class="member-name">Ramesh Kumar Verma</div>
+              <div class="member-role">नेशनल डायरेक्टर</div>
+              <div class="member-rank">DIRECTOR</div>
+              <div class="team-stats">
+                टीम: 10,200+ मेम्बर्स<br>
+                बिजनेस: ₹13Cr+
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="member-name">Dr. Jaiprakash</div>
-        <div class="member-role">सीनियर लीडर</div>
-        <div class="member-rank">DIAMOND</div>
-        <div class="team-stats">
-          टीम: 2,100 मेम्बर्स<br>
-          बिजनेस: ₹3 करोड़
+
+        <!-- Level 2 - Senior Leaders -->
+        <div class="mobile-level">
+          <div class="mobile-level-title">सीनियर लीडर्स</div>
+          <div class="mobile-members">
+            <div class="team-member">
+              <div class="member-image" style="background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: bold;">
+                JP
+              </div>
+              <div class="member-name">Dr. Jaiprakash</div>
+              <div class="member-role">सीनियर लीडर</div>
+              <div class="member-rank">DIAMOND</div>
+              <div class="team-stats">
+                टीम: 2,100 मेम्बर्स<br>
+                बिजनेस: ₹3 करोड़
+              </div>
+            </div>
+
+            <div class="team-member">
+              <div class="member-image" style="background: linear-gradient(135deg, #f093fb, #f5576c); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: bold;">
+                MK
+              </div>
+              <div class="member-name">Mahesh Kumar</div>
+              <div class="member-role">सीनियर लीडर</div>
+              <div class="member-rank">BLUE DIAMOND</div>
+              <div class="team-stats">
+                टीम: 6,000 मेम्बर्स<br>
+                बिजनेस: ₹7 करोड़
+              </div>
+            </div>
+
+            <div class="team-member">
+              <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/wakeel.jpeg" alt="Mohammed Wakeel" class="member-image" onerror="this.src='https://via.placeholder.com/80/ff6b00/1a1a2e?text=MW'">
+              <div class="member-name">Mohammed Wakeel</div>
+              <div class="member-role">सीनियर लीडर</div>
+              <div class="member-rank">DIAMOND</div>
+              <div class="team-stats">
+                टीम: 2,100 मेम्बर्स<br>
+                बिजनेस: ₹3 करोड़
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Level 3 - Downline Members -->
+        <div class="mobile-level">
+          <div class="mobile-level-title">टीम लीडर्स</div>
+          <div class="mobile-members">
+            <div class="team-member">
+              <div class="member-image" style="background: linear-gradient(135deg, #4facfe, #00f2fe); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; font-weight: bold;">
+                A1
+              </div>
+              <div class="member-name">अनिल शर्मा</div>
+              <div class="member-role">टीम लीडर</div>
+              <div class="member-rank">MANAGER</div>
+              <div class="team-stats">
+                टीम: 500+ मेम्बर्स
+              </div>
+            </div>
+
+            <div class="team-member">
+              <div class="member-image" style="background: linear-gradient(135deg, #43e97b, #38f9d7); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; font-weight: bold;">
+                R1
+              </div>
+              <div class="member-name">रवि कुमार</div>
+              <div class="member-role">टीम लीडर</div>
+              <div class="member-rank">MANAGER</div>
+              <div class="team-stats">
+                टीम: 450+ मेम्बर्स
+              </div>
+            </div>
+
+            <div class="team-member">
+              <div class="member-image" style="background: linear-gradient(135deg, #ff9a9e, #fecfef); display: flex; align-items: center; justify-content: center; color: #1a1a2e; font-size: 1.2rem; font-weight: bold;">
+                S1
+              </div>
+              <div class="member-name">सुरेश यादव</div>
+              <div class="member-role">टीम लीडर</div>
+              <div class="member-rank">SR. MANAGER</div>
+              <div class="team-stats">
+                टीम: 800+ मेम्बर्स
+              </div>
+            </div>
+
+            <div class="team-member">
+              <div class="member-image" style="background: linear-gradient(135deg, #a8edea, #fed6e3); display: flex; align-items: center; justify-content: center; color: #1a1a2e; font-size: 1.2rem; font-weight: bold;">
+                RY
+              </div>
+              <div class="member-name">रियाजुद्दीन</div>
+              <div class="member-role">टीम लीडर</div>
+              <div class="member-rank">MANAGER</div>
+              <div class="team-stats">
+                टीम: 600+ मेम्बर्स
+              </div>
+            </div>
+
+            <div class="team-member">
+              <div class="member-image" style="background: linear-gradient(135deg, #fad0c4, #ffd1ff); display: flex; align-items: center; justify-content: center; color: #1a1a2e; font-size: 1.2rem; font-weight: bold;">
+                BY
+              </div>
+              <div class="member-name">बुधराम यादव</div>
+              <div class="member-role">टीम लीडर</div>
+              <div class="member-rank">MANAGER</div>
+              <div class="team-stats">
+                टीम: 550+ मेम्बर्स
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-      <div class="team-member level-2 level-2-2">
-        <div class="member-image" style="background: linear-gradient(135deg, #f093fb, #f5576c); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: bold;">
-          MK
-        </div>
-        <div class="member-name">Mahesh Kumar</div>
-        <div class="member-role">सीनियर लीडर</div>
-        <div class="member-rank">BLUE DIAMOND</div>
-        <div class="team-stats">
-          टीम: 6,000 मेम्बर्स<br>
-          बिजनेस: ₹7 करोड़
-        </div>
-      </div>
-
-      <div class="team-member level-2 level-2-3">
-        <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/wakeel.jpeg" alt="Mohammed Wakeel" class="member-image" onerror="this.src='https://via.placeholder.com/80/ff6b00/1a1a2e?text=MW'">
-        <div class="member-name">Mohammed Wakeel</div>
-        <div class="member-role">सीनियर लीडर</div>
-        <div class="member-rank">DIAMOND</div>
-        <div class="team-stats">
-          टीम: 2,100 मेम्बर्स<br>
-          बिजनेस: ₹3 करोड़
-        </div>
-      </div>
-
-      <!-- Level 3 - Downline Members -->
-      <!-- Under Dr. JP -->
-      <div class="team-member level-3 level-3-1">
-        <div class="member-image" style="background: linear-gradient(135deg, #4facfe, #00f2fe); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; font-weight: bold;">
-          A1
-        </div>
-        <div class="member-name">अनिल शर्मा</div>
-        <div class="member-role">टीम लीडर</div>
-        <div class="member-rank">MANAGER</div>
-        <div class="team-stats">
-          टीम: 500+ मेम्बर्स
-        </div>
-      </div>
-
-      <div class="team-member level-3 level-3-2">
-        <div class="member-image" style="background: linear-gradient(135deg, #43e97b, #38f9d7); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; font-weight: bold;">
-          R1
-        </div>
-        <div class="member-name">रवि कुमार</div>
-        <div class="member-role">टीम लीडर</div>
-        <div class="member-rank">MANAGER</div>
-        <div class="team-stats">
-          टीम: 450+ मेम्बर्स
-        </div>
-      </div>
-
-      <!-- Under Mahesh Kumar -->
-      <div class="team-member level-3 level-3-3">
-        <div class="member-image" style="background: linear-gradient(135deg, #ff9a9e, #fecfef); display: flex; align-items: center; justify-content: center; color: #1a1a2e; font-size: 1.2rem; font-weight: bold;">
-          S1
-        </div>
-        <div class="member-name">सुरेश यादव</div>
-        <div class="member-role">टीम लीडर</div>
-        <div class="member-rank">SR. MANAGER</div>
-        <div class="team-stats">
-          टीम: 800+ मेम्बर्स
-        </div>
-      </div>
-
-      <!-- Under Mohammed Wakeel -->
-      <div class="team-member level-3 level-3-4">
-        <div class="member-image" style="background: linear-gradient(135deg, #a8edea, #fed6e3); display: flex; align-items: center; justify-content: center; color: #1a1a2e; font-size: 1.2rem; font-weight: bold;">
-          RY
-        </div>
-        <div class="member-name">रियाजुद्दीन</div>
-        <div class="member-role">टीम लीडर</div>
-        <div class="member-rank">MANAGER</div>
-        <div class="team-stats">
-          टीम: 600+ मेम्बर्स
-        </div>
-      </div>
-
-      <div class="team-member level-3 level-3-5">
-        <div class="member-image" style="background: linear-gradient(135deg, #fad0c4, #ffd1ff); display: flex; align-items: center; justify-content: center; color: #1a1a2e; font-size: 1.2rem; font-weight: bold;">
-          BY
-        </div>
-        <div class="member-name">बुधराम यादव</div>
-        <div class="member-role">टीम लीडर</div>
-        <div class="member-rank">MANAGER</div>
-        <div class="team-stats">
-          टीम: 550+ मेम्बर्स
-        </div>
-      </div>
-
-      <!-- Level 4 - Celebrities -->
-      <div class="team-member level-4 level-4-1">
-        <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/MG_0856-min-1-scaled.jpg" alt="Celebrity 1" class="member-image" onerror="this.src='https://via.placeholder.com/80/ffd700/1a1a2e?text=C1'">
-        <div class="member-name">बॉलीवुड स्टार</div>
-        <div class="member-role">ब्रांड एम्बेसडर</div>
-        <div class="member-rank">CELEBRITY</div>
-      </div>
-
-      <div class="team-member level-4 level-4-2">
-        <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/MG_0863-min-scaled.jpg" alt="Celebrity 2" class="member-image" onerror="this.src='https://via.placeholder.com/80/ffd700/1a1a2e?text=C2'">
-        <div class="member-name">टीवी एक्टर</div>
-        <div class="member-role">ब्रांड एम्बेसडर</div>
-        <div class="member-rank">CELEBRITY</div>
-      </div>
-
-      <div class="team-member level-4 level-4-3">
-        <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/MG_0843-min-scaled.jpg" alt="Celebrity 3" class="member-image" onerror="this.src='https://via.placeholder.com/80/ffd700/1a1a2e?text=C3'">
-        <div class="member-name">स्पोर्ट्स पर्सनैलिटी</div>
-        <div class="member-role">ब्रांड एम्बेसडर</div>
-        <div class="member-rank">CELEBRITY</div>
-      </div>
-
-      <!-- Connection Lines -->
-      <!-- From Director to Senior Leaders -->
-      <div class="connector vertical" style="top: 150px; left: 50%; height: 150px;"></div>
-      
-      <div class="connector horizontal" style="top: 300px; left: 20%; width: 60%; height: 2px;"></div>
-      
-      <!-- From Senior Leaders to Downline -->
-      <div class="connector vertical" style="top: 400px; left: 20%; height: 150px;"></div>
-      <div class="connector vertical" style="top: 400px; left: 50%; height: 150px;"></div>
-      <div class="connector vertical" style="top: 400px; left: 80%; height: 150px;"></div>
-      
-      <!-- From Downline to Celebrities -->
-      <div class="connector vertical" style="top: 650px; left: 80%; height: 100px;"></div>
-      
-      <div class="connector horizontal" style="top: 750px; left: 25%; width: 50%; height: 2px;"></div>
     </div>
 
     <!-- Celebrity Section -->
@@ -636,22 +923,28 @@
   </div>
 
   <script>
-    // Add animation to connection lines
+    // Side Menu Functionality
+    document.getElementById('menuIcon').addEventListener('click', function(event) {
+      event.stopPropagation();
+      openMenu();
+    });
+
+    function openMenu() {
+      document.getElementById('menuContent').classList.add('active');
+      document.getElementById('menuOverlay').classList.add('active');
+    }
+
+    function closeMenu() {
+      document.getElementById('menuContent').classList.remove('active');
+      document.getElementById('menuOverlay').classList.remove('active');
+    }
+
+    // Close menu when clicking on overlay
+    document.getElementById('menuOverlay').addEventListener('click', closeMenu);
+
+    // Add animation to team members
     document.addEventListener('DOMContentLoaded', function() {
-      const connectors = document.querySelectorAll('.connector');
       const teamMembers = document.querySelectorAll('.team-member');
-      
-      // Animate connectors
-      setTimeout(() => {
-        connectors.forEach(connector => {
-          if (connector.classList.contains('horizontal')) {
-            connector.style.width = '60%';
-          } else if (connector.classList.contains('vertical')) {
-            const currentHeight = connector.style.height;
-            connector.style.height = currentHeight;
-          }
-        });
-      }, 1000);
       
       // Add hover effects
       teamMembers.forEach(member => {
@@ -664,6 +957,13 @@
         });
       });
     });
+
+    function logout() {
+      if(confirm('क्या आप लॉगआउट करना चाहते हैं?')) {
+        alert('लॉगआउट सफलतापूर्वक किया गया');
+        closeMenu();
+      }
+    }
   </script>
 </body>
 </html>
