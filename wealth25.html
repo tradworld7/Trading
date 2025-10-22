@@ -22,6 +22,7 @@
       padding-top: 80px;
     }
 
+    /* Professional Header Styles */
     .main-header {
       position: fixed;
       top: 0;
@@ -34,6 +35,7 @@
       align-items: center;
       z-index: 1000;
       box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
@@ -54,12 +56,168 @@
       color: white;
     }
 
+    /* Header Right Section - Side Menu */
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    /* Side Menu Styles - Horizontal Lines */
+    .side-menu {
+      position: relative;
+    }
+
+    .menu-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      padding: 8px;
+    }
+
+    .menu-icon:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.05);
+    }
+
+    .menu-line {
+      width: 25px;
+      height: 3px;
+      background: white;
+      margin: 2px 0;
+      border-radius: 2px;
+      transition: all 0.3s ease;
+    }
+
+    /* Side Menu Content - Left Side */
+    .menu-content {
+      position: fixed;
+      top: 0;
+      left: -300px;
+      width: 300px;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.98);
+      padding: 80px 0 20px 0;
+      box-shadow: 2px 0 25px rgba(0, 0, 0, 0.7);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.4s ease;
+      backdrop-filter: blur(10px);
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      z-index: 999;
+      overflow-y: auto;
+    }
+
+    .menu-content.active {
+      left: 0;
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .menu-header {
+      text-align: center;
+      padding: 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 20px;
+    }
+
+    .menu-header h3 {
+      color: #ffd700;
+      font-size: 1.5rem;
+      margin-bottom: 5px;
+    }
+
+    .menu-header p {
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 0.9rem;
+    }
+
+    .menu-item {
+      padding: 15px 25px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 1rem;
+      text-decoration: none;
+      color: white;
+    }
+
+    .menu-item:last-child {
+      border-bottom: none;
+    }
+
+    .menu-item:hover {
+      background: rgba(255, 255, 255, 0.1);
+      padding-left: 30px;
+    }
+
+    .menu-item i {
+      margin-right: 15px;
+      font-size: 1.3rem;
+      width: 25px;
+      text-align: center;
+      color: #ffd700;
+    }
+
+    .menu-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: none;
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .menu-close:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
+    }
+
+    /* Overlay for menu */
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 998;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Header Left Section - Language Switcher */
     .language-switcher {
       display: flex;
       gap: 10px;
       background: rgba(255, 255, 255, 0.1);
       padding: 8px 15px;
       border-radius: 25px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .lang-btn {
@@ -71,11 +229,25 @@
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .lang-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
     }
 
     .lang-btn.active {
       background: white;
       color: #1a1a2e;
+    }
+
+    /* Page Container */
+    .page-container {
+      display: none;
+    }
+
+    .page-container.active {
+      display: block;
     }
 
     .content-header {
@@ -322,6 +494,19 @@
       font-weight: 700;
     }
 
+    /* English Page Specific Styles */
+    .english-page .content-header h1,
+    .english-page .content-header p,
+    .english-page .section-title,
+    .english-page .package-card h3,
+    .english-page .package-amount,
+    .english-page .monthly-reward,
+    .english-page .total-return,
+    .english-page .bonus-table,
+    .english-page .benefit-card h4 {
+      font-family: 'Poppins', sans-serif;
+    }
+
     @media (max-width: 768px) {
       body {
         padding-top: 70px;
@@ -347,27 +532,123 @@
       .benefits-grid {
         grid-template-columns: 1fr;
       }
+      
+      .main-header {
+        padding: 10px 15px;
+      }
+      
+      .logo-text {
+        font-size: 1.2rem;
+      }
+      
+      .language-switcher {
+        padding: 5px 10px;
+      }
+      
+      .lang-btn {
+        padding: 4px 10px;
+        font-size: 0.8rem;
+      }
+      
+      .menu-content {
+        width: 280px;
+        left: -280px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-right {
+        gap: 10px;
+      }
+      
+      .language-switcher {
+        flex-direction: column;
+        gap: 5px;
+        padding: 8px 12px;
+      }
+      
+      .menu-content {
+        width: 250px;
+        left: -250px;
+      }
     }
   </style>
   
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-  <!-- Header -->
+  <!-- Professional Header -->
   <header class="main-header">
+    <!-- Left Side - Logo and Language Switcher -->
     <div class="logo">
       <div class="logo-icon">💎</div>
       <div class="logo-text">Probot X Wealth25</div>
     </div>
 
-    <div class="language-switcher">
-      <button class="lang-btn active" onclick="showPage('hindi')">हिंदी</button>
-      <button class="lang-btn" onclick="showPage('english')">English</button>
+    <!-- Right Side - Language Switcher and Side Menu -->
+    <div class="header-right">
+      <!-- Language Switcher -->
+      <div class="language-switcher">
+        <button class="lang-btn" id="hindiBtn" onclick="showPage('hindi')">हिंदी</button>
+        <button class="lang-btn active" id="englishBtn" onclick="showPage('english')">English</button>
+      </div>
+
+      <!-- Side Menu - Horizontal Lines -->
+      <div class="side-menu">
+        <div class="menu-icon" id="menuIcon">
+          <div class="menu-line"></div>
+          <div class="menu-line"></div>
+          <div class="menu-line"></div>
+        </div>
+        
+        <!-- Side Menu Content -->
+        <div class="menu-content" id="menuContent">
+          <button class="menu-close" onclick="closeMenu()">
+            <i class="fas fa-times"></i>
+          </button>
+          
+          <div class="menu-header">
+            <h3>Probot X</h3>
+            <p>Welcome to your dashboard</p>
+          </div>
+          
+          <a href="index.html" class="menu-item">
+            <i class="fas fa-tachometer-alt"></i> Dashboard
+          </a>
+          <a href="wealth25.html" class="menu-item">
+            <i class="fas fa-coins"></i> Wealth 25
+          </a>
+          <a href="income-calculator.html" class="menu-item">
+            <i class="fas fa-calculator"></i> Income Calculator
+          </a>
+          <a href="business-plan.html" class="menu-item">
+            <i class="fas fa-chart-line"></i> Business Plan
+          </a>
+          <a href="joining.html" class="menu-item">
+            <i class="fas fa-user-plus"></i> Joining
+          </a>
+          <a href="package.html" class="menu-item">
+            <i class="fas fa-box"></i> Package
+          </a>
+          <a href="Help-support.html" class="menu-item">
+            <i class="fas fa-heartbeat"></i> Help Support
+          </a>
+          <a href="my-team.html" class="menu-item">
+            <i class="fas fa-coins"></i> My Team
+          </a>
+          <div class="menu-item" onclick="logout()">
+            <i class="fas fa-sign-out-alt"></i> Logout
+          </div>
+        </div>
+        
+        <!-- Menu Overlay -->
+        <div class="menu-overlay" id="menuOverlay" onclick="closeMenu()"></div>
+      </div>
     </div>
   </header>
 
-  <!-- Hindi Wealth25 Page -->
-  <div id="hindiPage">
+  <!-- Hindi Page -->
+  <div class="page-container" id="hindiPage">
     <div class="content-header">
       <h1>💎 PROBOT X WEALTH25</h1>
       <p>25 महीने तक 8% मासिक रिटर्न - आपकी वित्तीय स्वतंत्रता का रास्ता</p>
@@ -543,8 +824,8 @@
     </div>
   </div>
 
-  <!-- English Wealth25 Page -->
-  <div id="englishPage" style="display: none;">
+  <!-- English Page -->
+  <div class="page-container english-page active" id="englishPage">
     <div class="content-header">
       <h1>💎 PROBOT X WEALTH25</h1>
       <p>8% Monthly Returns for 25 Months - Your Path to Financial Freedom</p>
@@ -711,7 +992,7 @@
           <p><strong>Website:</strong> www.probotx.io</p>
           <p><strong>Email:</strong> support@probotx.io</p>
           
-          <a href="https://wa.me/916394607174?text=Hello! I want information about Probot X Wealth25 Plan" 
+          <a href="https://wa.me/916394607174?text=Hello! I want to know more about Probot X Wealth25 plan" 
              class="whatsapp-btn" target="_blank">
             <i class="fab fa-whatsapp"></i> Chat on WhatsApp
           </a>
@@ -721,28 +1002,52 @@
   </div>
 
   <script>
-    function showPage(page) {
-      const hindiBtn = document.querySelector('.lang-btn:nth-child(1)');
-      const englishBtn = document.querySelector('.lang-btn:nth-child(2)');
-      const hindiPage = document.getElementById('hindiPage');
-      const englishPage = document.getElementById('englishPage');
+    // Language Switcher Function
+    function showPage(language) {
+      // Hide all pages
+      document.getElementById('hindiPage').classList.remove('active');
+      document.getElementById('englishPage').classList.remove('active');
       
-      if (page === 'hindi') {
-        hindiBtn.classList.add('active');
-        englishBtn.classList.remove('active');
-        hindiPage.style.display = 'block';
-        englishPage.style.display = 'none';
+      // Remove active class from all buttons
+      document.getElementById('hindiBtn').classList.remove('active');
+      document.getElementById('englishBtn').classList.remove('active');
+      
+      // Show selected page and activate button
+      if (language === 'hindi') {
+        document.getElementById('hindiPage').classList.add('active');
+        document.getElementById('hindiBtn').classList.add('active');
       } else {
-        englishBtn.classList.add('active');
-        hindiBtn.classList.remove('active');
-        englishPage.style.display = 'block';
-        hindiPage.style.display = 'none';
+        document.getElementById('englishPage').classList.add('active');
+        document.getElementById('englishBtn').classList.add('active');
       }
     }
 
-    // Initialize with Hindi page
+    // Side Menu Functions
+    function openMenu() {
+      document.getElementById('menuContent').classList.add('active');
+      document.getElementById('menuOverlay').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+      document.getElementById('menuContent').classList.remove('active');
+      document.getElementById('menuOverlay').classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Menu Icon Click Event
+    document.getElementById('menuIcon').addEventListener('click', openMenu);
+
+    // Logout Function
+    function logout() {
+      if (confirm('क्या आप लॉगआउट करना चाहते हैं? / Do you want to logout?')) {
+        window.location.href = 'index.html';
+      }
+    }
+
+    // Set default language to English
     window.onload = function() {
-      showPage('hindi');
+      showPage('english');
     };
   </script>
 </body>
