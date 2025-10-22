@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>💼 प्रोबोट एक्स - ज्वाइन करें</title>
+  <title>💼 Probot X - Join Now</title>
 
   <style>
     * {
@@ -478,6 +478,16 @@
       font-size: 1.3rem;
     }
 
+    /* English Page Specific Styles */
+    .english-page .content-header h1,
+    .english-page .content-header p,
+    .english-page h2,
+    .english-page .profile-name,
+    .english-page .total-income,
+    .english-page table {
+      font-family: 'Poppins', sans-serif;
+    }
+
     /* --- Print Mode (For PDF Conversion) --- */
     @media print {
       body {
@@ -600,8 +610,8 @@
     <div class="header-right">
       <!-- Language Switcher -->
       <div class="language-switcher">
-        <button class="lang-btn active" id="hindiBtn" onclick="showPage('hindi')">हिंदी</button>
-        <button class="lang-btn" id="englishBtn" onclick="showPage('english')">English</button>
+        <button class="lang-btn" id="hindiBtn" onclick="showPage('hindi')">हिंदी</button>
+        <button class="lang-btn active" id="englishBtn" onclick="showPage('english')">English</button>
       </div>
 
       <!-- Side Menu - Horizontal Lines -->
@@ -623,6 +633,9 @@
             <p>Welcome to your dashboard</p>
           </div>
           
+          <a href="index.html" class="menu-item">
+            <i class="fas fa-tachometer-alt"></i> Dashboard
+          </a>
           <a href="wealth25.html" class="menu-item">
             <i class="fas fa-coins"></i> Wealth 25
           </a>
@@ -632,11 +645,17 @@
           <a href="business-plan.html" class="menu-item">
             <i class="fas fa-chart-line"></i> Business Plan
           </a>
-          <a href="settings.html" class="menu-item">
-            <i class="fas fa-cog"></i> Settings
+          <a href="joining.html" class="menu-item">
+            <i class="fas fa-user-plus"></i> Joining
           </a>
-          <a href="help.html" class="menu-item">
-            <i class="fas fa-question-circle"></i> Help & Support
+          <a href="package.html" class="menu-item">
+            <i class="fas fa-box"></i> Package
+          </a>
+          <a href="Help-support.html" class="menu-item">
+            <i class="fas fa-heartbeat"></i> Help Support
+          </a>
+          <a href="my-team.html" class="menu-item">
+            <i class="fas fa-coins"></i> My Team
           </a>
           <div class="menu-item" onclick="logout()">
             <i class="fas fa-sign-out-alt"></i> Logout
@@ -650,7 +669,7 @@
   </header>
 
   <!-- Hindi Joining Page -->
-  <div class="page-container active" id="hindiPage">
+  <div class="page-container" id="hindiPage">
     <div class="content-header">
       <h1>💼 प्रोबोट एक्स - ज्वाइन करें</h1>
       <p>आपकी फाइनेंशियल फ्रीडम की यात्रा यहाँ से शुरू होती है</p>
@@ -715,7 +734,7 @@
   </div>
 
   <!-- English Joining Page -->
-  <div class="page-container english-page" id="englishPage">
+  <div class="page-container english-page active" id="englishPage">
     <div class="content-header">
       <h1>💼 Probot X - Join Now</h1>
       <p>Your Financial Freedom Journey Starts Here</p>
@@ -843,8 +862,8 @@
     }
     
     function logout() {
-      if(confirm('क्या आप लॉगआउट करना चाहते हैं?')) {
-        alert('लॉगआउट सफलतापूर्वक किया गया');
+      if(confirm('Are you sure you want to logout?')) {
+        alert('Logged out successfully');
         closeMenu();
       }
     }
