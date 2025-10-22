@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Probot X - Wealth25 Business Plan</title>
+  
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+      color: white;
+      font-size: 16px;
+      line-height: 1.6;
+      padding-top: 80px;
+    }
+
+    .main-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo-icon {
+      font-size: 2rem;
+      color: #ffd700;
+    }
+
+    .logo-text {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: white;
+    }
+
+    .language-switcher {
+      display: flex;
+      gap: 10px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 8px 15px;
+      border-radius: 25px;
+    }
+
+    .lang-btn {
+      background: transparent;
+      color: white;
+      border: none;
+      padding: 6px 15px;
+      border-radius: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .lang-btn.active {
+      background: white;
+      color: #1a1a2e;
+    }
+
+    .content-header {
+      text-align: center;
+      padding: 50px 20px;
+      background: linear-gradient(135deg, rgba(255,215,0,0.2), rgba(255,107,0,0.2));
+      margin-bottom: 30px;
+      border-bottom: 3px solid #ffd700;
+    }
+
+    .content-header h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+    }
+
+    .content-header p {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #ffd700;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .section {
+      background: rgba(255,255,255,0.05);
+      padding: 30px;
+      border-radius: 15px;
+      margin: 25px 0;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .section-title {
+      color: #ffd700;
+      font-size: 2rem;
+      margin-bottom: 25px;
+      text-align: center;
+      border-bottom: 2px solid #ffd700;
+      padding-bottom: 10px;
+    }
+
+    .wealth25-intro {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 1.2rem;
+    }
+
+    .package-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+      margin: 30px 0;
+    }
+
+    .package-card {
+      background: rgba(255,255,255,0.08);
+      padding: 25px;
+      border-radius: 15px;
+      border: 2px solid rgba(255,215,0,0.3);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .package-card:hover {
+      transform: translateY(-5px);
+      border-color: #ffd700;
+    }
+
+    .package-card h3 {
+      color: #ffd700;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    .package-amount {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #ffd700;
+      text-align: center;
+      margin: 15px 0;
+    }
+
+    .monthly-reward {
+      text-align: center;
+      color: #ff6b00;
+      font-weight: 600;
+      margin-bottom: 20px;
+      font-size: 1.3rem;
+    }
+
+    .total-return {
+      text-align: center;
+      color: #25D366;
+      font-weight: 600;
+      margin: 15px 0;
+      font-size: 1.1rem;
+    }
+
+    .bonus-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .bonus-table th {
+      background: #ffd700;
+      color: #1a1a2e;
+      padding: 15px;
+      text-align: left;
+      font-weight: 700;
+    }
+
+    .bonus-table td {
+      padding: 12px 15px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .bonus-table tr:hover {
+      background: rgba(255,255,255,0.08);
+    }
+
+    .intro-bonus {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin: 25px 0;
+    }
+
+    .bonus-level {
+      background: rgba(255,255,255,0.08);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      border: 1px solid rgba(255,215,0,0.2);
+    }
+
+    .level-number {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #ffd700;
+      margin-bottom: 10px;
+    }
+
+    .bonus-percentage {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #ff6b00;
+    }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin: 25px 0;
+    }
+
+    .benefit-card {
+      background: rgba(255,255,255,0.08);
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      border: 1px solid rgba(255,215,0,0.2);
+    }
+
+    .benefit-card i {
+      font-size: 2.5rem;
+      color: #ffd700;
+      margin-bottom: 15px;
+    }
+
+    .benefit-card h4 {
+      color: #ffd700;
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: linear-gradient(135deg, #ffd700, #ff6b00);
+      color: #1a1a2e;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 800;
+      text-decoration: none;
+      margin: 20px 0;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(255,215,0,0.4);
+    }
+
+    .whatsapp-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #25D366, #128C7E);
+      color: white;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      text-decoration: none;
+      margin: 10px 0;
+      box-shadow: 0 10px 25px rgba(37,211,102,0.4);
+      transition: all 0.3s ease;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .whatsapp-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(37,211,102,0.6);
+    }
+
+    .contact-info {
+      text-align: center;
+      margin: 30px 0;
+      padding: 25px;
+      background: rgba(255,215,0,0.1);
+      border-radius: 15px;
+      border: 2px solid #ffd700;
+    }
+
+    .highlight {
+      color: #ffd700;
+      font-weight: 700;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-top: 70px;
+        font-size: 14px;
+      }
+      
+      .content-header h1 {
+        font-size: 2rem;
+      }
+      
+      .content-header p {
+        font-size: 1.1rem;
+      }
+      
+      .package-cards {
+        grid-template-columns: 1fr;
+      }
+      
+      .intro-bonus {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .benefits-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header -->
+  <header class="main-header">
+    <div class="logo">
+      <div class="logo-icon">💎</div>
+      <div class="logo-text">Probot X Wealth25</div>
+    </div>
+
+    <div class="language-switcher">
+      <button class="lang-btn active" onclick="showPage('hindi')">हिंदी</button>
+      <button class="lang-btn" onclick="showPage('english')">English</button>
+    </div>
+  </header>
+
+  <!-- Hindi Wealth25 Page -->
+  <div id="hindiPage">
+    <div class="content-header">
+      <h1>💎 PROBOT X WEALTH25</h1>
+      <p>25 महीने तक 8% मासिक रिटर्न - आपकी वित्तीय स्वतंत्रता का रास्ता</p>
+    </div>
+
+    <div class="container">
+      <!-- Introduction -->
+      <div class="section">
+        <h2 class="section-title">🚀 वेल्थ25 क्या है?</h2>
+        <div class="wealth25-intro">
+          <p>Wealth25 Probot X का प्रीमियम इन्वेस्टमेंट प्लान है जहाँ आप <span class="highlight">25 महीने तक 8% का गारंटेड मासिक रिटर्न</span> प्राप्त कर सकते हैं।</p>
+          <p>हमारे एक्सपर्ट ट्रेडिंग टीम और पावरफुल ट्रेडिंग बॉट की मदद से आप अपने ट्रेडिंग रिवार्ड्स को मैक्सिमाइज़ कर सकते हैं।</p>
+        </div>
+      </div>
+
+      <!-- Wealth25 Packages -->
+      <div class="section">
+        <h2 class="section-title">📦 वेल्थ25 पैकेजेस</h2>
+        <div class="package-cards">
+          <div class="package-card">
+            <h3>W25 BASIC</h3>
+            <div class="package-amount">$100</div>
+            <div class="monthly-reward">मासिक रिवार्ड: $8</div>
+            <div class="total-return">25 महीने टोटल: $200</div>
+          </div>
+
+          <div class="package-card">
+            <h3>W25 STANDARD</h3>
+            <div class="package-amount">$270</div>
+            <div class="monthly-reward">मासिक रिवार्ड: $21.6</div>
+            <div class="total-return">25 महीने टोटल: $540</div>
+          </div>
+
+          <div class="package-card">
+            <h3>W25 PREMIUM</h3>
+            <div class="package-amount">$450</div>
+            <div class="monthly-reward">मासिक रिवार्ड: $36</div>
+            <div class="total-return">25 महीने टोटल: $900</div>
+          </div>
+
+          <div class="package-card">
+            <h3>W25 EXCLUSIVE</h3>
+            <div class="package-amount">$900</div>
+            <div class="monthly-reward">मासिक रिवार्ड: $72</div>
+            <div class="total-return">25 महीने टोटल: $1,800</div>
+          </div>
+
+          <div class="package-card">
+            <h3>W25 SAPPHIRE</h3>
+            <div class="package-amount">$1,200</div>
+            <div class="monthly-reward">मासिक रिवार्ड: $96</div>
+            <div class="total-return">25 महीने टोटल: $2,400</div>
+          </div>
+
+          <div class="package-card">
+            <h3>W25 PROFESSIONAL</h3>
+            <div class="package-amount">$10,800</div>
+            <div class="monthly-reward">मासिक रिवार्ड: $864</div>
+            <div class="total-return">25 महीने टोटल: $21,600</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Complete Package Table -->
+      <div class="section">
+        <h2 class="section-title">📊 कम्पलीट वेल्थ25 प्लान</h2>
+        <table class="bonus-table">
+          <thead>
+            <tr>
+              <th>पैकेज</th>
+              <th>मासिक रिवार्ड (8%)</th>
+              <th>25 महीने टोटल</th>
+              <th>नेट प्रॉफिट</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>W25 $100</td><td>$8</td><td>$200</td><td>+100%</td></tr>
+            <tr><td>W25 $270</td><td>$21.6</td><td>$540</td><td>+100%</td></tr>
+            <tr><td>W25 $450</td><td>$36</td><td>$900</td><td>+100%</td></tr>
+            <tr><td>W25 $900</td><td>$72</td><td>$1,800</td><td>+100%</td></tr>
+            <tr><td>W25 $1200</td><td>$96</td><td>$2,400</td><td>+100%</td></tr>
+            <tr><td>W25 $1800</td><td>$144</td><td>$3,600</td><td>+100%</td></tr>
+            <tr><td>W25 $2700</td><td>$216</td><td>$5,400</td><td>+100%</td></tr>
+            <tr><td>W25 $5400</td><td>$432</td><td>$10,800</td><td>+100%</td></tr>
+            <tr><td>W25 $10800</td><td>$864</td><td>$21,600</td><td>+100%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- W25 Intro Bonus -->
+      <div class="section">
+        <h2 class="section-title">💰 W25 इंट्रो बोनस</h2>
+        <p style="text-align: center; margin-bottom: 20px;">जब भी कोई Wealth25 के माध्यम से फंड डिपॉजिट करता है, तो आप Level 5 तक बोनस कमा सकते हैं:</p>
+        
+        <div class="intro-bonus">
+          <div class="bonus-level">
+            <div class="level-number">पहला लेवल</div>
+            <div class="bonus-percentage">4%</div>
+            <div class="level-desc">डायरेक्ट रेफरल</div>
+          </div>
+          
+          <div class="bonus-level">
+            <div class="level-number">दूसरा लेवल</div>
+            <div class="bonus-percentage">0.4%</div>
+            <div class="level-desc">इनडायरेक्ट रेफरल</div>
+          </div>
+          
+          <div class="bonus-level">
+            <div class="level-number">तीसरा लेवल</div>
+            <div class="bonus-percentage">0.2%</div>
+            <div class="level-desc">इनडायरेक्ट रेफरल</div>
+          </div>
+          
+          <div class="bonus-level">
+            <div class="level-number">चौथा लेवल</div>
+            <div class="bonus-percentage">0.2%</div>
+            <div class="level-desc">इनडायरेक्ट रेफरल</div>
+          </div>
+          
+          <div class="bonus-level">
+            <div class="level-number">पाँचवा लेवल</div>
+            <div class="bonus-percentage">0.2%</div>
+            <div class="level-desc">इनडायरेक्ट रेफरल</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Benefits -->
+      <div class="section">
+        <h2 class="section-title">🎯 वेल्थ25 के फायदे</h2>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <i class="fas fa-chart-line"></i>
+            <h4>गारंटेड रिटर्न</h4>
+            <p>25 महीने तक 8% मासिक रिटर्न</p>
+          </div>
+          
+          <div class="benefit-card">
+            <i class="fas fa-robot"></i>
+            <h4>ऑटोमेटेड ट्रेडिंग</h4>
+            <p>एक्सपर्ट ट्रेडिंग बॉट द्वारा मैनेज</p>
+          </div>
+          
+          <div class="benefit-card">
+            <i class="fas fa-users"></i>
+            <h4>मल्टी-लेवल इनकम</h4>
+            <p>5 लेवल्स तक रेफरल बोनस</p>
+          </div>
+          
+          <div class="benefit-card">
+            <i class="fas fa-shield-alt"></i>
+            <h4>सिक्योर इन्वेस्टमेंट</h4>
+            <p>सुरक्षित और रेगुलेटेड प्लेटफॉर्म</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Section -->
+      <div class="section">
+        <h2 class="section-title">🚀 आज ही इन्वेस्ट करें!</h2>
+        <div class="contact-info">
+          <h3>📞 संपर्क करें</h3>
+          <p><strong>WhatsApp:</strong> +91 63946 07174</p>
+          <p><strong>वेबसाइट:</strong> www.probotx.io</p>
+          <p><strong>ईमेल:</strong> support@probotx.io</p>
+          
+          <a href="https://wa.me/916394607174?text=नमस्ते! मैं Probot X Wealth25 प्लान के बारे में जानकारी चाहता/चाहती हूं" 
+             class="whatsapp-btn" target="_blank">
+            <i class="fab fa-whatsapp"></i> WhatsApp पर बात करें
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- English Wealth25 Page -->
+  <div id="englishPage" style="display: none;">
+    <div class="content-header">
+      <h1>💎 PROBOT X WEALTH25</h1>
+      <p>8% Monthly Returns for 25 Months - Your Path to Financial Freedom</p>
+    </div>
+
+    <div class="container">
+      <!-- Introduction -->
+      <div class="section">
+        <h2 class="section-title">🚀 What is Wealth25?</h2>
+        <div class="wealth25-intro">
+          <p>Wealth25 is Probot X's premium investment plan where you can earn <span class="highlight">guaranteed 8% monthly returns for 25 months</span>.</p>
+          <p>With our expert trading team and powerful trading bot, you can maximize your trading rewards.</p>
+        </div>
+      </div>
+
+      <!-- Wealth25 Packages -->
+      <div class="section">
+        <h2 class="section-title">📦 Wealth25 Packages</h2>
+        <div class="package-cards">
+          <div class="package-card">
+            <h3>W25 BASIC</h3>
+            <div class="package-amount">$100</div>
+            <div class="monthly-reward">Monthly Reward: $8</div>
+            <div class="total-return">25 Months Total: $200</div>
+          </div>
+
+          <div class="package-card">
+            <h3>W25 STANDARD</h3>
+            <div class="package-amount">$270</div>
+            <div class="monthly-reward">Monthly Reward: $21.6</div>
+            <div class="total-return">25 Months Total: $540</div>
+          </div>
+
+          <div class="package-card">
+            <h3>W25 PREMIUM</h3>
+            <div class="package-amount">$450</div>
+            <div class="monthly-reward">Monthly Reward: $36</div>
+            <div class="total-return">25 Months Total: $900</div>
+          </div>
+
+          <div class="package-card">
+            <h3>W25 EXCLUSIVE</h3>
+            <div class="package-amount">$900</div>
+            <div class="monthly-reward">Monthly Reward: $72</div>
+            <div class="total-return">25 Months Total: $1,800</div>
+          </div>
+
+          <div class="package-card">
+            <h3>W25 SAPPHIRE</h3>
+            <div class="package-amount">$1,200</div>
+            <div class="monthly-reward">Monthly Reward: $96</div>
+            <div class="total-return">25 Months Total: $2,400</div>
+          </div>
+
+          <div class="package-card">
+            <h3>W25 PROFESSIONAL</h3>
+            <div class="package-amount">$10,800</div>
+            <div class="monthly-reward">Monthly Reward: $864</div>
+            <div class="total-return">25 Months Total: $21,600</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Complete Package Table -->
+      <div class="section">
+        <h2 class="section-title">📊 Complete Wealth25 Plan</h2>
+        <table class="bonus-table">
+          <thead>
+            <tr>
+              <th>Package</th>
+              <th>Monthly Reward (8%)</th>
+              <th>25 Months Total</th>
+              <th>Net Profit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>W25 $100</td><td>$8</td><td>$200</td><td>+100%</td></tr>
+            <tr><td>W25 $270</td><td>$21.6</td><td>$540</td><td>+100%</td></tr>
+            <tr><td>W25 $450</td><td>$36</td><td>$900</td><td>+100%</td></tr>
+            <tr><td>W25 $900</td><td>$72</td><td>$1,800</td><td>+100%</td></tr>
+            <tr><td>W25 $1200</td><td>$96</td><td>$2,400</td><td>+100%</td></tr>
+            <tr><td>W25 $1800</td><td>$144</td><td>$3,600</td><td>+100%</td></tr>
+            <tr><td>W25 $2700</td><td>$216</td><td>$5,400</td><td>+100%</td></tr>
+            <tr><td>W25 $5400</td><td>$432</td><td>$10,800</td><td>+100%</td></tr>
+            <tr><td>W25 $10800</td><td>$864</td><td>$21,600</td><td>+100%</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- W25 Intro Bonus -->
+      <div class="section">
+        <h2 class="section-title">💰 W25 Intro Bonus</h2>
+        <p style="text-align: center; margin-bottom: 20px;">Whenever someone deposits funds through Wealth25, you can earn bonus up to Level 5:</p>
+        
+        <div class="intro-bonus">
+          <div class="bonus-level">
+            <div class="level-number">First Level</div>
+            <div class="bonus-percentage">4%</div>
+            <div class="level-desc">Direct Referral</div>
+          </div>
+          
+          <div class="bonus-level">
+            <div class="level-number">Second Level</div>
+            <div class="bonus-percentage">0.4%</div>
+            <div class="level-desc">Indirect Referral</div>
+          </div>
+          
+          <div class="bonus-level">
+            <div class="level-number">Third Level</div>
+            <div class="bonus-percentage">0.2%</div>
+            <div class="level-desc">Indirect Referral</div>
+          </div>
+          
+          <div class="bonus-level">
+            <div class="level-number">Fourth Level</div>
+            <div class="bonus-percentage">0.2%</div>
+            <div class="level-desc">Indirect Referral</div>
+          </div>
+          
+          <div class="bonus-level">
+            <div class="level-number">Fifth Level</div>
+            <div class="bonus-percentage">0.2%</div>
+            <div class="level-desc">Indirect Referral</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Benefits -->
+      <div class="section">
+        <h2 class="section-title">🎯 Wealth25 Benefits</h2>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <i class="fas fa-chart-line"></i>
+            <h4>Guaranteed Returns</h4>
+            <p>8% monthly returns for 25 months</p>
+          </div>
+          
+          <div class="benefit-card">
+            <i class="fas fa-robot"></i>
+            <h4>Automated Trading</h4>
+            <p>Managed by expert trading bot</p>
+          </div>
+          
+          <div class="benefit-card">
+            <i class="fas fa-users"></i>
+            <h4>Multi-Level Income</h4>
+            <p>Referral bonus up to 5 levels</p>
+          </div>
+          
+          <div class="benefit-card">
+            <i class="fas fa-shield-alt"></i>
+            <h4>Secure Investment</h4>
+            <p>Safe and regulated platform</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA Section -->
+      <div class="section">
+        <h2 class="section-title">🚀 Start Investing Today!</h2>
+        <div class="contact-info">
+          <h3>📞 Contact Us</h3>
+          <p><strong>WhatsApp:</strong> +91 63946 07174</p>
+          <p><strong>Website:</strong> www.probotx.io</p>
+          <p><strong>Email:</strong> support@probotx.io</p>
+          
+          <a href="https://wa.me/916394607174?text=Hello! I want information about Probot X Wealth25 Plan" 
+             class="whatsapp-btn" target="_blank">
+            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showPage(page) {
+      const hindiBtn = document.querySelector('.lang-btn:nth-child(1)');
+      const englishBtn = document.querySelector('.lang-btn:nth-child(2)');
+      const hindiPage = document.getElementById('hindiPage');
+      const englishPage = document.getElementById('englishPage');
+      
+      if (page === 'hindi') {
+        hindiBtn.classList.add('active');
+        englishBtn.classList.remove('active');
+        hindiPage.style.display = 'block';
+        englishPage.style.display = 'none';
+      } else {
+        englishBtn.classList.add('active');
+        hindiBtn.classList.remove('active');
+        englishPage.style.display = 'block';
+        hindiPage.style.display = 'none';
+      }
+    }
+
+    // Initialize with Hindi page
+    window.onload = function() {
+      showPage('hindi');
+    };
+  </script>
+</body>
+</html>
