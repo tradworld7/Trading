@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>💼 प्रोबोट एक्स बिज़नेस प्लान</title>
+  <title>💼 Probot X Business Plan</title>
 
   <style>
     * {
@@ -482,8 +482,8 @@
     <div class="header-right">
       <!-- Language Switcher -->
       <div class="language-switcher">
-        <button class="lang-btn active" id="hindiBtn" onclick="showPage('hindi')">हिंदी</button>
-        <button class="lang-btn" id="englishBtn" onclick="showPage('english')">English</button>
+        <button class="lang-btn" id="hindiBtn" onclick="showPage('hindi')">हिंदी</button>
+        <button class="lang-btn active" id="englishBtn" onclick="showPage('english')">English</button>
       </div>
 
       <!-- Side Menu - Horizontal Lines -->
@@ -524,7 +524,7 @@
             <i class="fas fa-box"></i> Package
           </a>
           <a href="Help-support.html" class="menu-item">
-            <i class="fas fa-heartbeat"></i>Help Support
+            <i class="fas fa-heartbeat"></i> Help Support
           </a>
           <a href="my-team.html" class="menu-item">
             <i class="fas fa-coins"></i> My Team
@@ -541,7 +541,7 @@
   </header>
 
   <!-- Hindi Page -->
-  <div class="page-container active" id="hindiPage">
+  <div class="page-container" id="hindiPage">
     <div class="content-header">
       <h1>💼 प्रोबोट एक्स बिज़नेस प्लान</h1>
       <p>6 लेवल का स्मार्ट इनकम स्ट्रक्चर – आपकी फाइनेंशियल ग्रोथ का नया तरीका</p>
@@ -620,7 +620,7 @@
   </div>
 
   <!-- English Page -->
-  <div class="page-container english-page" id="englishPage">
+  <div class="page-container english-page active" id="englishPage">
     <div class="content-header">
       <h1>💼 Probot X Business Plan</h1>
       <p>6 Level Smart Income Structure - New Way to Your Financial Growth</p>
@@ -750,8 +750,8 @@
     }
     
     function logout() {
-      if(confirm('क्या आप लॉगआउट करना चाहते हैं?')) {
-        alert('लॉगआउट सफलतापूर्वक किया गया');
+      if(confirm('Are you sure you want to logout?')) {
+        alert('Logged out successfully');
         closeMenu();
       }
     }
@@ -877,6 +877,3 @@
   </script>
 </body>
 </html>
-
-
-
