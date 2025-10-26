@@ -442,6 +442,120 @@
       margin: 0 auto 15px;
     }
 
+    /* Sunil Pal Comedy King Section */
+    .sunil-pal-section {
+      text-align: center;
+      margin: 60px 0;
+      padding: 40px 20px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 20px;
+      border: 1px solid rgba(255,215,0,0.3);
+    }
+
+    .sunil-pal-title {
+      color: #ffd700;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .sunil-pal-image {
+      width: 90%;
+      max-width: 1000px;
+      border-radius: 20px;
+      border: 5px solid #ffd700;
+      box-shadow: 0 0 25px rgba(255,215,0,0.5);
+      margin-bottom: 40px;
+    }
+
+    .sunil-pal-video-title {
+      color: #ff6b00;
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
+
+    .sunil-pal-video {
+      width: 90%;
+      max-width: 900px;
+      border-radius: 15px;
+      border: 3px solid #ffd700;
+      box-shadow: 0 0 20px rgba(255,215,0,0.3);
+    }
+
+    /* Trophy Sections */
+    .trophy-section {
+      text-align: center;
+      margin: 60px 0;
+      padding: 40px 20px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 20px;
+      border: 1px solid rgba(255,215,0,0.3);
+    }
+
+    .trophy-title {
+      color: #ffd700;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .trophy-image {
+      width: 90%;
+      max-width: 1000px;
+      border-radius: 20px;
+      border: 5px solid #ffd700;
+      box-shadow: 0 0 25px rgba(255,215,0,0.5);
+      margin-bottom: 40px;
+    }
+
+    .trophy-video-title {
+      color: #ff6b00;
+      margin-bottom: 15px;
+      font-size: 1.5rem;
+    }
+
+    .trophy-video {
+      width: 90%;
+      max-width: 900px;
+      border-radius: 15px;
+      border: 3px solid #ffd700;
+      box-shadow: 0 0 20px rgba(255,215,0,0.3);
+    }
+
+    /* YouTube Video Section */
+    .youtube-section {
+      text-align: center;
+      margin: 60px 0;
+      padding: 40px 20px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 20px;
+      border: 1px solid rgba(255,215,0,0.3);
+    }
+
+    .youtube-title {
+      color: #ffd700;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .youtube-video-container {
+      position: relative;
+      width: 90%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      height: 0;
+    }
+
+    .youtube-video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 15px;
+      border: 3px solid #ffd700;
+      box-shadow: 0 0 20px rgba(255,215,0,0.3);
+    }
+
     /* Responsive Design */
     @media (max-width: 1024px) {
       .team-structure {
@@ -482,6 +596,22 @@
         width: 70px;
         height: 70px;
       }
+      
+      .sunil-pal-title,
+      .trophy-title,
+      .youtube-title {
+        font-size: 2rem;
+      }
+      
+      .sunil-pal-image,
+      .trophy-image {
+        width: 95%;
+      }
+      
+      .sunil-pal-video,
+      .trophy-video {
+        width: 95%;
+      }
     }
 
     @media (max-width: 480px) {
@@ -520,6 +650,17 @@
       .menu-content {
         width: 280px;
         left: -280px;
+      }
+      
+      .sunil-pal-title,
+      .trophy-title,
+      .youtube-title {
+        font-size: 1.8rem;
+      }
+      
+      .sunil-pal-video-title,
+      .trophy-video-title {
+        font-size: 1.3rem;
       }
     }
   </style>
@@ -881,84 +1022,167 @@
       </div>
     </div>
 
+    <!-- Sunil Pal Comedy King Section -->
+    <div class="sunil-pal-section">
+      <h2 class="sunil-pal-title">🎭 कॉमेडी किंग सुनील पाल - Bollywood Comedian King</h2>
+      
+      <!-- Large Image -->
+      <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/sunil-pal-scaled.jpg" 
+           alt="Sunil Pal Comedy King"
+           class="sunil-pal-image">
+
+      <!-- Video Section -->
+      <h3 class="sunil-pal-video-title">🏆 Celebrity Trophy Achiever Video</h3>
+      <video controls class="sunil-pal-video">
+        <source src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/videoplayback.mp4" type="video/mp4">
+        आपका ब्राउज़र वीडियो चलाने में असमर्थ है।
+      </video>
+    </div>
+
+    <!-- Trophy Section 1 -->
+    <div class="trophy-section">
+      <h2 class="trophy-title">🏆 सेलिब्रिटी ट्रॉफी विजेता</h2>
+      
+      <!-- Large Image -->
+      <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/selybarty-scaled.jpg" 
+           alt="Celebrity Trophy Winner"
+           class="trophy-image">
+    </div>
+
+    <!-- Trophy Section 2 -->
+    <div class="trophy-section">
+      <h2 class="trophy-title">🏆 मेथर ट्रॉफी बॉलीवुड एक्टर</h2>
+      
+      <!-- Large Image -->
+      <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/MG_0863-min-scaled.jpg" 
+           alt="Mether Trophy Bollywood Actor"
+           class="trophy-image">
+    </div>
+
+    <!-- Trophy Section 3 -->
+    <div class="trophy-section">
+      <h2 class="trophy-title">🏆 प्रोबोट एक्स अवार्ड विजेता</h2>
+      
+      <!-- Large Image -->
+      <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/MG_0840-min-scaled.jpg" 
+           alt="Probot X Award Winner"
+           class="trophy-image">
+    </div>
+
+    <!-- Trophy Section 4 -->
+    <div class="trophy-section">
+      <h2 class="trophy-title">🏆 लीडरशिप अचीवमेंट अवार्ड</h2>
+      
+      <!-- Large Image -->
+      <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/MG_0859-min-scaled.jpg" 
+           alt="Leadership Achievement Award"
+           class="trophy-image">
+    </div>
+
+    <!-- Trophy Section 5 -->
+    <div class="trophy-section">
+      <h2 class="trophy-title">🏆 बिजनेस एक्सीलेंस अवार्ड</h2>
+      
+      <!-- Large Image -->
+      <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/MG_0851-min-scaled.jpg" 
+           alt="Business Excellence Award"
+           class="trophy-image">
+    </div>
+
+    <!-- YouTube Video Section -->
+    <div class="youtube-section">
+      <h2 class="youtube-title">🎬 अम्बेडकर ट्रॉफी अचीवर वीडियो</h2>
+      
+      <div class="youtube-video-container">
+        <iframe src="https://www.youtube.com/embed/sYLT8bMtF34" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
     <!-- Celebrity Section -->
     <div class="celebrity-section">
-      <h2 style="color: #ffd700; text-align: center; margin-bottom: 25px; font-size: 2rem;">🌟 सेलेब्रिटी ब्रांड एम्बेसडर</h2>
-      <p style="text-align: center; margin-bottom: 20px; color: rgba(255,255,255,0.8);">
-        Probot X के साथ जुड़े हुए प्रमुख सेलेब्रिटीज जो हमारे ब्रांड को सपोर्ट कर रहे हैं
-      </p>
+      <h2 style="text-align: center; color: #ffd700; margin-bottom: 25px; font-size: 2rem;">🌟 सेलेब्रिटी एंडोर्सर्स</h2>
       
       <div class="celebrity-grid">
         <div class="celebrity-card">
-          <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/selybarty-scaled.jpg" alt="Comedy King Sunil Pal" class="celebrity-image" onerror="this.src='https://via.placeholder.com/100/ffd700/1a1a2e?text=Sunil'">
-          <div class="member-name">सुनील पाल</div>
-          <div class="member-role">कॉमेडी किंग</div>
-          <div class="member-rank">मुख्य एम्बेसडर</div>
-        </div>
-        
-        <div class="celebrity-card">
           <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/sunil-pal-scaled.jpg" alt="Sunil Pal" class="celebrity-image" onerror="this.src='https://via.placeholder.com/100/ffd700/1a1a2e?text=SP'">
           <div class="member-name">सुनील पाल</div>
-          <div class="member-role">एंटरटेनर</div>
-          <div class="member-rank">ब्रांड एम्बेसडर</div>
+          <div class="member-role">कॉमेडी किंग</div>
+          <div class="team-stats">बॉलीवुड एक्टर एंड कॉमेडियन</div>
         </div>
         
         <div class="celebrity-card">
-          <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/reward-scaled.jpg" alt="Reward" class="celebrity-image" onerror="this.src='https://via.placeholder.com/100/ffd700/1a1a2e?text=Reward'">
-          <div class="member-name">सुनील पाल</div>
-          <div class="member-role">अवार्ड विजेता</div>
-          <div class="member-rank">एम्बेसडर</div>
+          <div class="celebrity-image" style="background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: bold;">
+            AK
+          </div>
+          <div class="member-name">अनिल कपूर</div>
+          <div class="member-role">बॉलीवुड स्टार</div>
+          <div class="team-stats">फेमस बॉलीवुड एक्टर</div>
         </div>
         
         <div class="celebrity-card">
-          <img src="http://sujitjaiswal.kesug.com/wp-content/uploads/2025/10/sunil1-scaled.jpg" alt="Sunil Pal" class="celebrity-image" onerror="this.src='https://via.placeholder.com/100/ffd700/1a1a2e?text=SP1'">
-          <div class="member-name">सुनील पाल</div>
-          <div class="member-role">कॉमेडी एक्टर</div>
-          <div class="member-rank">ब्रांड एम्बेसडर</div>
+          <div class="celebrity-image" style="background: linear-gradient(135deg, #f093fb, #f5576c); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: bold;">
+            SK
+          </div>
+          <div class="member-name">सलमान खान</div>
+          <div class="member-role">बॉलीवुड सुपरस्टार</div>
+          <div class="team-stats">भारतीय फिल्म एक्टर</div>
+        </div>
+        
+        <div class="celebrity-card">
+          <div class="celebrity-image" style="background: linear-gradient(135deg, #4facfe, #00f2fe); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; font-weight: bold;">
+            AK
+          </div>
+          <div class="member-name">अक्षय कुमार</div>
+          <div class="member-role">बॉलीवुड स्टार</div>
+          <div class="team-stats">फेमस बॉलीवुड एक्टर</div>
         </div>
       </div>
     </div>
   </div>
 
   <script>
-    // Side Menu Functionality
-    function openMenu() {
-      document.getElementById('menuContent').classList.add('active');
-      document.getElementById('menuOverlay').classList.add('active');
-      document.body.style.overflow = 'hidden';
+    // Menu Toggle Functionality
+    function toggleMenu() {
+      const menuContent = document.getElementById('menuContent');
+      const menuOverlay = document.getElementById('menuOverlay');
+      
+      menuContent.classList.toggle('active');
+      menuOverlay.classList.toggle('active');
     }
 
     function closeMenu() {
-      document.getElementById('menuContent').classList.remove('active');
-      document.getElementById('menuOverlay').classList.remove('active');
-      document.body.style.overflow = 'auto';
+      const menuContent = document.getElementById('menuContent');
+      const menuOverlay = document.getElementById('menuOverlay');
+      
+      menuContent.classList.remove('active');
+      menuOverlay.classList.remove('active');
     }
 
-    document.getElementById('menuIcon').addEventListener('click', openMenu);
-
-    // Logout Function
+    // Add event listeners
+    document.getElementById('menuIcon').addEventListener('click', toggleMenu);
+    
+    // Logout function
     function logout() {
       if (confirm('क्या आप लॉगआउट करना चाहते हैं?')) {
-        alert('आप सफलतापूर्वक लॉगआउट हो गए हैं!');
         window.location.href = 'index.html';
       }
     }
 
-    // Add some animation to team members
-    document.addEventListener('DOMContentLoaded', function() {
-      const teamMembers = document.querySelectorAll('.team-member');
-      
-      teamMembers.forEach((member, index) => {
-        member.style.opacity = '0';
-        member.style.transform = 'translateY(20px)';
-        
-        setTimeout(() => {
-          member.style.transition = 'all 0.5s ease';
-          member.style.opacity = '1';
-          member.style.transform = 'translateY(0)';
-        }, 100 * index);
-      });
-    });
+    // Draw connection lines for team structure
+    function drawConnectors() {
+      // This function would draw lines between team members
+      // For now, we'll just add a console log
+      console.log('Team structure connectors would be drawn here');
+    }
+
+    // Initialize on page load
+    window.onload = function() {
+      drawConnectors();
+    };
   </script>
 </body>
 </html>
